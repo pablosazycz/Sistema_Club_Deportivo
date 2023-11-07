@@ -14,6 +14,7 @@ namespace Sistema_Club_Deportivo.Modelo
         public int NroCarnet { get; set; }
         public int CuotaAPagar { get; set; }
         public int IdPersona { get; set; }
+        public bool Eliminado { get; set; }
 
         public Persona Persona { get; set; }
 

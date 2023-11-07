@@ -308,22 +308,6 @@ namespace Login.Datos
                         carnet = new Carnet();
                     }
 
-                    // Llena los datos de la persona
-                    persona.Id = reader.GetInt32(5);
-                    persona.IdRol = reader.GetInt32(6);
-                    persona.Nombre = reader.GetString(7);
-                    persona.Apellido = reader.GetString(8);
-                    persona.TipoDoc = reader.GetString(9);
-                    persona.Dni = reader.GetInt32(10);
-                    persona.FechaNacimiento = reader.GetDateTime(11);
-                    persona.Direccion = reader.GetString(12);
-                    persona.Cp = reader.GetInt32(13);
-                    persona.Localidad = reader.GetString(14);
-                    persona.CorreoElect = reader.GetString(15);
-                    persona.Telefono1 = reader.GetInt32(16);
-                    persona.Telefono2 = reader.GetInt32(17);
-              
-
                     // Llena los datos del afiliado
                     afiliado.Id = reader.GetInt32(0);
                     afiliado.FechaAfiliacion = reader.GetDateTime(1);
@@ -331,13 +315,32 @@ namespace Login.Datos
                     //afiliado.NroCarnet = reader.GetInt32(3);
                     afiliado.CuotaAPagar = reader.GetInt32(3);
                     afiliado.IdPersona = reader.GetInt32(4);
+                    afiliado.Eliminado = reader.GetBoolean(5);
 
+
+                    // Llena los datos de la persona
+                    persona.Id = reader.GetInt32(6);
+                    persona.IdRol = reader.GetInt32(7);
+                    persona.Nombre = reader.GetString(8);
+                    persona.Apellido = reader.GetString(9);
+                    persona.TipoDoc = reader.GetString(10);
+                    persona.Dni = reader.GetInt32(11);
+                    persona.FechaNacimiento = reader.GetDateTime(12);
+                    persona.Direccion = reader.GetString(13);
+                    persona.Cp = reader.GetInt32(14);
+                    persona.Localidad = reader.GetString(15);
+                    persona.CorreoElect = reader.GetString(16);
+                    persona.Telefono1 = reader.GetInt32(17);
+                    persona.Telefono2 = reader.GetInt32(18);
+                    persona.Eliminado = reader.GetBoolean(19);
+
+                    
 
                     // Establece el objeto Persona en el objeto Afiliado
                     afiliado.Persona = persona;
                     
-                    carnet.NroCarnet = reader.GetInt64(18);
-                    //carnet.FechaVencimiento = reader.GetDateTime(19);
+                    carnet.NroCarnet = reader.GetInt64(20);
+                    carnet.FechaVencimiento = reader.GetDateTime(22);
                     afiliado.Carnet = carnet;
                 }
 
@@ -428,6 +431,53 @@ namespace Login.Datos
             }
         }
 
+        public void DarDeBajaAfiliado(int idAfiliado)
+        {
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
+                
 
+                    using (MySqlCommand cmd = new MySqlCommand("DarDeBajaAfiliado", sqlCon))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("p_idAfiliado", idAfiliado);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                Console.WriteLine("Error al dar de baja al afiliado: " + ex.Message);
+            }
+        }
+
+        public void DarDeBajaPersona(int idPersona)
+        {
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
+            {
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
+
+                using (MySqlCommand cmd = new MySqlCommand("DarDeBajaPersona", sqlCon))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("p_idPersona", idPersona);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                Console.WriteLine("Error al dar de baja a la persona: " + ex.Message);
+            }
+        }
     }
 }

@@ -21,5 +21,6 @@ namespace Sistema_Club_Deportivo.Modelo
         public string CorreoElect { get; set; }
         public int Telefono1 { get; set; }
         public int Telefono2 { get; set; }
+        public bool Eliminado { get; set; }
     }
 }

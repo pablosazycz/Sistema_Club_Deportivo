@@ -41,7 +41,7 @@ namespace Sistema_Club_Deportivo
                     conexion.Open();
 
                     // Consulta SQL para obtener los datos
-                    string consulta = "SELECT * FROM persona";
+                    string consulta = "SELECT * FROM persona WHERE eliminado=0";
                     MySqlCommand cmd = new MySqlCommand(consulta, conexion);
 
                     MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);
@@ -94,7 +94,8 @@ namespace Sistema_Club_Deportivo
 
         private void btnBorrarAf_Click(object sender, EventArgs e)
         {
-
+            EliminarAfiliado eliminarAfiliado = new EliminarAfiliado();
+            eliminarAfiliado.Show();
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)

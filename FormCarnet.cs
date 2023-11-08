@@ -19,8 +19,8 @@ namespace Sistema_Club_Deportivo
 
            carnetNombre.Text = "Nombre: " + afiliado.Persona.Nombre;
            carnetApellido.Text = "Apellido: " + afiliado.Persona.Apellido;
-            carnetVto.Text = "Vencimiento: " + fechaVencimiento;
-            carnetNroSocio.Text = "Nro. Socio: " + numeroCarnet;
+           carnetVto.Text = "Vencimiento: " + fechaVencimiento;
+           carnetNroSocio.Text = "Nro. Socio: " + numeroCarnet;
 
 
         }

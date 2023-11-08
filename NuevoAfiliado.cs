@@ -1,16 +1,5 @@
 ﻿using Login.Datos;
-using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI.Common;
 using Sistema_Club_Deportivo.Modelo;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Sistema_Club_Deportivo
 {
@@ -77,8 +66,19 @@ namespace Sistema_Club_Deportivo
 
                         if (resultado == DialogResult.Yes)
                         {
-                            administrador.ReactivarPersona(persona.Dni);
-                            MessageBox.Show("La persona ha sido reactivada.");
+                            (bool personaReactivada, int idPersona, DateTime fechaVencimiento, long nroCarnet) = administrador.ReactivarPersona(persona.Dni);
+
+                            if (personaReactivada)
+                            {
+                                MessageBox.Show("La persona ha sido reactivada.");
+
+                                // Crea el formulario FormCarnet y pasa la información
+                                Afiliado afiliado = administrador.BuscarAfiliadoPorDni(persona.Dni);
+                              
+                                FormCarnet formCarnet = new FormCarnet(afiliado, fechaVencimiento, nroCarnet);
+                                formCarnet.Show();
+                            }
+
                         }
                         else
                         {

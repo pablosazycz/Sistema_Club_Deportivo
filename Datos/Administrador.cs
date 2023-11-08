@@ -56,7 +56,7 @@ namespace Login.Datos
             }
         }
 
-       
+
         //public int CrearPersona(int idRol, string nombre, string apellido, string tipoDoc, int dni, DateTime fechaNacimiento, string direccion, int cp, string localidad, string correoElect, int telefono1, int telefono2)
         //{
         //    MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion();
@@ -140,8 +140,9 @@ namespace Login.Datos
         //        }
         //    }
         //}
-        
-       public int CrearPersonaObj(Persona persona)
+
+
+        public int CrearPersonaObj(Persona persona)
         {
             MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion();
             int idPersona = -1; // Inicializamos en un valor no válido
@@ -190,7 +191,81 @@ namespace Login.Datos
             return idPersona;
         }
 
-       public int CrearAfiliadoObj(Afiliado afiliado)
+        //public int CrearPersonaObj(Persona persona)
+        //{
+        //    MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion();
+        //    int idPersona = -1; // Inicializa en un valor no válido
+
+        //    try
+        //    {
+        //        sqlCon.Open();
+
+        //        // Verificar si la persona ya existe
+        //        bool personaExistente = VerificarExistenciaPersona(persona.Dni);
+        //        bool personaDadaDeBaja = false; // Obtén el estado 'eliminado' de la persona si existe
+
+        //        if (personaExistente)
+        //        {
+        //            if (personaDadaDeBaja)
+        //            {
+        //                // La persona existe y está dada de baja, puedes optar por reactivarla si es necesario.
+        //                ReactivarPersona(persona.Dni);
+        //                Console.WriteLine("La persona existe y ha sido reactivada.");
+        //                return 0; // Opción 0 para reactivación exitosa
+        //            }
+        //            else
+        //            {
+        //                Console.WriteLine("La persona existe y no está dada de baja.");
+        //                return -1; // Opción -1 para persona existente pero no dada de baja
+        //            }
+        //        }
+        //        else
+        //        {
+        //            MySqlCommand cmd = new MySqlCommand("CrearPersona", sqlCon);
+        //            cmd.CommandType = CommandType.StoredProcedure;
+        //            cmd.Parameters.Add(new MySqlParameter("p_idRol", persona.IdRol));
+        //            cmd.Parameters.Add(new MySqlParameter("p_nombre", persona.Nombre));
+        //            cmd.Parameters.Add(new MySqlParameter("p_apellido", persona.Apellido));
+        //            cmd.Parameters.Add(new MySqlParameter("p_tipoDoc", persona.TipoDoc));
+        //            cmd.Parameters.Add(new MySqlParameter("p_dni", persona.Dni));
+        //            cmd.Parameters.Add(new MySqlParameter("p_fechaNacimiento", persona.FechaNacimiento));
+        //            cmd.Parameters.Add(new MySqlParameter("p_direccion", persona.Direccion));
+        //            cmd.Parameters.Add(new MySqlParameter("p_cp", persona.Cp));
+        //            cmd.Parameters.Add(new MySqlParameter("p_localidad", persona.Localidad));
+        //            cmd.Parameters.Add(new MySqlParameter("p_correoElect", persona.CorreoElect));
+        //            cmd.Parameters.Add(new MySqlParameter("p_telefono1", persona.Telefono1));
+        //            cmd.Parameters.Add(new MySqlParameter("p_telefono2", persona.Telefono2));
+
+        //            cmd.Parameters.Add(new MySqlParameter("p_lastInsertId", MySqlDbType.Int32));
+        //            cmd.Parameters["p_lastInsertId"].Direction = ParameterDirection.Output;
+
+        //            cmd.ExecuteNonQuery();
+
+        //            // Obtén el último ID insertado
+        //            idPersona = Convert.ToInt32(cmd.Parameters["p_lastInsertId"].Value);
+        //            persona.Id = idPersona;
+
+        //            Console.WriteLine("La persona ha sido creada con éxito.");
+        //            return idPersona; // Retorna el ID de la persona creada
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Manejar errores
+        //        Console.WriteLine("Error al crear la persona: " + ex.Message);
+        //        return -2; // Opción -2 para error
+        //    }
+        //    finally
+        //    {
+        //        if (sqlCon.State == ConnectionState.Open)
+        //        {
+        //            sqlCon.Close();
+        //        }
+        //    }
+        //}
+
+
+        public int CrearAfiliadoObj(Afiliado afiliado)
         {
             MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion();
             int idAfiliado = -1; // Inicializa en un valor no válido
@@ -479,5 +554,46 @@ namespace Login.Datos
                 Console.WriteLine("Error al dar de baja a la persona: " + ex.Message);
             }
         }
+
+        public (bool personaExiste, bool personaEliminada) VerificarExistenciaPersona(int dniPersona)
+        {
+            using (MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion())
+            {
+                sqlCon.Open();
+
+                MySqlCommand cmd = new MySqlCommand("VerificarExistenciaPersona", sqlCon);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("p_dniPersona", dniPersona));
+                cmd.Parameters.Add(new MySqlParameter("p_personaExiste", MySqlDbType.Bit));
+                cmd.Parameters["p_personaExiste"].Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(new MySqlParameter("p_personaEliminada", MySqlDbType.Bit));
+                cmd.Parameters["p_personaEliminada"].Direction = ParameterDirection.Output;
+
+                cmd.ExecuteNonQuery();
+
+                bool personaExiste = Convert.ToBoolean(cmd.Parameters["p_personaExiste"].Value);
+                bool personaEliminada = Convert.ToBoolean(cmd.Parameters["p_personaEliminada"].Value);
+
+                return (personaExiste, personaEliminada);
+            }
+        }
+
+
+
+        public void ReactivarPersona(int dniPersona)
+        {
+            using (MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion())
+            {
+                sqlCon.Open();
+
+                MySqlCommand cmd = new MySqlCommand("ReactivarPersona", sqlCon); // Supongamos que has creado un procedimiento almacenado llamado ReactivarPersona
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("p_dniPersona", dniPersona));
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+
     }
 }

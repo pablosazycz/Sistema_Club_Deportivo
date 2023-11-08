@@ -67,44 +67,69 @@ namespace Sistema_Club_Deportivo
                 };
 
                 Administrador administrador = new Administrador();
+                (bool personaExistente, bool personaEliminada) = administrador.VerificarExistenciaPersona(persona.Dni);
 
-                int idPersona = administrador.CrearPersonaObj(persona);
-
-                Afiliado afiliado = new Afiliado
+                if (personaExistente)
                 {
-                    FechaAfiliacion = DateTime.Now,
-                    Socio = int.Parse(txtSocio.Text),
-                    CuotaAPagar = int.Parse(txtCuotas.Text),
-                    IdPersona = idPersona,
-                    Persona = persona
-                };
+                    if (personaEliminada)
+                    {
+                        DialogResult resultado = MessageBox.Show("La persona ya existe pero está dada de baja. ¿Desea reactivarla?", "Persona Existente", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                administrador.CrearAfiliadoObj(afiliado);
+                        if (resultado == DialogResult.Yes)
+                        {
+                            administrador.ReactivarPersona(persona.Dni);
+                            MessageBox.Show("La persona ha sido reactivada.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("La persona ya existe pero está dada de baja y no fue reactivada.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("La persona ya existe y no está dada de baja.");
+                    }
+                }
+                else
+                {
+                    int idPersona = administrador.CrearPersonaObj(persona);
 
-                DialogResult result = MessageBox.Show("Afiliado agregado exitosamente. ¿Desea imprimir el carnet ahora?", "Éxito", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    Afiliado afiliado = new Afiliado
+                    {
+                        FechaAfiliacion = DateTime.Now,
+                        Socio = int.Parse(txtSocio.Text),
+                        CuotaAPagar = int.Parse(txtCuotas.Text),
+                        IdPersona = idPersona,
+                        Persona = persona
+                    };
+
+                    administrador.CrearAfiliadoObj(afiliado);
+
+                    DialogResult result = MessageBox.Show("Afiliado agregado exitosamente. ¿Desea imprimir el carnet ahora?", "Éxito", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
                     DateTime expira;
                     long nroCarnet;
-                if (result == DialogResult.Yes)
-                {
-                    administrador.CrearCarnetAutomatico(out expira, out nroCarnet);
+                    if (result == DialogResult.Yes)
+                    {
+                        administrador.CrearCarnetAutomatico(out expira, out nroCarnet);
 
-                    // Crea el formulario FormCarnet y pasa la información
-                    FormCarnet formCarnet = new FormCarnet(afiliado, expira, nroCarnet);
-                    formCarnet.Show();
-                }
-            
-                else
-                {
-                    administrador.CrearCarnetAutomatico(out expira, out nroCarnet);
-                    Dispose();
-                }
+                        // Crea el formulario FormCarnet y pasa la información
+                        FormCarnet formCarnet = new FormCarnet(afiliado, expira, nroCarnet);
+                        formCarnet.Show();
+                    }
 
-                LimpiarCampos();
+                    else
+                    {
+                        administrador.CrearCarnetAutomatico(out expira, out nroCarnet);
+                        Dispose();
+                    }
+
+                    LimpiarCampos();
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al crear afiliado",ex.ToString());
+                MessageBox.Show("Error al crear afiliado" + ex.ToString(), "Error");
             }
         }
 

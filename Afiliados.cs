@@ -71,7 +71,7 @@ namespace Sistema_Club_Deportivo
                     conexion.Open();
 
                     // Consulta SQL para obtener los datos
-                    string consulta = " SELECT a.*, p.*, c.*     FROM afiliado AS a     JOIN persona AS p ON a.IdPersona = p.Id join carnet AS c ON  a.Id=c.idAfiliado" ;
+                    string consulta = " SELECT a.*, p.*, c.* FROM afiliado AS a JOIN persona AS p ON a.IdPersona = p.Id join carnet AS c ON  a.Id=c.idAfiliado" ;
                     MySqlCommand cmd = new MySqlCommand(consulta, conexion);
 
                     MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);

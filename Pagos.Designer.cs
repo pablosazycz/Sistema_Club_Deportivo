@@ -108,6 +108,7 @@
             btnNuevoAf.TabIndex = 7;
             btnNuevoAf.Text = "REGISTRAR  NUEVO     Pago";
             btnNuevoAf.UseVisualStyleBackColor = false;
+            btnNuevoAf.Click += btnNuevoAf_Click;
             // 
             // pnlTabPagos
             // 

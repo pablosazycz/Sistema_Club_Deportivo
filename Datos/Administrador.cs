@@ -608,7 +608,8 @@ namespace Login.Datos
                 return (personaReactivada, idPersona, fechaVencimiento, nroCarnet);
             }
         }
-public void EliminarAfiliado(int idAfiliado)
+        
+            public void EliminarAfiliado(int idAfiliado)
         {
                 MySqlConnection sqlCon = new MySqlConnection();
                 try
@@ -679,7 +680,47 @@ public void EliminarAfiliado(int idAfiliado)
                     Console.WriteLine("Error al eliminar el carnet: " + ex.Message);
                 }
             }
-    
+
+
+        public void RegistrarPago(Pago pago)
+        {
+            using (MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion())
+            {
+                sqlCon.Open();
+
+                using (MySqlCommand command = new MySqlCommand("RegistrarPago", sqlCon))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@p_AfiliadoID", pago.idAfiliado);
+                    command.Parameters.AddWithValue("@p_FechaPago", pago.FechaPago);
+                    command.Parameters.AddWithValue("@p_Monto", pago.Monto);
+                    command.Parameters.AddWithValue("@p_MetodoPago", pago.MetodoPago); ;
+                    command.Parameters.AddWithValue("@p_Comentario", pago.Comentario);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void RegistrarInfoFinanciera(InformacionFinanciera informacionFinanciera)
+        {
+            using (MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion())
+            {
+                sqlCon.Open();
+
+                using (MySqlCommand command = new MySqlCommand("RegistrarInfoFinanciera", sqlCon))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@p_AfiliadoID", informacionFinanciera.AfiliadoID);
+                    command.Parameters.AddWithValue("@p_FechaExpiracion", informacionFinanciera.FechaExpiracion);
+                    command.Parameters.AddWithValue("@p_NumeroTarjetaCredito", informacionFinanciera.NumeroTarjetaCredito);
+                    command.Parameters.AddWithValue("@p_CodigoSeguridad", informacionFinanciera.CodigoSeguridad); ;
+
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
 
     }
 }

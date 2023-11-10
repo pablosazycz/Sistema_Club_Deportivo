@@ -21,5 +21,12 @@ namespace Sistema_Club_Deportivo
         {
             this.Close();
         }
+
+        private void btnNuevoAf_Click(object sender, EventArgs e)
+        {
+
+            NuevoPago nuevoPago = new NuevoPago();
+            nuevoPago.Show();
+        }
     }
 }

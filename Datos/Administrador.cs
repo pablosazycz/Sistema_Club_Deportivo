@@ -696,6 +696,7 @@ namespace Login.Datos
                     command.Parameters.AddWithValue("@p_Monto", pago.Monto);
                     command.Parameters.AddWithValue("@p_MetodoPago", pago.MetodoPago); ;
                     command.Parameters.AddWithValue("@p_Comentario", pago.Comentario);
+                    command.Parameters.AddWithValue("@p_Cuota", pago.Cuota);
 
                     command.ExecuteNonQuery();
                 }
@@ -722,6 +723,147 @@ namespace Login.Datos
             }
         }
 
+        public void CrearActividad(Actividad actividad)
+        {
+            try
+            {
+                using (MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion())
+                {
+                    sqlCon.Open();
+
+                    using (MySqlCommand command = new MySqlCommand("CrearActividad", sqlCon))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@p_Nombre", actividad.Nombre);
+                        command.Parameters.AddWithValue("@p_Descripcion", actividad.Descripcion);
+                        command.Parameters.AddWithValue("@p_CupoMaximo", actividad.CupoMaximo);
+                        command.Parameters.AddWithValue("@p_FechaInicio", actividad.FechaInicio);
+                        command.Parameters.AddWithValue("@p_FechaFin", actividad.FechaFin);
+                        command.Parameters.AddWithValue("@p_HoraInicio", actividad.HoraInicio);
+                        command.Parameters.AddWithValue("@p_HoraFin", actividad.HoraFin);
+                        command.Parameters.AddWithValue("@p_Costo", actividad.Costo);
+                        command.Parameters.AddWithValue("@p_ProfesorID", actividad.ProfesorID);
+                        command.Parameters.AddWithValue("@p_Equipamiento", actividad.Equipamiento);
+                        command.Parameters.AddWithValue("@p_DiasSemana", actividad.DiasSemana);
+                        
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al crear la actividad: {ex.Message}");
+                
+            }
+        }
+
+        public List<Actividad> ObtenerActividades()
+        {
+            List<Actividad> actividades = new List<Actividad>();
+
+            try
+            {
+                using (MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion())
+
+                {
+                    sqlCon.Open();
+
+                    using (MySqlCommand command = new MySqlCommand("ObtenerActividades", sqlCon))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Actividad actividad = new Actividad
+                                {
+                                    ActividadID = Convert.ToInt32(reader["ActividadID"]),
+                                    Nombre = reader["Nombre"].ToString(),
+                                    Descripcion = reader["Descripcion"].ToString(),
+                                    CupoMaximo = Convert.ToInt32(reader["CupoMaximo"]),
+                                    FechaInicio = Convert.ToDateTime(reader["FechaInicio"]),
+                                    FechaFin = Convert.ToDateTime(reader["FechaFin"]),
+                                    HoraInicio = TimeSpan.Parse(reader["HoraInicio"].ToString()),
+                                    HoraFin = TimeSpan.Parse(reader["HoraFin"].ToString()),
+                                    Costo = Convert.ToDecimal(reader["Costo"]),
+                                    ProfesorID = Convert.ToInt32(reader["ProfesorID"]),
+                                    Equipamiento = reader["Equipamiento"].ToString(),
+                                    DiasSemana = reader["DiasSemana"].ToString(),
+                                };
+
+                                actividades.Add(actividad);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al obtener las actividades: {ex.Message}");
+            }
+
+            return actividades;
+        }
+
+        public void ActualizarActividad(Actividad actividad)
+        {
+            try
+            {
+                using (MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion())
+                {
+                    sqlCon.Open();
+
+                    using (MySqlCommand command = new MySqlCommand("ActualizarActividad", sqlCon))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@p_ActividadID", actividad.ActividadID);
+                        command.Parameters.AddWithValue("@p_Nombre", actividad.Nombre);
+                        command.Parameters.AddWithValue("@p_Descripcion", actividad.Descripcion);
+                        command.Parameters.AddWithValue("@p_CupoMaximo", actividad.CupoMaximo); 
+                        command.Parameters.AddWithValue("@p_FechaInicio", actividad.FechaInicio);
+                        command.Parameters.AddWithValue("@p_FechaFin", actividad.FechaFin);
+                        command.Parameters.AddWithValue("@p_HoraInicio", actividad.HoraInicio);
+                        command.Parameters.AddWithValue("@p_HoraFin", actividad.HoraFin);
+                        command.Parameters.AddWithValue("@p_Costo", actividad.Costo);
+                        command.Parameters.AddWithValue("@p_ProfesorID", actividad.ProfesorID);
+                        command.Parameters.AddWithValue("@p_Equipamiento", actividad.Equipamiento);
+                        command.Parameters.AddWithValue("@p_DiasSemana", actividad.DiasSemana);
+                        
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al actualizar la actividad: {ex.Message}");
+            }
+        }
+
+        public void EliminarActividad(int actividadID)
+        {
+            try
+            {
+                using (MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion())
+                {
+                    sqlCon.Open();
+
+                    using (MySqlCommand command = new MySqlCommand("EliminarActividad", sqlCon))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@p_ActividadID", actividadID);
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al eliminar la actividad: {ex.Message}");
+                // Puedes manejar el error de alguna manera (por ejemplo, lanzar una excepción personalizada)
+            }
+        }
     }
 }
         

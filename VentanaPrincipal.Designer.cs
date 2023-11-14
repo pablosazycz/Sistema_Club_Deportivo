@@ -112,6 +112,7 @@
             btnSubVTurDisp.Text = " Turnos DISPONIBLES";
             btnSubVTurDisp.TextAlign = ContentAlignment.MiddleLeft;
             btnSubVTurDisp.UseVisualStyleBackColor = false;
+            btnSubVTurDisp.Click += btnSubVTurDisp_Click_1;
             // 
             // btnSubVTurAsig
             // 

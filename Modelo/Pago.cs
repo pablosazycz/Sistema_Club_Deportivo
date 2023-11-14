@@ -14,5 +14,6 @@ namespace Sistema_Club_Deportivo.Modelo
         public Decimal Monto { get; set; }
         public string MetodoPago { get; set; } 
         public string Comentario { get;set; }
+        public int Cuota { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -71,64 +72,110 @@ namespace Sistema_Club_Deportivo
                 Decimal monto = Convert.ToInt32(txtMonto.Text);
                 string metodoPago = comboBox1.Text;
                 string comentario = txtArea.Text;
+                int cuotas = ObtenerCuotasSeleccionadas();
 
 
-                if ((comboBox1.Text == "Debito" || comboBox1.Text == "Credito"))
+                switch (comboBox1.Text)
                 {
-                    try
-                    {
-                        
-                        InformacionFinanciera informacionFinanciera = new InformacionFinanciera
+                    case "Credito":
+
+                        try
                         {
-                            AfiliadoID = afiliadoId,
-                            NumeroTarjetaCredito = txtNroTarjeta.Text,
-                            FechaExpiracion = dateFechaVto.Value,
-                            CodigoSeguridad = Convert.ToInt32(txtCodSeg.Text)
-                        };
 
-                        Pago pago = new Pago
+                            ObtenerCuotasSeleccionadas();
+                            ActualizarMontoAPagar(Convert.ToInt32(txtMonto.Text), cuotas);
+
+                            InformacionFinanciera informacionFinanciera = new InformacionFinanciera
+                            {
+                                AfiliadoID = afiliadoId,
+                                NumeroTarjetaCredito = txtNroTarjeta.Text,
+                                FechaExpiracion = dateFechaVto.Value,
+                                CodigoSeguridad = Convert.ToInt32(txtCodSeg.Text)
+                            };
+
+                            Pago pago = new Pago
+                            {
+                                idAfiliado = afiliadoId,
+                                FechaPago = fechaPago,
+                                MetodoPago = metodoPago,
+                                Monto = monto,
+                                Comentario = comentario,
+                                Cuota = cuotas
+                            };
+
+                            Administrador admin = new Administrador();
+                            admin.RegistrarPago(pago);
+                            admin.RegistrarInfoFinanciera(informacionFinanciera);
+
+                        }
+                        catch (Exception)
                         {
-                            idAfiliado = afiliadoId,
-                            FechaPago = fechaPago,
-                            MetodoPago = metodoPago,
-                            Monto = monto,
-                            Comentario = comentario
-                        };
 
-                        Administrador admin = new Administrador();
-                        admin.RegistrarPago(pago);
-                        admin.RegistrarInfoFinanciera(informacionFinanciera);
+                            throw;
+                        }
 
-                    }
-                    catch (Exception)
-                    {
+                        break;
 
-                        throw;
-                    }
-                }
-                else
-                {
-                     
-                    try
-                    {
-
-                        Pago pago = new Pago
+                    case "Debito":
+                        try
                         {
-                            idAfiliado = afiliadoId,
-                            FechaPago = fechaPago,
-                            MetodoPago = metodoPago,
-                            Monto = monto,
-                            Comentario = comentario
-                        };
+                           
 
-                        Administrador admin = new Administrador();
-                        admin.RegistrarPago(pago);
-                    }
-                    catch (Exception)
-                    {
+                            InformacionFinanciera informacionFinanciera = new InformacionFinanciera
+                            {
+                                AfiliadoID = afiliadoId,
+                                NumeroTarjetaCredito = txtNroTarjeta.Text,
+                                FechaExpiracion = dateFechaVto.Value,
+                                CodigoSeguridad = Convert.ToInt32(txtCodSeg.Text)
+                            };
 
-                        throw;
-                    }
+                            Pago pago = new Pago
+                            {
+                                idAfiliado = afiliadoId,
+                                FechaPago = fechaPago,
+                                MetodoPago = metodoPago,
+                                Monto = monto,
+                                Comentario = comentario,
+                                Cuota = cuotas
+                            };
+
+                            Administrador admin = new Administrador();
+                            admin.RegistrarPago(pago);
+                            admin.RegistrarInfoFinanciera(informacionFinanciera);
+
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+                        break;
+
+                    case "Efectivo":
+                        try
+                        {
+                          
+
+                            Pago pago = new Pago
+                            {
+                                idAfiliado = afiliadoId,
+                                FechaPago = fechaPago,
+                                MetodoPago = metodoPago,
+                                Monto = monto,
+                                Comentario = comentario,
+                                Cuota = cuotas
+                            };
+
+                            Administrador admin = new Administrador();
+                            admin.RegistrarPago(pago);
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+                        break;
+
                 }
 
                 MessageBox.Show("Pago realizado con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -143,20 +190,68 @@ namespace Sistema_Club_Deportivo
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (comboBox1.Text == "Debito" || comboBox1.Text == "Credito")
+            switch (comboBox1.Text)
             {
 
-                case true:
+                case "Debito":
                     txtCodSeg.ReadOnly = false;
                     txtNroTarjeta.ReadOnly = false;
                     dateFechaVto.Enabled = true;
+                    radioCuotas6.Enabled = false;
+                    radioCuotas3.Enabled = false;
                     break;
-                case false:
+
+                case "Credito":
+                    txtCodSeg.ReadOnly = false;
+                    txtNroTarjeta.ReadOnly = false;
+                    dateFechaVto.Enabled = true;
+                    radioCuotas6.Enabled = true;
+                    radioCuotas3.Enabled = true;
+
+                    break;
+
+                case "Efectivo":
                     txtCodSeg.ReadOnly = true;
                     txtNroTarjeta.ReadOnly = true;
                     dateFechaVto.Enabled = false;
+                    radioCuotas6.Enabled = false;
+                    radioCuotas3.Enabled = false;
                     break;
             }
+        }
+
+        private void radioCuotas_CheckedChanged(object sender, EventArgs e)
+        {
+            int cuotas = ObtenerCuotasSeleccionadas();
+
+            // Llamada al método para actualizar el monto a pagar
+            ActualizarMontoAPagar(Convert.ToInt32(txtMonto.Text), cuotas);
+
+
+        }
+        private int ObtenerCuotasSeleccionadas()
+        {
+            int cuotas = 1;
+
+            if (radioCuotas3.Checked)
+            {
+                cuotas = 3;
+            }
+            else if (radioCuotas6.Checked)
+            {
+                cuotas = 6;
+            }
+
+            return cuotas;
+        }
+
+        private void ActualizarMontoAPagar(decimal monto, int cuotas)
+        {
+           
+            decimal montoPorCuota = monto / cuotas;
+
+            
+            montoAPagar.Text =montoPorCuota.ToString("F2");
         }
     }
 }

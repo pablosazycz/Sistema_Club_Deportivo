@@ -54,11 +54,20 @@
             label19 = new Label();
             txtIdPersona = new TextBox();
             comboBox1 = new ComboBox();
+            radioCuotas3 = new RadioButton();
+            radioCuotas6 = new RadioButton();
+            groupBox1 = new GroupBox();
+            groupBox2 = new GroupBox();
+            montoAPagar = new TextBox();
+            label11 = new Label();
+            label10 = new Label();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // btnBuscarAfil
             // 
-            btnBuscarAfil.Location = new Point(470, 54);
+            btnBuscarAfil.Location = new Point(444, 53);
             btnBuscarAfil.Name = "btnBuscarAfil";
             btnBuscarAfil.Size = new Size(75, 23);
             btnBuscarAfil.TabIndex = 78;
@@ -68,7 +77,7 @@
             // 
             // txtBuscarAfil
             // 
-            txtBuscarAfil.Location = new Point(192, 55);
+            txtBuscarAfil.Location = new Point(166, 54);
             txtBuscarAfil.Name = "txtBuscarAfil";
             txtBuscarAfil.Size = new Size(239, 23);
             txtBuscarAfil.TabIndex = 77;
@@ -76,7 +85,7 @@
             // radioSocioBusca
             // 
             radioSocioBusca.AutoSize = true;
-            radioSocioBusca.Location = new Point(56, 71);
+            radioSocioBusca.Location = new Point(30, 70);
             radioSocioBusca.Name = "radioSocioBusca";
             radioSocioBusca.Size = new Size(77, 19);
             radioSocioBusca.TabIndex = 75;
@@ -87,7 +96,7 @@
             // 
             radioDocBuscar.AutoSize = true;
             radioDocBuscar.Checked = true;
-            radioDocBuscar.Location = new Point(56, 46);
+            radioDocBuscar.Location = new Point(30, 45);
             radioDocBuscar.Name = "radioDocBuscar";
             radioDocBuscar.Size = new Size(69, 19);
             radioDocBuscar.TabIndex = 76;
@@ -98,7 +107,7 @@
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new Point(32, 11);
+            label17.Location = new Point(6, 19);
             label17.Name = "label17";
             label17.Size = new Size(141, 15);
             label17.TabIndex = 74;
@@ -107,7 +116,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(56, 103);
+            label1.Location = new Point(56, 122);
             label1.Name = "label1";
             label1.Size = new Size(58, 15);
             label1.TabIndex = 79;
@@ -116,7 +125,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(56, 216);
+            label2.Location = new Point(56, 235);
             label2.Name = "label2";
             label2.Size = new Size(43, 15);
             label2.TabIndex = 80;
@@ -125,7 +134,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(56, 257);
+            label3.Location = new Point(56, 276);
             label3.Name = "label3";
             label3.Size = new Size(95, 15);
             label3.TabIndex = 81;
@@ -142,21 +151,21 @@
             // 
             // txtIdAfiliado
             // 
-            txtIdAfiliado.Location = new Point(120, 100);
+            txtIdAfiliado.Location = new Point(120, 119);
             txtIdAfiliado.Name = "txtIdAfiliado";
             txtIdAfiliado.Size = new Size(100, 23);
             txtIdAfiliado.TabIndex = 83;
             // 
             // txtMonto
             // 
-            txtMonto.Location = new Point(139, 208);
+            txtMonto.Location = new Point(139, 227);
             txtMonto.Name = "txtMonto";
             txtMonto.Size = new Size(100, 23);
             txtMonto.TabIndex = 84;
             // 
             // btnRegistrarPago
             // 
-            btnRegistrarPago.Location = new Point(456, 326);
+            btnRegistrarPago.Location = new Point(426, 343);
             btnRegistrarPago.Name = "btnRegistrarPago";
             btnRegistrarPago.Size = new Size(180, 30);
             btnRegistrarPago.TabIndex = 87;
@@ -166,7 +175,7 @@
             // 
             // txtCodSeg
             // 
-            txtCodSeg.Location = new Point(475, 249);
+            txtCodSeg.Location = new Point(117, 113);
             txtCodSeg.Name = "txtCodSeg";
             txtCodSeg.Size = new Size(100, 23);
             txtCodSeg.TabIndex = 93;
@@ -175,7 +184,7 @@
             // 
             txtNroTarjeta.HideSelection = false;
             txtNroTarjeta.ImeMode = ImeMode.NoControl;
-            txtNroTarjeta.Location = new Point(470, 165);
+            txtNroTarjeta.Location = new Point(112, 29);
             txtNroTarjeta.Name = "txtNroTarjeta";
             txtNroTarjeta.Size = new Size(166, 23);
             txtNroTarjeta.TabIndex = 91;
@@ -183,7 +192,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(362, 257);
+            label5.Location = new Point(4, 121);
             label5.Name = "label5";
             label5.Size = new Size(85, 15);
             label5.TabIndex = 90;
@@ -192,7 +201,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(362, 216);
+            label6.Location = new Point(4, 80);
             label6.Name = "label6";
             label6.Size = new Size(107, 15);
             label6.TabIndex = 89;
@@ -201,7 +210,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(362, 173);
+            label7.Location = new Point(4, 37);
             label7.Name = "label7";
             label7.Size = new Size(77, 15);
             label7.TabIndex = 88;
@@ -218,7 +227,7 @@
             // dateFechaVto
             // 
             dateFechaVto.Format = DateTimePickerFormat.Short;
-            dateFechaVto.Location = new Point(479, 214);
+            dateFechaVto.Location = new Point(121, 78);
             dateFechaVto.Name = "dateFechaVto";
             dateFechaVto.Size = new Size(96, 23);
             dateFechaVto.TabIndex = 94;
@@ -226,7 +235,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(63, 173);
+            label8.Location = new Point(63, 192);
             label8.Name = "label8";
             label8.Size = new Size(51, 15);
             label8.TabIndex = 98;
@@ -235,7 +244,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(63, 138);
+            label9.Location = new Point(63, 157);
             label9.Name = "label9";
             label9.Size = new Size(51, 15);
             label9.TabIndex = 97;
@@ -243,14 +252,14 @@
             // 
             // txtApellido
             // 
-            txtApellido.Location = new Point(120, 170);
+            txtApellido.Location = new Point(120, 189);
             txtApellido.Name = "txtApellido";
             txtApellido.Size = new Size(164, 23);
             txtApellido.TabIndex = 96;
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(120, 135);
+            txtNombre.Location = new Point(120, 154);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(164, 23);
             txtNombre.TabIndex = 95;
@@ -258,7 +267,7 @@
             // label19
             // 
             label19.AutoSize = true;
-            label19.Location = new Point(254, 103);
+            label19.Location = new Point(254, 122);
             label19.Name = "label19";
             label19.Size = new Size(59, 15);
             label19.TabIndex = 100;
@@ -267,7 +276,7 @@
             // txtIdPersona
             // 
             txtIdPersona.Enabled = false;
-            txtIdPersona.Location = new Point(319, 100);
+            txtIdPersona.Location = new Point(319, 119);
             txtIdPersona.Name = "txtIdPersona";
             txtIdPersona.ReadOnly = true;
             txtIdPersona.Size = new Size(164, 23);
@@ -275,20 +284,107 @@
             // 
             // comboBox1
             // 
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "Credito", "Debito", "Efectivo" });
-            comboBox1.Location = new Point(169, 249);
+            comboBox1.Location = new Point(169, 268);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(121, 23);
             comboBox1.Sorted = true;
             comboBox1.TabIndex = 101;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
+            // radioCuotas3
+            // 
+            radioCuotas3.AutoSize = true;
+            radioCuotas3.Cursor = Cursors.Hand;
+            radioCuotas3.Location = new Point(319, 55);
+            radioCuotas3.Name = "radioCuotas3";
+            radioCuotas3.Size = new Size(71, 19);
+            radioCuotas3.TabIndex = 102;
+            radioCuotas3.TabStop = true;
+            radioCuotas3.Text = "3 Cuotas";
+            radioCuotas3.UseVisualStyleBackColor = true;
+            radioCuotas3.CheckedChanged += radioCuotas_CheckedChanged;
+           
+            // 
+            // radioCuotas6
+            // 
+            radioCuotas6.AutoSize = true;
+            radioCuotas6.Location = new Point(319, 80);
+            radioCuotas6.Name = "radioCuotas6";
+            radioCuotas6.Size = new Size(71, 19);
+            radioCuotas6.TabIndex = 103;
+            radioCuotas6.TabStop = true;
+            radioCuotas6.Text = "6 Cuotas";
+            radioCuotas6.UseVisualStyleBackColor = true;
+            radioCuotas6.CheckedChanged += radioCuotas_CheckedChanged;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(label17);
+            groupBox1.Controls.Add(radioDocBuscar);
+            groupBox1.Controls.Add(radioSocioBusca);
+            groupBox1.Controls.Add(txtBuscarAfil);
+            groupBox1.Controls.Add(btnBuscarAfil);
+            groupBox1.Dock = DockStyle.Top;
+            groupBox1.Location = new Point(0, 0);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(800, 99);
+            groupBox1.TabIndex = 104;
+            groupBox1.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(montoAPagar);
+            groupBox2.Controls.Add(label11);
+            groupBox2.Controls.Add(label10);
+            groupBox2.Controls.Add(radioCuotas6);
+            groupBox2.Controls.Add(radioCuotas3);
+            groupBox2.Controls.Add(dateFechaVto);
+            groupBox2.Controls.Add(txtCodSeg);
+            groupBox2.Controls.Add(txtNroTarjeta);
+            groupBox2.Controls.Add(label5);
+            groupBox2.Controls.Add(label6);
+            groupBox2.Controls.Add(label7);
+            groupBox2.Location = new Point(358, 155);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(429, 151);
+            groupBox2.TabIndex = 105;
+            groupBox2.TabStop = false;
+            // 
+            // montoAPagar
+            // 
+            montoAPagar.Location = new Point(314, 113);
+            montoAPagar.Name = "montoAPagar";
+            montoAPagar.Size = new Size(100, 23);
+            montoAPagar.TabIndex = 106;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(223, 113);
+            label11.Name = "label11";
+            label11.Size = new Size(85, 15);
+            label11.TabIndex = 105;
+            label11.Text = "Monto a Pagar";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(302, 29);
+            label10.Name = "label10";
+            label10.Size = new Size(103, 15);
+            label10.TabIndex = 104;
+            label10.Text = "Seleccione Cuotas";
+            // 
             // NuevoPago
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox1);
             Controls.Add(comboBox1);
             Controls.Add(label19);
             Controls.Add(txtIdPersona);
@@ -296,12 +392,6 @@
             Controls.Add(label9);
             Controls.Add(txtApellido);
             Controls.Add(txtNombre);
-            Controls.Add(dateFechaVto);
-            Controls.Add(txtCodSeg);
-            Controls.Add(txtNroTarjeta);
-            Controls.Add(label5);
-            Controls.Add(label6);
-            Controls.Add(label7);
             Controls.Add(btnRegistrarPago);
             Controls.Add(txtArea);
             Controls.Add(txtMonto);
@@ -310,14 +400,14 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(btnBuscarAfil);
-            Controls.Add(txtBuscarAfil);
-            Controls.Add(radioSocioBusca);
-            Controls.Add(radioDocBuscar);
-            Controls.Add(label17);
+            Cursor = Cursors.Hand;
             Name = "NuevoPago";
             Text = "NuevoPago";
             Load += NuevoPago_Load;
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -350,5 +440,12 @@
         private Label label19;
         private TextBox txtIdPersona;
         private ComboBox comboBox1;
+        private RadioButton radioCuotas3;
+        private RadioButton radioCuotas6;
+        private GroupBox groupBox1;
+        private GroupBox groupBox2;
+        private Label label10;
+        private TextBox montoAPagar;
+        private Label label11;
     }
 }

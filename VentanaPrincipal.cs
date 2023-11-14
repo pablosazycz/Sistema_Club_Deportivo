@@ -177,6 +177,17 @@ namespace Sistema_Club_Deportivo
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSubVTurDisp_Click_1(object sender, EventArgs e)
+        {
+            Actividades actividades = new Actividades();
+            actividades.Show();
+        }
+
 
 
 

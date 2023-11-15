@@ -8,6 +8,7 @@ namespace Sistema_Club_Deportivo.Modelo
 {
     public class Pago
     {
+        
         public int id { get; set; }
         public int idAfiliado { get; set; }
         public DateTime FechaPago { get; set; }
@@ -15,5 +16,6 @@ namespace Sistema_Club_Deportivo.Modelo
         public string MetodoPago { get; set; } 
         public string Comentario { get;set; }
         public int Cuota { get; set; }
+        public DateTime FechaVencimiento { get; set; }
     }
 }

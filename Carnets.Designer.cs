@@ -74,8 +74,9 @@
             btnNuevoAf.Name = "btnNuevoAf";
             btnNuevoAf.Size = new Size(467, 40);
             btnNuevoAf.TabIndex = 5;
-            btnNuevoAf.Text = "NUEVO      Carnet";
+            btnNuevoAf.Text = "Buscar   Carnet";
             btnNuevoAf.UseVisualStyleBackColor = false;
+            btnNuevoAf.Click += btnNuevoAf_Click;
             // 
             // btnBorrarAf
             // 

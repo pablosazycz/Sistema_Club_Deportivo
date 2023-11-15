@@ -36,14 +36,19 @@ namespace Sistema_Club_Deportivo
             carnetNroSocio = new Label();
             carnetLogo = new PictureBox();
             fotoSocio = new PictureBox();
+            printDialog1 = new PrintDialog();
+            menuStrip1 = new MenuStrip();
+            impToolStripMenuItem = new ToolStripMenuItem();
+            imprimirCarnetToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)carnetLogo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)fotoSocio).BeginInit();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // carnetNombre
             // 
             carnetNombre.AutoSize = true;
-            carnetNombre.Location = new Point(12, 132);
+            carnetNombre.Location = new Point(12, 155);
             carnetNombre.Name = "carnetNombre";
             carnetNombre.Size = new Size(38, 15);
             carnetNombre.TabIndex = 0;
@@ -52,7 +57,7 @@ namespace Sistema_Club_Deportivo
             // carnetApellido
             // 
             carnetApellido.AutoSize = true;
-            carnetApellido.Location = new Point(12, 156);
+            carnetApellido.Location = new Point(12, 179);
             carnetApellido.Name = "carnetApellido";
             carnetApellido.Size = new Size(38, 15);
             carnetApellido.TabIndex = 1;
@@ -61,7 +66,7 @@ namespace Sistema_Club_Deportivo
             // carnetVto
             // 
             carnetVto.AutoSize = true;
-            carnetVto.Location = new Point(12, 210);
+            carnetVto.Location = new Point(12, 233);
             carnetVto.Name = "carnetVto";
             carnetVto.Size = new Size(38, 15);
             carnetVto.TabIndex = 2;
@@ -70,7 +75,7 @@ namespace Sistema_Club_Deportivo
             // carnetNroSocio
             // 
             carnetNroSocio.AutoSize = true;
-            carnetNroSocio.Location = new Point(235, 210);
+            carnetNroSocio.Location = new Point(235, 233);
             carnetNroSocio.Name = "carnetNroSocio";
             carnetNroSocio.Size = new Size(38, 15);
             carnetNroSocio.TabIndex = 3;
@@ -80,7 +85,7 @@ namespace Sistema_Club_Deportivo
             // 
             carnetLogo.BackColor = Color.Transparent;
             carnetLogo.Image = Properties.Resources.Iron_House_Fitness;
-            carnetLogo.Location = new Point(12, 12);
+            carnetLogo.Location = new Point(12, 35);
             carnetLogo.Name = "carnetLogo";
             carnetLogo.Size = new Size(217, 108);
             carnetLogo.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -90,26 +95,59 @@ namespace Sistema_Club_Deportivo
             // 
             // fotoSocio
             // 
-            fotoSocio.Location = new Point(235, 12);
+            fotoSocio.Image = Properties.Resources.pngwing_com;
+            fotoSocio.Location = new Point(235, 35);
             fotoSocio.Name = "fotoSocio";
             fotoSocio.Size = new Size(170, 195);
+            fotoSocio.SizeMode = PictureBoxSizeMode.StretchImage;
             fotoSocio.TabIndex = 5;
             fotoSocio.TabStop = false;
+            // 
+            // printDialog1
+            // 
+            printDialog1.UseEXDialog = true;
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { impToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(429, 24);
+            menuStrip1.TabIndex = 6;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // impToolStripMenuItem
+            // 
+            impToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { imprimirCarnetToolStripMenuItem });
+            impToolStripMenuItem.Name = "impToolStripMenuItem";
+            impToolStripMenuItem.Size = new Size(65, 20);
+            impToolStripMenuItem.Text = "Imprimir";
+            // 
+            // imprimirCarnetToolStripMenuItem
+            // 
+            imprimirCarnetToolStripMenuItem.Name = "imprimirCarnetToolStripMenuItem";
+            imprimirCarnetToolStripMenuItem.Size = new Size(180, 22);
+            imprimirCarnetToolStripMenuItem.Text = "Imprimir Carnet";
+            imprimirCarnetToolStripMenuItem.Click += imprimirCarnetToolStripMenuItem_Click;
             // 
             // FormCarnet
             // 
             BackColor = Color.White;
-            ClientSize = new Size(417, 234);
+            ClientSize = new Size(429, 261);
             Controls.Add(fotoSocio);
             Controls.Add(carnetNroSocio);
             Controls.Add(carnetVto);
             Controls.Add(carnetApellido);
             Controls.Add(carnetNombre);
             Controls.Add(carnetLogo);
+            Controls.Add(menuStrip1);
+            MainMenuStrip = menuStrip1;
             Name = "FormCarnet";
             Text = "Carnet de Afiliado al Gimnasio";
             ((System.ComponentModel.ISupportInitialize)carnetLogo).EndInit();
             ((System.ComponentModel.ISupportInitialize)fotoSocio).EndInit();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -122,5 +160,9 @@ namespace Sistema_Club_Deportivo
         private Label carnetNroSocio;
         private PictureBox carnetLogo;
         private PictureBox fotoSocio;
+        private PrintDialog printDialog1;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem impToolStripMenuItem;
+        private ToolStripMenuItem imprimirCarnetToolStripMenuItem;
     }
 }

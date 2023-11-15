@@ -302,6 +302,39 @@ namespace Login.Datos
             }
         }
 
+        public int CrearNoAfiliadoObj(Afiliado afiliado)
+        {
+            MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion();
+            int idAfiliado = -1; // Inicializa en un valor no válido
+            try
+            {
+                sqlCon.Open();
+
+                MySqlCommand cmd = new MySqlCommand("CrearNoAfiliado", sqlCon);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("p_idPersona", afiliado.IdPersona)); // Asocia el afiliado con la persona
+                cmd.Parameters.Add(new MySqlParameter("p_fechaAfiliacion", afiliado.FechaAfiliacion));
+                cmd.Parameters.Add(new MySqlParameter("p_idAfiliado", MySqlDbType.Int32));
+                cmd.Parameters["p_idAfiliado"].Direction = ParameterDirection.Output;
+                cmd.ExecuteNonQuery();
+
+                idAfiliado = Convert.ToInt32(cmd.Parameters["p_idAfiliado"].Value);
+                afiliado.Id = idAfiliado;
+                return idAfiliado;
+            }
+            catch (Exception ex)
+            {
+                // Manejar errores
+                throw;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
+        }
         public void CrearCarnetAutomatico(out DateTime fechaVencimiento, out long nroCarnet)
         {
             MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion();
@@ -608,6 +641,33 @@ namespace Login.Datos
                 return (personaReactivada, idPersona, fechaVencimiento, nroCarnet);
             }
         }
+
+        public Carnet BuscarCarnetPorDni(int dniPersona)
+        {
+            using (MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion())
+            {
+                sqlCon.Open();
+                Carnet carnet = null; // Inicializa a null
+                
+                MySqlCommand cmd = new MySqlCommand("BuscarCarnetPorDni", sqlCon);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("p_dniPersona", dniPersona));
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (carnet == null)
+                    {
+                        carnet = new Carnet();
+                    }
+
+                    carnet.FechaVencimiento = reader.GetDateTime(0);
+                    carnet.NroCarnet = reader.GetInt64(1);
+                }
+
+                return carnet;
+            }
+        }
         
             public void EliminarAfiliado(int idAfiliado)
         {
@@ -697,6 +757,7 @@ namespace Login.Datos
                     command.Parameters.AddWithValue("@p_MetodoPago", pago.MetodoPago); ;
                     command.Parameters.AddWithValue("@p_Comentario", pago.Comentario);
                     command.Parameters.AddWithValue("@p_Cuota", pago.Cuota);
+                    command.Parameters.AddWithValue("@p_FechaVencimiento", pago.FechaVencimiento);
 
                     command.ExecuteNonQuery();
                 }

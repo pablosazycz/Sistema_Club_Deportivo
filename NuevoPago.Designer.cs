@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             btnBuscarAfil = new Button();
             txtBuscarAfil = new TextBox();
             radioSocioBusca = new RadioButton();
@@ -61,8 +62,10 @@
             montoAPagar = new TextBox();
             label11 = new Label();
             label10 = new Label();
+            errorProvider1 = new ErrorProvider(components);
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // btnBuscarAfil
@@ -306,7 +309,6 @@
             radioCuotas3.Text = "3 Cuotas";
             radioCuotas3.UseVisualStyleBackColor = true;
             radioCuotas3.CheckedChanged += radioCuotas_CheckedChanged;
-           
             // 
             // radioCuotas6
             // 
@@ -318,7 +320,6 @@
             radioCuotas6.TabStop = true;
             radioCuotas6.Text = "6 Cuotas";
             radioCuotas6.UseVisualStyleBackColor = true;
-            radioCuotas6.CheckedChanged += radioCuotas_CheckedChanged;
             // 
             // groupBox1
             // 
@@ -378,6 +379,10 @@
             label10.TabIndex = 104;
             label10.Text = "Seleccione Cuotas";
             // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
             // NuevoPago
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -408,6 +413,7 @@
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -447,5 +453,6 @@
         private Label label10;
         private TextBox montoAPagar;
         private Label label11;
+        private ErrorProvider errorProvider1;
     }
 }

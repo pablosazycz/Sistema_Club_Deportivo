@@ -10,22 +10,21 @@ using System.Windows.Forms;
 
 namespace Sistema_Club_Deportivo
 {
-    public partial class Carnets : Form
+    public partial class NuevoNoAfiliado : Form
     {
-        public Carnets()
+        public NuevoNoAfiliado()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.Close();
+
         }
 
-        private void btnNuevoAf_Click(object sender, EventArgs e)
+        private void panel2_Paint(object sender, PaintEventArgs e)
         {
-            BuscarCarnet buscarCarnet = new BuscarCarnet();
-            buscarCarnet.Show();
+
         }
     }
 }

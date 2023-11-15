@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Sistema_Club_Deportivo
 {
@@ -23,13 +24,81 @@ namespace Sistema_Club_Deportivo
         private void NuevoPago_Load(object sender, EventArgs e)
         {
 
+            errorProvider1.ContainerControl = this; // Asociar con el formulario
+                   }
 
-
-
+        private void txtIdAfiliado_Validating(object sender, CancelEventArgs e)
+        {
+            ValidarCampo(txtIdAfiliado, e);
         }
 
+        private void txtMonto_Validating(object sender, CancelEventArgs e)
+        {
+            ValidarCampo(txtMonto, e);
+        }
 
+        private void comboBox1_Validating(object sender, CancelEventArgs e)
+        {
+            ValidarCampo(comboBox1, e);
+        }
 
+        private void txtArea_Validating(object sender, CancelEventArgs e)
+        {
+            ValidarCampo(txtArea, e);
+        }
+
+        private void ValidarCampo(Control control, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(control.Text))
+            {
+                errorProvider1.SetError(control, "Este campo es obligatorio.");
+                e.Cancel = true;
+            }
+            else
+            {
+                errorProvider1.SetError(control, "");
+            }
+        }
+
+        private void txtIdAfiliado_Validated(object sender, EventArgs e)
+        {
+            LimpiarError(txtIdAfiliado);
+        }
+
+        private void txtMonto_Validated(object sender, EventArgs e)
+        {
+            LimpiarError(txtMonto);
+        }
+
+        private void comboBox1_Validated(object sender, EventArgs e)
+        {
+            LimpiarError(comboBox1);
+        }
+
+        private void txtArea_Validated(object sender, EventArgs e)
+        {
+            LimpiarError(txtArea);
+        }
+
+        private void LimpiarError(Control control)
+        {
+            errorProvider1.SetError(control, "");
+        }
+
+        private bool HayErroresDeValidacion()
+        {
+            // Verificar si hay mensajes de error en el ErrorProvider
+            foreach (Control control in this.Controls)
+            {
+                if (!string.IsNullOrEmpty(errorProvider1.GetError(control)))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        int rol= 0;
         private void btnBuscarAfil_Click(object sender, EventArgs e)
         {
             {
@@ -53,7 +122,7 @@ namespace Sistema_Club_Deportivo
                         txtIdPersona.Text = afiliado.Persona.Id.ToString();
                         txtApellido.Text = afiliado.Persona.Apellido;
                         txtNombre.Text = afiliado.Persona.Nombre;
-
+                        rol = afiliado.Persona.IdRol;
                     }
                     else
                     {
@@ -65,14 +134,35 @@ namespace Sistema_Club_Deportivo
 
         private void btnRegistrarPago_Click_1(object sender, EventArgs e)
         {
+            txtIdAfiliado_Validating(txtIdAfiliado, new CancelEventArgs());
+            txtMonto_Validating(txtMonto, new CancelEventArgs());
+            comboBox1_Validating(comboBox1, new CancelEventArgs());
+            txtArea_Validating(txtArea, new CancelEventArgs());
+
+            if (HayErroresDeValidacion())
+            {
+                // Mostrar un mensaje u otra acción según tus necesidades
+                MessageBox.Show("Por favor, corrija los campos con errores antes de continuar.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
+                
                 int afiliadoId = Convert.ToInt32(txtIdAfiliado.Text);
                 DateTime fechaPago = DateTime.Now;
+                DateTime fechaVencimiento = DateTime.Now;
                 Decimal monto = Convert.ToInt32(txtMonto.Text);
                 string metodoPago = comboBox1.Text;
                 string comentario = txtArea.Text;
                 int cuotas = ObtenerCuotasSeleccionadas();
+                if (rol==1)
+                {
+                    fechaVencimiento = fechaPago.AddMonths(1);
+                }
+                else
+                {
+                    fechaVencimiento = fechaPago.AddMonths(3);
+                }
 
 
                 switch (comboBox1.Text)
@@ -100,13 +190,14 @@ namespace Sistema_Club_Deportivo
                                 MetodoPago = metodoPago,
                                 Monto = monto,
                                 Comentario = comentario,
-                                Cuota = cuotas
+                                Cuota = cuotas,
+                                FechaVencimiento = fechaVencimiento
                             };
 
                             Administrador admin = new Administrador();
                             admin.RegistrarPago(pago);
                             admin.RegistrarInfoFinanciera(informacionFinanciera);
-
+                            MessageBox.Show("Pago realizado con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         catch (Exception)
                         {
@@ -119,7 +210,7 @@ namespace Sistema_Club_Deportivo
                     case "Debito":
                         try
                         {
-                           
+
 
                             InformacionFinanciera informacionFinanciera = new InformacionFinanciera
                             {
@@ -136,13 +227,14 @@ namespace Sistema_Club_Deportivo
                                 MetodoPago = metodoPago,
                                 Monto = monto,
                                 Comentario = comentario,
-                                Cuota = cuotas
+                                Cuota = cuotas,
+                                FechaVencimiento = fechaVencimiento
                             };
 
                             Administrador admin = new Administrador();
                             admin.RegistrarPago(pago);
                             admin.RegistrarInfoFinanciera(informacionFinanciera);
-
+                            MessageBox.Show("Pago realizado con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         catch (Exception)
                         {
@@ -154,7 +246,7 @@ namespace Sistema_Club_Deportivo
                     case "Efectivo":
                         try
                         {
-                          
+
 
                             Pago pago = new Pago
                             {
@@ -163,11 +255,13 @@ namespace Sistema_Club_Deportivo
                                 MetodoPago = metodoPago,
                                 Monto = monto,
                                 Comentario = comentario,
-                                Cuota = cuotas
+                                Cuota = cuotas,
+                                FechaVencimiento = fechaVencimiento
                             };
 
                             Administrador admin = new Administrador();
                             admin.RegistrarPago(pago);
+                            MessageBox.Show("Pago realizado con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         catch (Exception)
                         {
@@ -176,9 +270,13 @@ namespace Sistema_Club_Deportivo
                         }
                         break;
 
+                    default:
+                        MessageBox.Show("Debe seleccionar un método de pago", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+
                 }
 
-                MessageBox.Show("Pago realizado con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 
             }
             catch (Exception)
@@ -224,7 +322,7 @@ namespace Sistema_Club_Deportivo
         {
             int cuotas = ObtenerCuotasSeleccionadas();
 
-            // Llamada al método para actualizar el monto a pagar
+
             ActualizarMontoAPagar(Convert.ToInt32(txtMonto.Text), cuotas);
 
 
@@ -247,11 +345,11 @@ namespace Sistema_Club_Deportivo
 
         private void ActualizarMontoAPagar(decimal monto, int cuotas)
         {
-           
+
             decimal montoPorCuota = monto / cuotas;
 
-            
-            montoAPagar.Text =montoPorCuota.ToString("F2");
+
+            montoAPagar.Text = montoPorCuota.ToString("F2");
         }
     }
 }

@@ -302,25 +302,25 @@ namespace Login.Datos
             }
         }
 
-        public int CrearNoAfiliadoObj(Afiliado afiliado)
+        public int CrearNoAfiliadoObj(NoAfiliado noAfiliado)
         {
             MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion();
-            int idAfiliado = -1; // Inicializa en un valor no válido
+            int idNoAfiliado = -1; // Inicializa en un valor no válido
             try
             {
                 sqlCon.Open();
 
                 MySqlCommand cmd = new MySqlCommand("CrearNoAfiliado", sqlCon);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new MySqlParameter("p_idPersona", afiliado.IdPersona)); // Asocia el afiliado con la persona
-                cmd.Parameters.Add(new MySqlParameter("p_fechaAfiliacion", afiliado.FechaAfiliacion));
-                cmd.Parameters.Add(new MySqlParameter("p_idAfiliado", MySqlDbType.Int32));
-                cmd.Parameters["p_idAfiliado"].Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(new MySqlParameter("p_idPersona", noAfiliado.IdPersona)); // Asocia el afiliado con la persona
+                cmd.Parameters.Add(new MySqlParameter("p_fechaAfiliacion", noAfiliado.FechaAfiliacion));
+                cmd.Parameters.Add(new MySqlParameter("p_idNoAfiliado", MySqlDbType.Int32));
+                cmd.Parameters["p_idNoAfiliado"].Direction = ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
 
-                idAfiliado = Convert.ToInt32(cmd.Parameters["p_idAfiliado"].Value);
-                afiliado.Id = idAfiliado;
-                return idAfiliado;
+                idNoAfiliado = Convert.ToInt32(cmd.Parameters["p_idNoAfiliado"].Value);
+                noAfiliado.Id = idNoAfiliado;
+                return idNoAfiliado;
             }
             catch (Exception ex)
             {
@@ -463,6 +463,74 @@ namespace Login.Datos
                 if (sqlCon.State == ConnectionState.Open)
                 { sqlCon.Close(); }
             }
+        }
+
+        public NoAfiliado BuscarNoAfiliadoPorDni(int dniPersona)
+        {
+            NoAfiliado noAfiliado = null; // Inicializa a null
+            Persona persona = null; // Inicializa a null
+            MySqlConnection sqlCon = new MySqlConnection();
+
+            try
+            {
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
+
+                MySqlCommand cmd = new MySqlCommand("BuscarNoAfiliadoPorDni", sqlCon);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("p_dniPersona", dniPersona));
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (noAfiliado == null)
+                    {
+                        noAfiliado = new NoAfiliado();
+                    }
+
+                    if (persona == null)
+                    {
+                        persona = new Persona();
+                    }
+
+                    // Llena los datos del afiliado
+                    noAfiliado.Id = reader.GetInt32(0);
+                    noAfiliado.FechaAfiliacion = reader.GetDateTime(1);
+                    noAfiliado.IdPersona = reader.GetInt32(2);
+                    noAfiliado.Eliminado = reader.GetBoolean(3);
+                    // Llena los datos de la persona
+                    persona.Id = reader.GetInt32(4);
+                    persona.IdRol = reader.GetInt32(5);
+                    persona.Nombre = reader.GetString(6);
+                    persona.Apellido = reader.GetString(7);
+                    persona.TipoDoc = reader.GetString(8);
+                    persona.Dni = reader.GetInt32(9);
+                    persona.FechaNacimiento = reader.GetDateTime(10);
+                    persona.Direccion = reader.GetString(11);
+                    persona.Cp = reader.GetInt32(12);
+                    persona.Localidad = reader.GetString(13);
+                    persona.CorreoElect = reader.GetString(14);
+                    persona.Telefono1 = reader.GetInt32(15);
+                    persona.Telefono2 = reader.GetInt32(16);
+                    persona.Eliminado = reader.GetBoolean(17);
+
+
+
+                    // Establece el objeto Persona en el objeto Afiliado
+                    noAfiliado.Persona = persona;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                { sqlCon.Close(); }
+            }
+
+            return noAfiliado;
         }
 
         public void EditarAfiliado(Afiliado afiliado)
@@ -751,7 +819,7 @@ namespace Login.Datos
                 using (MySqlCommand command = new MySqlCommand("RegistrarPago", sqlCon))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@p_AfiliadoID", pago.idAfiliado);
+                    command.Parameters.AddWithValue("@p_PersonaID", pago.PersonaID);
                     command.Parameters.AddWithValue("@p_FechaPago", pago.FechaPago);
                     command.Parameters.AddWithValue("@p_Monto", pago.Monto);
                     command.Parameters.AddWithValue("@p_MetodoPago", pago.MetodoPago); ;
@@ -925,6 +993,61 @@ namespace Login.Datos
                 // Puedes manejar el error de alguna manera (por ejemplo, lanzar una excepción personalizada)
             }
         }
+
+        public void RegistrarInscripcion(int noAfiliadoID, int actividadID)
+        {
+            using (MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion())
+            {
+                sqlCon.Open();
+
+                string query = "INSERT INTO InscripcionActividad (NoAfiliadoID, ActividadID, FechaRegistro) VALUES (@NoAfiliadoID, @ActividadID, @FechaRegistro)";
+
+                using (MySqlCommand command = new MySqlCommand(query, sqlCon))
+                {
+                    command.Parameters.AddWithValue("@NoAfiliadoID", noAfiliadoID);
+                    command.Parameters.AddWithValue("@ActividadID", actividadID);
+                    command.Parameters.AddWithValue("@FechaRegistro", DateTime.Now);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        
+        public List<InscripcionActividad> ObtenerInscripcionesPorNoAfiliado(int noAfiliadoID)
+        {
+            List<InscripcionActividad> inscripciones = new List<InscripcionActividad>();
+            using (MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion())
+            {
+                sqlCon.Open();
+
+                string query = "SELECT * FROM InscripcionActividad WHERE NoAfiliadoID = @NoAfiliadoID";
+                using (MySqlCommand command = new MySqlCommand(query, sqlCon))
+                {
+                    command.Parameters.AddWithValue("@NoAfiliadoID", noAfiliadoID);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            InscripcionActividad inscripcion = new InscripcionActividad
+                            {
+                                InscripcionID = Convert.ToInt32(reader["InscripcionID"]),
+                                NoAfiliadoID = Convert.ToInt32(reader["NoAfiliadoID"]),
+                                ActividadID = Convert.ToInt32(reader["ActividadID"]),
+                                FechaRegistro = Convert.ToDateTime(reader["FechaRegistro"]),
+                                // Otras propiedades según tus necesidades
+                            };
+
+                            inscripciones.Add(inscripcion);
+                        }
+                    }
+                }
+            }
+
+            return inscripciones;
+        }
+
     }
 }
         

@@ -10,7 +10,7 @@ namespace Sistema_Club_Deportivo.Modelo
     {
         
         public int id { get; set; }
-        public int idAfiliado { get; set; }
+        public int PersonaID { get; set; }
         public DateTime FechaPago { get; set; }
         public Decimal Monto { get; set; }
         public string MetodoPago { get; set; } 

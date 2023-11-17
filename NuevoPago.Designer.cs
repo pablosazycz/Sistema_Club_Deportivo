@@ -1,4 +1,6 @@
-﻿namespace Sistema_Club_Deportivo
+﻿using System.Windows.Forms;
+
+namespace Sistema_Club_Deportivo
 {
     partial class NuevoPago
     {
@@ -229,7 +231,8 @@
             // 
             // dateFechaVto
             // 
-            dateFechaVto.Format = DateTimePickerFormat.Short;
+            dateFechaVto.Format = DateTimePickerFormat.Custom;
+            dateFechaVto.CustomFormat = "MM/yyyy";
             dateFechaVto.Location = new Point(121, 78);
             dateFechaVto.Name = "dateFechaVto";
             dateFechaVto.Size = new Size(96, 23);

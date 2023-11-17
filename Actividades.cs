@@ -91,7 +91,7 @@ namespace Sistema_Club_Deportivo
         }
 
         private void MostrarActividadesEnFormulario(List<Actividad> actividades)
-        {           
+        {
             try
             {
 
@@ -110,9 +110,9 @@ namespace Sistema_Club_Deportivo
 
             try
             {
-               
+
                 int indiceSeleccionado = dataGridView1.SelectedRows[0].Index;
-            
+
                 Actividad actividadSeleccionada = ObtenerActividadDesdeDataGridView(indiceSeleccionado);
 
                 Administrador actividadManager = new Administrador();
@@ -130,7 +130,7 @@ namespace Sistema_Club_Deportivo
 
         private Actividad ObtenerActividadDesdeDataGridView(int indice)
         {
-           
+
             if (indice >= 0 && indice < dataGridView1.Rows.Count)
             {
                 DataGridViewRow filaSeleccionada = dataGridView1.Rows[indice];
@@ -171,7 +171,7 @@ namespace Sistema_Club_Deportivo
             }
             else
             {
-               
+
                 throw new ArgumentOutOfRangeException("Índice fuera de los límites");
             }
         }
@@ -181,7 +181,7 @@ namespace Sistema_Club_Deportivo
 
             try
             {
-             
+
                 int indiceSeleccionado = dataGridView1.SelectedRows[0].Index;
                 Actividad actividadSeleccionada = ObtenerActividadDesdeDataGridView(indiceSeleccionado);
 

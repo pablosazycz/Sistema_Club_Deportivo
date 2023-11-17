@@ -49,6 +49,7 @@
             picLogo = new PictureBox();
             panelHijoForm = new Panel();
             pictureBox1 = new PictureBox();
+            btnNoAfiliado = new Button();
             panel2.SuspendLayout();
             pnl3SubMenuServNutric.SuspendLayout();
             pnl2SubMenuProfes.SuspendLayout();
@@ -91,7 +92,7 @@
             pnl3SubMenuServNutric.Controls.Add(btnSubVTurDisp);
             pnl3SubMenuServNutric.Controls.Add(btnSubVTurAsig);
             pnl3SubMenuServNutric.Dock = DockStyle.Top;
-            pnl3SubMenuServNutric.Location = new Point(0, 420);
+            pnl3SubMenuServNutric.Location = new Point(0, 443);
             pnl3SubMenuServNutric.Name = "pnl3SubMenuServNutric";
             pnl3SubMenuServNutric.Size = new Size(200, 70);
             pnl3SubMenuServNutric.TabIndex = 7;
@@ -139,7 +140,7 @@
             btnNutricion.FlatStyle = FlatStyle.Flat;
             btnNutricion.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             btnNutricion.ForeColor = SystemColors.ButtonFace;
-            btnNutricion.Location = new Point(0, 380);
+            btnNutricion.Location = new Point(0, 403);
             btnNutricion.Name = "btnNutricion";
             btnNutricion.Size = new Size(200, 40);
             btnNutricion.TabIndex = 5;
@@ -155,7 +156,7 @@
             pnl2SubMenuProfes.Controls.Add(btnSubVRutinas);
             pnl2SubMenuProfes.Controls.Add(btnSubVAsistencia);
             pnl2SubMenuProfes.Dock = DockStyle.Top;
-            pnl2SubMenuProfes.Location = new Point(0, 280);
+            pnl2SubMenuProfes.Location = new Point(0, 303);
             pnl2SubMenuProfes.Name = "pnl2SubMenuProfes";
             pnl2SubMenuProfes.Size = new Size(200, 100);
             pnl2SubMenuProfes.TabIndex = 6;
@@ -219,7 +220,7 @@
             btnProfesores.FlatStyle = FlatStyle.Flat;
             btnProfesores.Font = new Font("Segoe UI", 12.75F, FontStyle.Bold, GraphicsUnit.Point);
             btnProfesores.ForeColor = SystemColors.ButtonFace;
-            btnProfesores.Location = new Point(0, 240);
+            btnProfesores.Location = new Point(0, 263);
             btnProfesores.Name = "btnProfesores";
             btnProfesores.Size = new Size(200, 40);
             btnProfesores.TabIndex = 4;
@@ -234,11 +235,12 @@
             pnl1SubMenuAfiliados.Controls.Add(btnSubVAfiliados);
             pnl1SubMenuAfiliados.Controls.Add(btnSubVCarnets);
             pnl1SubMenuAfiliados.Controls.Add(btnSubVPagos);
+            pnl1SubMenuAfiliados.Controls.Add(btnNoAfiliado);
             pnl1SubMenuAfiliados.Dock = DockStyle.Top;
             pnl1SubMenuAfiliados.Location = new Point(0, 140);
             pnl1SubMenuAfiliados.Margin = new Padding(0);
             pnl1SubMenuAfiliados.Name = "pnl1SubMenuAfiliados";
-            pnl1SubMenuAfiliados.Size = new Size(200, 100);
+            pnl1SubMenuAfiliados.Size = new Size(200, 123);
             pnl1SubMenuAfiliados.TabIndex = 5;
             // 
             // btnSubVAfiliados
@@ -249,7 +251,7 @@
             btnSubVAfiliados.FlatStyle = FlatStyle.Popup;
             btnSubVAfiliados.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnSubVAfiliados.ForeColor = SystemColors.ButtonFace;
-            btnSubVAfiliados.Location = new Point(0, 10);
+            btnSubVAfiliados.Location = new Point(0, 3);
             btnSubVAfiliados.Margin = new Padding(0);
             btnSubVAfiliados.Name = "btnSubVAfiliados";
             btnSubVAfiliados.Padding = new Padding(22, 0, 0, 0);
@@ -268,7 +270,7 @@
             btnSubVCarnets.FlatStyle = FlatStyle.Popup;
             btnSubVCarnets.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnSubVCarnets.ForeColor = SystemColors.ButtonFace;
-            btnSubVCarnets.Location = new Point(0, 40);
+            btnSubVCarnets.Location = new Point(0, 33);
             btnSubVCarnets.Margin = new Padding(0);
             btnSubVCarnets.Name = "btnSubVCarnets";
             btnSubVCarnets.Padding = new Padding(22, 0, 0, 0);
@@ -287,7 +289,7 @@
             btnSubVPagos.FlatStyle = FlatStyle.Popup;
             btnSubVPagos.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnSubVPagos.ForeColor = SystemColors.ButtonFace;
-            btnSubVPagos.Location = new Point(0, 70);
+            btnSubVPagos.Location = new Point(0, 63);
             btnSubVPagos.Margin = new Padding(0);
             btnSubVPagos.Name = "btnSubVPagos";
             btnSubVPagos.Padding = new Padding(22, 0, 0, 0);
@@ -359,6 +361,25 @@
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
+            // btnNoAfiliado
+            // 
+            btnNoAfiliado.BackColor = Color.FromArgb(64, 64, 64);
+            btnNoAfiliado.Dock = DockStyle.Bottom;
+            btnNoAfiliado.FlatAppearance.BorderSize = 0;
+            btnNoAfiliado.FlatStyle = FlatStyle.Popup;
+            btnNoAfiliado.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnNoAfiliado.ForeColor = SystemColors.ButtonFace;
+            btnNoAfiliado.Location = new Point(0, 93);
+            btnNoAfiliado.Margin = new Padding(0);
+            btnNoAfiliado.Name = "btnNoAfiliado";
+            btnNoAfiliado.Padding = new Padding(22, 0, 0, 0);
+            btnNoAfiliado.Size = new Size(200, 30);
+            btnNoAfiliado.TabIndex = 9;
+            btnNoAfiliado.Text = "No Afiliado";
+            btnNoAfiliado.TextAlign = ContentAlignment.MiddleLeft;
+            btnNoAfiliado.UseVisualStyleBackColor = false;
+            btnNoAfiliado.Click += btnNoAfiliado_Click;
+            // 
             // VentanaPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -405,5 +426,6 @@
         private Button btnNutricion;
         private PictureBox pictureBox1;
         private Button btnProfesores;
+        private Button btnNoAfiliado;
     }
 }

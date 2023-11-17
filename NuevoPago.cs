@@ -25,7 +25,7 @@ namespace Sistema_Club_Deportivo
         {
 
             errorProvider1.ContainerControl = this; // Asociar con el formulario
-                   }
+        }
 
         private void txtIdAfiliado_Validating(object sender, CancelEventArgs e)
         {
@@ -98,7 +98,7 @@ namespace Sistema_Club_Deportivo
             return false;
         }
 
-        int rol= 0;
+        int rol = 0;
         private void btnBuscarAfil_Click(object sender, EventArgs e)
         {
             {
@@ -147,7 +147,8 @@ namespace Sistema_Club_Deportivo
             }
             try
             {
-                
+
+                int personaId = Convert.ToInt32(txtIdPersona.Text);
                 int afiliadoId = Convert.ToInt32(txtIdAfiliado.Text);
                 DateTime fechaPago = DateTime.Now;
                 DateTime fechaVencimiento = DateTime.Now;
@@ -155,7 +156,7 @@ namespace Sistema_Club_Deportivo
                 string metodoPago = comboBox1.Text;
                 string comentario = txtArea.Text;
                 int cuotas = ObtenerCuotasSeleccionadas();
-                if (rol==1)
+                if (rol == 1)
                 {
                     fechaVencimiento = fechaPago.AddMonths(1);
                 }
@@ -185,13 +186,14 @@ namespace Sistema_Club_Deportivo
 
                             Pago pago = new Pago
                             {
-                                idAfiliado = afiliadoId,
+                                PersonaID = personaId,
                                 FechaPago = fechaPago,
                                 MetodoPago = metodoPago,
                                 Monto = monto,
                                 Comentario = comentario,
                                 Cuota = cuotas,
-                                FechaVencimiento = fechaVencimiento
+                                FechaVencimiento = fechaVencimiento,
+
                             };
 
                             Administrador admin = new Administrador();
@@ -222,7 +224,7 @@ namespace Sistema_Club_Deportivo
 
                             Pago pago = new Pago
                             {
-                                idAfiliado = afiliadoId,
+                                PersonaID = personaId,
                                 FechaPago = fechaPago,
                                 MetodoPago = metodoPago,
                                 Monto = monto,
@@ -250,7 +252,7 @@ namespace Sistema_Club_Deportivo
 
                             Pago pago = new Pago
                             {
-                                idAfiliado = afiliadoId,
+                                PersonaID = personaId,
                                 FechaPago = fechaPago,
                                 MetodoPago = metodoPago,
                                 Monto = monto,
@@ -263,7 +265,7 @@ namespace Sistema_Club_Deportivo
                             admin.RegistrarPago(pago);
                             MessageBox.Show("Pago realizado con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
 
                             throw;
@@ -279,10 +281,11 @@ namespace Sistema_Club_Deportivo
 
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                MessageBox.Show($"Error al registrar el pago: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
 
@@ -297,6 +300,10 @@ namespace Sistema_Club_Deportivo
                     dateFechaVto.Enabled = true;
                     radioCuotas6.Enabled = false;
                     radioCuotas3.Enabled = false;
+                    int cuotas = ObtenerCuotasSeleccionadas();
+
+                    ActualizarMontoAPagar(Convert.ToInt32(txtMonto.Text), cuotas);
+
                     break;
 
                 case "Credito":

@@ -13,5 +13,8 @@ namespace Sistema_Club_Deportivo.Modelo
         public string NumeroTarjetaCredito { get; set; }
         public DateTime FechaExpiracion { get; set; }
         public int CodigoSeguridad { get; set; }
+
+        public Afiliado Afiliado { get; set; }
+
     }
 }

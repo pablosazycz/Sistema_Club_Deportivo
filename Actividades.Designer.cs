@@ -30,7 +30,6 @@
         {
             label1 = new Label();
             textBox1 = new TextBox();
-            txtNombre = new TextBox();
             label2 = new Label();
             txtDescripcion = new TextBox();
             label3 = new Label();
@@ -53,6 +52,7 @@
             button2 = new Button();
             button3 = new Button();
             button4 = new Button();
+            txtNombre = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -73,17 +73,10 @@
             textBox1.TabIndex = 2;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
-            // txtNombre
-            // 
-            txtNombre.Location = new Point(63, 65);
-            txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(100, 23);
-            txtNombre.TabIndex = 4;
-            // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(19, 68);
+            label2.Location = new Point(12, 67);
             label2.Name = "label2";
             label2.Size = new Size(49, 15);
             label2.TabIndex = 3;
@@ -266,11 +259,22 @@
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
             // 
+            // txtNombre
+            // 
+            txtNombre.DropDownStyle = ComboBoxStyle.DropDownList;
+            txtNombre.FormattingEnabled = true;
+            txtNombre.Items.AddRange(new object[] { "Todas las Actividades", "ABS", "Crossfit", "Funcional Training", "Musculacion", "Spinnig", "Yoga", "Zumba" });
+            txtNombre.Location = new Point(46, 62);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(117, 23);
+            txtNombre.TabIndex = 26;
+            // 
             // Actividades
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(txtNombre);
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -292,7 +296,6 @@
             Controls.Add(label4);
             Controls.Add(txtDescripcion);
             Controls.Add(label3);
-            Controls.Add(txtNombre);
             Controls.Add(label2);
             Controls.Add(textBox1);
             Controls.Add(label1);
@@ -307,7 +310,6 @@
         #endregion
         private Label label1;
         private TextBox textBox1;
-        private TextBox txtNombre;
         private Label label2;
         private TextBox txtDescripcion;
         private Label label3;
@@ -331,5 +333,6 @@
         private Button button4;
         private Label label4;
         private TextBox txtCupoMaximo;
+        private ComboBox txtNombre;
     }
 }

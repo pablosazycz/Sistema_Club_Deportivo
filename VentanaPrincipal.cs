@@ -188,6 +188,12 @@ namespace Sistema_Club_Deportivo
             actividades.Show();
         }
 
+        private void btnNoAfiliado_Click(object sender, EventArgs e)
+        {
+            NuevoNoAfiliado nuevoNoAfiliado = new NuevoNoAfiliado();   
+            nuevoNoAfiliado.Show();
+        }
+
 
 
 

@@ -29,14 +29,9 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            panel2 = new Panel();
-            label14 = new Label();
-            comboBox1 = new ComboBox();
-            dataGridView1 = new DataGridView();
-            label13 = new Label();
-            button2 = new Button();
-            button1 = new Button();
-            comboBox2 = new ComboBox();
+            btnSiguienteP1 = new Button();
+            btnSalirP1 = new Button();
+            cboTipoDoc = new ComboBox();
             txtFechaAfi = new DateTimePicker();
             label16 = new Label();
             label12 = new Label();
@@ -63,11 +58,21 @@
             label1 = new Label();
             txtApellido = new TextBox();
             txtNombre = new TextBox();
+            panel2 = new Panel();
+            labelTotalCosto = new Label();
+            label29 = new Label();
+            dataGridView2 = new DataGridView();
+            btnSiguienteP2 = new Button();
+            btnAtrasP2 = new Button();
             button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
+            label14 = new Label();
+            cboTipoACtividad = new ComboBox();
+            dataGridView1 = new DataGridView();
+            label13 = new Label();
             panel3 = new Panel();
-            label15 = new Label();
+            button8 = new Button();
+            btnFinalizar = new Button();
+            btnAtrasP3 = new Button();
             groupBox2 = new GroupBox();
             montoAPagar = new TextBox();
             label17 = new Label();
@@ -85,21 +90,21 @@
             txtIdPersona = new TextBox();
             label23 = new Label();
             label24 = new Label();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
+            txtPagoApellido = new TextBox();
+            txtPagoNombre = new TextBox();
             btnRegistrarPago = new Button();
             txtArea = new TextBox();
             txtMonto = new TextBox();
-            txtIdAfiliado = new TextBox();
+            txtIdNoAfiliado = new TextBox();
             label25 = new Label();
             label26 = new Label();
             label27 = new Label();
             label28 = new Label();
-            button6 = new Button();
-            button7 = new Button();
-            button8 = new Button();
+            label15 = new Label();
+            printDialog1 = new PrintDialog();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             panel3.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -107,9 +112,9 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(button2);
-            panel1.Controls.Add(button1);
-            panel1.Controls.Add(comboBox2);
+            panel1.Controls.Add(btnSiguienteP1);
+            panel1.Controls.Add(btnSalirP1);
+            panel1.Controls.Add(cboTipoDoc);
             panel1.Controls.Add(txtFechaAfi);
             panel1.Controls.Add(label16);
             panel1.Controls.Add(label12);
@@ -142,93 +147,38 @@
             panel1.Size = new Size(800, 450);
             panel1.TabIndex = 0;
             // 
-            // panel2
+            // btnSiguienteP1
             // 
-            panel2.Controls.Add(button5);
-            panel2.Controls.Add(button4);
-            panel2.Controls.Add(button3);
-            panel2.Controls.Add(label14);
-            panel2.Controls.Add(comboBox1);
-            panel2.Controls.Add(dataGridView1);
-            panel2.Controls.Add(label13);
-            panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(0, 0);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(800, 450);
-            panel2.TabIndex = 74;
-            panel2.Paint += panel2_Paint;
+            btnSiguienteP1.Location = new Point(503, 377);
+            btnSiguienteP1.Name = "btnSiguienteP1";
+            btnSiguienteP1.Size = new Size(75, 23);
+            btnSiguienteP1.TabIndex = 73;
+            btnSiguienteP1.Text = "siguiente";
+            btnSiguienteP1.UseVisualStyleBackColor = true;
+            btnSiguienteP1.Click += btnSiguiente_Click;
             // 
-            // label14
+            // btnSalirP1
             // 
-            label14.AutoSize = true;
-            label14.Location = new Point(21, 48);
-            label14.Name = "label14";
-            label14.Size = new Size(99, 15);
-            label14.TabIndex = 3;
-            label14.Text = "Tipo de Actividad";
+            btnSalirP1.Location = new Point(365, 377);
+            btnSalirP1.Name = "btnSalirP1";
+            btnSalirP1.Size = new Size(75, 23);
+            btnSalirP1.TabIndex = 72;
+            btnSalirP1.Text = "Salir";
+            btnSalirP1.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // cboTipoDoc
             // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Todas las Actividades", "Musculacion", "Crossfit", "Zumba", "Yoga", "ABS", "Spinnig", "Funcional Training" });
-            comboBox1.Location = new Point(21, 69);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 2;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 117);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(776, 150);
-            dataGridView1.TabIndex = 1;
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Location = new Point(18, 7);
-            label13.Name = "label13";
-            label13.Size = new Size(298, 15);
-            label13.TabIndex = 0;
-            label13.Text = "Seleccione la actividad que desea inscribir al NO SOCIO";
-            // 
-            // button2
-            // 
-            button2.Location = new Point(503, 377);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 73;
-            button2.Text = "siguiente";
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(365, 377);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 72;
-            button1.Text = "atras";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // comboBox2
-            // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Items.AddRange(new object[] { "DNI", "PASAPORTE" });
-            comboBox2.Location = new Point(78, 82);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(121, 23);
-            comboBox2.TabIndex = 71;
+            cboTipoDoc.FormattingEnabled = true;
+            cboTipoDoc.Items.AddRange(new object[] { "Seleccione Tipo", "DNI", "PASAPORTE" });
+            cboTipoDoc.Location = new Point(78, 82);
+            cboTipoDoc.Name = "cboTipoDoc";
+            cboTipoDoc.Size = new Size(121, 23);
+            cboTipoDoc.TabIndex = 71;
             // 
             // txtFechaAfi
             // 
             txtFechaAfi.Format = DateTimePickerFormat.Short;
-            txtFechaAfi.Location = new Point(92, 300);
+            txtFechaAfi.Location = new Point(121, 292);
             txtFechaAfi.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
             txtFechaAfi.Name = "txtFechaAfi";
             txtFechaAfi.Size = new Size(167, 23);
@@ -270,6 +220,7 @@
             btnAgregarAfiliado.TabIndex = 59;
             btnAgregarAfiliado.Text = "Agregar Afiliado";
             btnAgregarAfiliado.UseVisualStyleBackColor = true;
+            btnAgregarAfiliado.Click += btnAgregarAfiliado_Click;
             // 
             // label11
             // 
@@ -286,6 +237,7 @@
             txtTel2.Name = "txtTel2";
             txtTel2.Size = new Size(164, 23);
             txtTel2.TabIndex = 57;
+            txtTel2.KeyPress += txtBox_KeyPress;
             // 
             // label10
             // 
@@ -302,6 +254,7 @@
             txtTel1.Name = "txtTel1";
             txtTel1.Size = new Size(164, 23);
             txtTel1.TabIndex = 55;
+            txtTel1.KeyPress += txtBox_KeyPress;
             // 
             // label9
             // 
@@ -350,6 +303,7 @@
             txtCP.Name = "txtCP";
             txtCP.Size = new Size(164, 23);
             txtCP.TabIndex = 49;
+            txtCP.KeyPress += txtBox_KeyPress;
             // 
             // label6
             // 
@@ -390,6 +344,7 @@
             txtNroDoc.Name = "txtNroDoc";
             txtNroDoc.Size = new Size(164, 23);
             txtNroDoc.TabIndex = 44;
+            txtNroDoc.KeyPress += txtBox_KeyPress;
             // 
             // label4
             // 
@@ -441,50 +396,148 @@
             txtNombre.Size = new Size(164, 23);
             txtNombre.TabIndex = 37;
             // 
+            // panel2
+            // 
+            panel2.Controls.Add(labelTotalCosto);
+            panel2.Controls.Add(label29);
+            panel2.Controls.Add(dataGridView2);
+            panel2.Controls.Add(btnSiguienteP2);
+            panel2.Controls.Add(btnAtrasP2);
+            panel2.Controls.Add(button3);
+            panel2.Controls.Add(label14);
+            panel2.Controls.Add(cboTipoACtividad);
+            panel2.Controls.Add(dataGridView1);
+            panel2.Controls.Add(label13);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(0, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(800, 450);
+            panel2.TabIndex = 74;
+            panel2.Paint += panel2_Paint;
+            // 
+            // labelTotalCosto
+            // 
+            labelTotalCosto.AutoSize = true;
+            labelTotalCosto.Location = new Point(15, 370);
+            labelTotalCosto.Name = "labelTotalCosto";
+            labelTotalCosto.Size = new Size(77, 15);
+            labelTotalCosto.TabIndex = 9;
+            labelTotalCosto.Text = "Total a Pagar:";
+            // 
+            // label29
+            // 
+            label29.AutoSize = true;
+            label29.Location = new Point(12, 213);
+            label29.Name = "label29";
+            label29.Size = new Size(122, 15);
+            label29.TabIndex = 8;
+            label29.Text = "Actividades a Inscribir";
+            label29.Click += label29_Click;
+            // 
+            // dataGridView2
+            // 
+            dataGridView2.AllowUserToAddRows = false;
+            dataGridView2.AllowUserToDeleteRows = false;
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Location = new Point(12, 241);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.ReadOnly = true;
+            dataGridView2.RowTemplate.Height = 25;
+            dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView2.Size = new Size(776, 121);
+            dataGridView2.TabIndex = 7;
+            dataGridView2.CellDoubleClick += dgv2_CellDoubleClick;
+            // 
+            // btnSiguienteP2
+            // 
+            btnSiguienteP2.Location = new Point(398, 401);
+            btnSiguienteP2.Name = "btnSiguienteP2";
+            btnSiguienteP2.Size = new Size(75, 23);
+            btnSiguienteP2.TabIndex = 6;
+            btnSiguienteP2.Text = "siguiente";
+            btnSiguienteP2.UseVisualStyleBackColor = true;
+            btnSiguienteP2.Click += btnSiguiente_Click;
+            // 
+            // btnAtrasP2
+            // 
+            btnAtrasP2.Location = new Point(241, 401);
+            btnAtrasP2.Name = "btnAtrasP2";
+            btnAtrasP2.Size = new Size(75, 23);
+            btnAtrasP2.TabIndex = 5;
+            btnAtrasP2.Text = "atras";
+            btnAtrasP2.UseVisualStyleBackColor = true;
+            btnAtrasP2.Click += btnAtras_Click;
+            // 
             // button3
             // 
-            button3.Location = new Point(29, 285);
+            button3.Location = new Point(12, 401);
             button3.Name = "button3";
             button3.Size = new Size(189, 23);
             button3.TabIndex = 4;
             button3.Text = "Inscribir";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
-            // button4
+            // label14
             // 
-            button4.Location = new Point(241, 401);
-            button4.Name = "button4";
-            button4.Size = new Size(75, 23);
-            button4.TabIndex = 5;
-            button4.Text = "atras";
-            button4.UseVisualStyleBackColor = true;
+            label14.AutoSize = true;
+            label14.Location = new Point(21, 48);
+            label14.Name = "label14";
+            label14.Size = new Size(99, 15);
+            label14.TabIndex = 3;
+            label14.Text = "Tipo de Actividad";
             // 
-            // button5
+            // cboTipoACtividad
             // 
-            button5.Location = new Point(398, 401);
-            button5.Name = "button5";
-            button5.Size = new Size(75, 23);
-            button5.TabIndex = 6;
-            button5.Text = "siguiente";
-            button5.UseVisualStyleBackColor = true;
+            cboTipoACtividad.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboTipoACtividad.FormattingEnabled = true;
+            cboTipoACtividad.Items.AddRange(new object[] { "Todas las Actividades", "ABS", "Crossfit", "Funcional Training", "Musculacion", "Spinnig", "Yoga", "Zumba" });
+            cboTipoACtividad.Location = new Point(126, 43);
+            cboTipoACtividad.Name = "cboTipoACtividad";
+            cboTipoACtividad.Size = new Size(121, 23);
+            cboTipoACtividad.TabIndex = 2;
+            cboTipoACtividad.SelectedIndexChanged += comboBox1_SelectedIndexChanged_1;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(12, 78);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Size = new Size(776, 123);
+            dataGridView1.TabIndex = 1;
+            dataGridView1.CellDoubleClick += dgv1_CellDoubleClick;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(18, 7);
+            label13.Name = "label13";
+            label13.Size = new Size(298, 15);
+            label13.TabIndex = 0;
+            label13.Text = "Seleccione la actividad que desea inscribir al NO SOCIO";
             // 
             // panel3
             // 
             panel3.Controls.Add(button8);
-            panel3.Controls.Add(button7);
-            panel3.Controls.Add(button6);
+            panel3.Controls.Add(btnFinalizar);
+            panel3.Controls.Add(btnAtrasP3);
             panel3.Controls.Add(groupBox2);
             panel3.Controls.Add(comboBox3);
             panel3.Controls.Add(label22);
             panel3.Controls.Add(txtIdPersona);
             panel3.Controls.Add(label23);
             panel3.Controls.Add(label24);
-            panel3.Controls.Add(textBox2);
-            panel3.Controls.Add(textBox3);
+            panel3.Controls.Add(txtPagoApellido);
+            panel3.Controls.Add(txtPagoNombre);
             panel3.Controls.Add(btnRegistrarPago);
             panel3.Controls.Add(txtArea);
             panel3.Controls.Add(txtMonto);
-            panel3.Controls.Add(txtIdAfiliado);
+            panel3.Controls.Add(txtIdNoAfiliado);
             panel3.Controls.Add(label25);
             panel3.Controls.Add(label26);
             panel3.Controls.Add(label27);
@@ -495,15 +548,36 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(800, 450);
             panel3.TabIndex = 7;
+            panel3.VisibleChanged += panel3_VisibleChanged;
             // 
-            // label15
+            // button8
             // 
-            label15.AutoSize = true;
-            label15.Location = new Point(24, 19);
-            label15.Name = "label15";
-            label15.Size = new Size(118, 15);
-            label15.TabIndex = 0;
-            label15.Text = "Registracion de pago";
+            button8.Location = new Point(387, 300);
+            button8.Name = "button8";
+            button8.Size = new Size(180, 30);
+            button8.TabIndex = 124;
+            button8.Text = "Impresion de Voucher";
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += button8_Click;
+            // 
+            // btnFinalizar
+            // 
+            btnFinalizar.Location = new Point(503, 415);
+            btnFinalizar.Name = "btnFinalizar";
+            btnFinalizar.Size = new Size(75, 23);
+            btnFinalizar.TabIndex = 123;
+            btnFinalizar.Text = "Finalizar";
+            btnFinalizar.UseVisualStyleBackColor = true;
+            // 
+            // btnAtrasP3
+            // 
+            btnAtrasP3.Location = new Point(174, 415);
+            btnAtrasP3.Name = "btnAtrasP3";
+            btnAtrasP3.Size = new Size(75, 23);
+            btnAtrasP3.TabIndex = 122;
+            btnAtrasP3.Text = "atras";
+            btnAtrasP3.UseVisualStyleBackColor = true;
+            btnAtrasP3.Click += btnAtras_Click;
             // 
             // groupBox2
             // 
@@ -559,6 +633,7 @@
             radioCuotas6.TabStop = true;
             radioCuotas6.Text = "6 Cuotas";
             radioCuotas6.UseVisualStyleBackColor = true;
+            radioCuotas6.CheckedChanged += radioCuotas_CheckedChanged;
             // 
             // radioCuotas3
             // 
@@ -571,6 +646,7 @@
             radioCuotas3.TabStop = true;
             radioCuotas3.Text = "3 Cuotas";
             radioCuotas3.UseVisualStyleBackColor = true;
+            radioCuotas3.CheckedChanged += radioCuotas_CheckedChanged;
             // 
             // dateFechaVto
             // 
@@ -633,6 +709,7 @@
             comboBox3.Size = new Size(121, 23);
             comboBox3.Sorted = true;
             comboBox3.TabIndex = 120;
+            comboBox3.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // label22
             // 
@@ -670,19 +747,19 @@
             label24.TabIndex = 116;
             label24.Text = "Nombre";
             // 
-            // textBox2
+            // txtPagoApellido
             // 
-            textBox2.Location = new Point(85, 136);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(164, 23);
-            textBox2.TabIndex = 115;
+            txtPagoApellido.Location = new Point(85, 136);
+            txtPagoApellido.Name = "txtPagoApellido";
+            txtPagoApellido.Size = new Size(164, 23);
+            txtPagoApellido.TabIndex = 115;
             // 
-            // textBox3
+            // txtPagoNombre
             // 
-            textBox3.Location = new Point(85, 101);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(164, 23);
-            textBox3.TabIndex = 114;
+            txtPagoNombre.Location = new Point(85, 101);
+            txtPagoNombre.Name = "txtPagoNombre";
+            txtPagoNombre.Size = new Size(164, 23);
+            txtPagoNombre.TabIndex = 114;
             // 
             // btnRegistrarPago
             // 
@@ -692,6 +769,7 @@
             btnRegistrarPago.TabIndex = 113;
             btnRegistrarPago.Text = "Registrar Pago";
             btnRegistrarPago.UseVisualStyleBackColor = true;
+            btnRegistrarPago.Click += btnRegistrarPago_Click_1;
             // 
             // txtArea
             // 
@@ -708,12 +786,12 @@
             txtMonto.Size = new Size(100, 23);
             txtMonto.TabIndex = 111;
             // 
-            // txtIdAfiliado
+            // txtIdNoAfiliado
             // 
-            txtIdAfiliado.Location = new Point(85, 66);
-            txtIdAfiliado.Name = "txtIdAfiliado";
-            txtIdAfiliado.Size = new Size(100, 23);
-            txtIdAfiliado.TabIndex = 110;
+            txtIdNoAfiliado.Location = new Point(85, 66);
+            txtIdNoAfiliado.Name = "txtIdNoAfiliado";
+            txtIdNoAfiliado.Size = new Size(100, 23);
+            txtIdNoAfiliado.TabIndex = 110;
             // 
             // label25
             // 
@@ -747,51 +825,39 @@
             label28.AutoSize = true;
             label28.Location = new Point(21, 69);
             label28.Name = "label28";
-            label28.Size = new Size(58, 15);
+            label28.Size = new Size(74, 15);
             label28.TabIndex = 106;
-            label28.Text = "IdAfiliado";
+            label28.Text = "IdNoAfiliado";
             // 
-            // button6
+            // label15
             // 
-            button6.Location = new Point(174, 415);
-            button6.Name = "button6";
-            button6.Size = new Size(75, 23);
-            button6.TabIndex = 122;
-            button6.Text = "atras";
-            button6.UseVisualStyleBackColor = true;
+            label15.AutoSize = true;
+            label15.Location = new Point(24, 19);
+            label15.Name = "label15";
+            label15.Size = new Size(118, 15);
+            label15.TabIndex = 0;
+            label15.Text = "Registracion de pago";
             // 
-            // button7
+            // printDialog1
             // 
-            button7.Location = new Point(503, 415);
-            button7.Name = "button7";
-            button7.Size = new Size(75, 23);
-            button7.TabIndex = 123;
-            button7.Text = "Finalizar";
-            button7.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            button8.Location = new Point(387, 300);
-            button8.Name = "button8";
-            button8.Size = new Size(180, 30);
-            button8.TabIndex = 124;
-            button8.Text = "Impresion de Voucher";
-            button8.UseVisualStyleBackColor = true;
+            printDialog1.UseEXDialog = true;
             // 
             // NuevoNoAfiliado
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(panel1);
             Controls.Add(panel3);
             Controls.Add(panel2);
+            Controls.Add(panel1);
             Name = "NuevoNoAfiliado";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "NuevoNoAfiliado";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
@@ -806,9 +872,9 @@
         private Panel panel2;
         private DataGridView dataGridView1;
         private Label label13;
-        private Button button2;
-        private Button button1;
-        private ComboBox comboBox2;
+        private Button btnSiguienteP1;
+        private Button btnSalirP1;
+        private ComboBox cboTipoDoc;
         private DateTimePicker txtFechaAfi;
         private Label label16;
         private Label label12;
@@ -836,14 +902,14 @@
         private TextBox txtApellido;
         private TextBox txtNombre;
         private Label label14;
-        private ComboBox comboBox1;
-        private Button button5;
-        private Button button4;
+        private ComboBox cboTipoACtividad;
+        private Button btnSiguienteP2;
+        private Button btnAtrasP2;
         private Button button3;
         private Panel panel3;
         private Label label15;
-        private Button button7;
-        private Button button6;
+        private Button btnFinalizar;
+        private Button btnAtrasP3;
         private GroupBox groupBox2;
         private TextBox montoAPagar;
         private Label label17;
@@ -866,11 +932,18 @@
         private Button btnRegistrarPago;
         private TextBox txtArea;
         private TextBox txtMonto;
-        private TextBox txtIdAfiliado;
+        private TextBox txtIdNoAfiliado;
         private Label label25;
         private Label label26;
         private Label label27;
         private Label label28;
         private Button button8;
+        private Label label29;
+        private DataGridView dataGridView2;
+        private TextBox txtPagoNombre;
+        private TextBox txtPagoApellido;
+        private Label label31;
+        private Label labelTotalCosto;
+        private PrintDialog printDialog1;
     }
 }

@@ -15,5 +15,6 @@ namespace Sistema_Club_Deportivo.Modelo
         public long NroCarnet { get; set; }
         public DateTime FechaVencimiento { get; set; }
         
+        public Afiliado Afiliado { get; set; }
     }
 }

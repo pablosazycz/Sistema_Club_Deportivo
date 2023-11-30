@@ -34,102 +34,136 @@ namespace Sistema_Club_Deportivo
         {
 
         }
+        Boolean error = false;
+        private Boolean Controlblanco()
+        {
+            if (string.IsNullOrEmpty(txtNombre.Text) ||
+                string.IsNullOrEmpty(txtApellido.Text) ||
+                string.IsNullOrEmpty(txtNroDoc.Text) ||
+                string.IsNullOrEmpty(txtFechaNac.Text) ||
+                string.IsNullOrEmpty(txtDireccion.Text) ||
+                string.IsNullOrEmpty(txtCP.Text) ||
+                string.IsNullOrEmpty(txtLocalidad.Text) ||
+                string.IsNullOrEmpty(txtEmail.Text) ||
+                string.IsNullOrEmpty(txtTel1.Text) ||
+                string.IsNullOrEmpty(txtTel2.Text))
+            {
+
+                error = true;
+            }
+            else
+            {
+                error = false;
+            }
+
+            return error;
+
+        }
         private void btnAgregarAfiliado_Click(object sender, EventArgs e)
         {
-            try
+            Controlblanco();
+            if (error == false)
             {
-                // Recopilar datos desde controles de formulario
-                Persona persona = new Persona
+                try
                 {
-                    IdRol = 1,
-                    Nombre = txtNombre.Text,
-                    Apellido = txtApellido.Text,
-                    TipoDoc = txtTipoDoc.Text,
-                    Dni = int.Parse(txtNroDoc.Text),
-                    FechaNacimiento = txtFechaNac.Value,
-                    Direccion = txtDireccion.Text,
-                    Cp = int.Parse(txtCP.Text),
-                    Localidad = txtLocalidad.Text,
-                    CorreoElect = txtEmail.Text,
-                    Telefono1 = int.Parse(txtTel1.Text),
-                    Telefono2 = int.Parse(txtTel2.Text)
-                };
-
-                Administrador administrador = new Administrador();
-                (bool personaExistente, bool personaEliminada) = administrador.VerificarExistenciaPersona(persona.Dni);
-
-                if (personaExistente)
-                {
-                    if (personaEliminada)
+                    // Recopilar datos desde controles de formulario
+                    Persona persona = new Persona
                     {
-                        DialogResult resultado = MessageBox.Show("La persona ya existe pero está dada de baja. ¿Desea reactivarla?", "Persona Existente", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        IdRol = 1,
+                        Nombre = txtNombre.Text,
+                        Apellido = txtApellido.Text,
+                        TipoDoc = txtTipoDoc.Text,
+                        Dni = int.Parse(txtNroDoc.Text),
+                        FechaNacimiento = txtFechaNac.Value,
+                        Direccion = txtDireccion.Text,
+                        Cp = int.Parse(txtCP.Text),
+                        Localidad = txtLocalidad.Text,
+                        CorreoElect = txtEmail.Text,
+                        Telefono1 = int.Parse(txtTel1.Text),
+                        Telefono2 = int.Parse(txtTel2.Text)
+                    };
 
-                        if (resultado == DialogResult.Yes)
+                    Administrador administrador = new Administrador();
+                    (bool personaExistente, bool personaEliminada) = administrador.VerificarExistenciaPersona(persona.Dni);
+
+                    if (personaExistente)
+                    {
+                        if (personaEliminada)
                         {
-                            (bool personaReactivada, int idPersona, DateTime fechaVencimiento, long nroCarnet) = administrador.ReactivarPersona(persona.Dni);
+                            DialogResult resultado = MessageBox.Show("La persona ya existe pero está dada de baja. ¿Desea reactivarla?", "Persona Existente", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                            if (personaReactivada)
+                            if (resultado == DialogResult.Yes)
                             {
-                                MessageBox.Show("La persona ha sido reactivada.");
+                                (bool personaReactivada, int idPersona, DateTime fechaVencimiento, long nroCarnet) = administrador.ReactivarPersona(persona.Dni);
 
-                                // Crea el formulario FormCarnet y pasa la información
-                                Afiliado afiliado = administrador.BuscarAfiliadoPorDni(persona.Dni);
-                              
-                                FormCarnet formCarnet = new FormCarnet(afiliado, fechaVencimiento, nroCarnet);
-                                formCarnet.Show();
+                                if (personaReactivada)
+                                {
+                                    MessageBox.Show("La persona ha sido reactivada.");
+
+                                    // Crea el formulario FormCarnet y pasa la información
+                                    Afiliado afiliado = administrador.BuscarAfiliadoPorDni(persona.Dni);
+
+                                    FormCarnet formCarnet = new FormCarnet(afiliado, fechaVencimiento, nroCarnet);
+                                    formCarnet.Show();
+                                }
+
                             }
+                            else
+                            {
+                                MessageBox.Show("La persona ya existe pero está dada de baja y no fue reactivada.");
 
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("La persona ya existe pero está dada de baja y no fue reactivada.");
+                            MessageBox.Show("La persona ya existe y no está dada de baja.");
+                            LimpiarCampos();
                         }
                     }
                     else
                     {
-                        MessageBox.Show("La persona ya existe y no está dada de baja.");
+                        int idPersona = administrador.CrearPersonaObj(persona);
+
+                        Afiliado afiliado = new Afiliado
+                        {
+                            FechaAfiliacion = DateTime.Now,
+                            IdPersona = idPersona,
+                            Persona = persona
+                        };
+
+                        administrador.CrearAfiliadoObj(afiliado);
+
+                        DialogResult result = MessageBox.Show("Afiliado agregado exitosamente. ¿Desea imprimir el carnet ahora?", "Éxito", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                        DateTime expira;
+                        long nroCarnet;
+                        if (result == DialogResult.Yes)
+                        {
+                            administrador.CrearCarnetAutomatico(out expira, out nroCarnet);
+
+                            // Crea el formulario FormCarnet y pasa la información
+                            FormCarnet formCarnet = new FormCarnet(afiliado, expira, nroCarnet);
+                            formCarnet.Show();
+                        }
+
+                        else
+                        {
+                            administrador.CrearCarnetAutomatico(out expira, out nroCarnet);
+                            Dispose();
+                        }
+
+                        LimpiarCampos();
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    int idPersona = administrador.CrearPersonaObj(persona);
-
-                    Afiliado afiliado = new Afiliado
-                    {
-                        FechaAfiliacion = DateTime.Now,
-                        Socio = int.Parse(txtSocio.Text),
-                        CuotaAPagar = int.Parse(txtCuotas.Text),
-                        IdPersona = idPersona,
-                        Persona = persona
-                    };
-
-                    administrador.CrearAfiliadoObj(afiliado);
-
-                    DialogResult result = MessageBox.Show("Afiliado agregado exitosamente. ¿Desea imprimir el carnet ahora?", "Éxito", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
-                    DateTime expira;
-                    long nroCarnet;
-                    if (result == DialogResult.Yes)
-                    {
-                        administrador.CrearCarnetAutomatico(out expira, out nroCarnet);
-
-                        // Crea el formulario FormCarnet y pasa la información
-                        FormCarnet formCarnet = new FormCarnet(afiliado, expira, nroCarnet);
-                        formCarnet.Show();
-                    }
-
-                    else
-                    {
-                        administrador.CrearCarnetAutomatico(out expira, out nroCarnet);
-                        Dispose();
-                    }
-
-                    LimpiarCampos();
+                    MessageBox.Show("Error al crear afiliado");
                 }
+
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Error al crear afiliado" + ex.ToString(), "Error");
+                MessageBox.Show("Debe completar todos los campos");
             }
         }
 
@@ -138,17 +172,16 @@ namespace Sistema_Club_Deportivo
         {
             txtNombre.Clear();
             txtApellido.Clear();
-            txtTipoDoc.Clear();
+            txtTipoDoc.Items.Clear();
             txtNroDoc.Clear();
-            txtFechaNac.ResetText(); // Para restablecer la fecha a su valor predeterminado
+            txtFechaNac.ResetText();
             txtDireccion.Clear();
             txtCP.Clear();
             txtLocalidad.Clear();
             txtEmail.Clear();
             txtTel1.Clear();
             txtTel2.Clear();
-            txtNroCarnet.Clear(); // Campo relacionado al afiliado
-            txtCuotas.Clear(); // Campo relacionado al afiliado
+
         }
         private void label12_Click(object sender, EventArgs e)
         {
@@ -157,6 +190,11 @@ namespace Sistema_Club_Deportivo
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
+        }
+
+        private void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

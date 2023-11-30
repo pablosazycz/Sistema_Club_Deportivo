@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VentanaPrincipal));
             panel1 = new Panel();
             panel2 = new Panel();
+            button1 = new Button();
             pnl3SubMenuServNutric = new Panel();
             btnSubVTurDisp = new Button();
             btnSubVTurAsig = new Button();
@@ -44,12 +45,13 @@
             btnSubVAfiliados = new Button();
             btnSubVCarnets = new Button();
             btnSubVPagos = new Button();
+            btnNoAfiliado = new Button();
             btnSubPanelAfiliados = new Button();
             pnlLogo = new Panel();
             picLogo = new PictureBox();
             panelHijoForm = new Panel();
             pictureBox1 = new PictureBox();
-            btnNoAfiliado = new Button();
+            button2 = new Button();
             panel2.SuspendLayout();
             pnl3SubMenuServNutric.SuspendLayout();
             pnl2SubMenuProfes.SuspendLayout();
@@ -73,6 +75,8 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(button2);
+            panel2.Controls.Add(button1);
             panel2.Controls.Add(pnl3SubMenuServNutric);
             panel2.Controls.Add(btnNutricion);
             panel2.Controls.Add(pnl2SubMenuProfes);
@@ -85,6 +89,16 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(200, 587);
             panel2.TabIndex = 13;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(9, 519);
+            button1.Name = "button1";
+            button1.Size = new Size(175, 23);
+            button1.TabIndex = 8;
+            button1.Text = "Editar no Afiliado";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // pnl3SubMenuServNutric
             // 
@@ -110,7 +124,7 @@
             btnSubVTurDisp.Padding = new Padding(21, 0, 0, 0);
             btnSubVTurDisp.Size = new Size(200, 30);
             btnSubVTurDisp.TabIndex = 6;
-            btnSubVTurDisp.Text = " Turnos DISPONIBLES";
+            btnSubVTurDisp.Text = "ABM'S Actividades";
             btnSubVTurDisp.TextAlign = ContentAlignment.MiddleLeft;
             btnSubVTurDisp.UseVisualStyleBackColor = false;
             btnSubVTurDisp.Click += btnSubVTurDisp_Click_1;
@@ -131,6 +145,7 @@
             btnSubVTurAsig.Text = " Turnos ASIGNADOS";
             btnSubVTurAsig.TextAlign = ContentAlignment.MiddleLeft;
             btnSubVTurAsig.UseVisualStyleBackColor = false;
+            btnSubVTurAsig.Click += btnSubVTurAsig_Click_1;
             // 
             // btnNutricion
             // 
@@ -144,7 +159,7 @@
             btnNutricion.Name = "btnNutricion";
             btnNutricion.Size = new Size(200, 40);
             btnNutricion.TabIndex = 5;
-            btnNutricion.Text = " Serv. NUTRICION";
+            btnNutricion.Text = "Actividades";
             btnNutricion.TextAlign = ContentAlignment.MiddleLeft;
             btnNutricion.UseVisualStyleBackColor = false;
             btnNutricion.Click += btnNutricion_Click_1;
@@ -300,6 +315,25 @@
             btnSubVPagos.UseVisualStyleBackColor = false;
             btnSubVPagos.Click += btnSubVPagos_Click_1;
             // 
+            // btnNoAfiliado
+            // 
+            btnNoAfiliado.BackColor = Color.FromArgb(64, 64, 64);
+            btnNoAfiliado.Dock = DockStyle.Bottom;
+            btnNoAfiliado.FlatAppearance.BorderSize = 0;
+            btnNoAfiliado.FlatStyle = FlatStyle.Popup;
+            btnNoAfiliado.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnNoAfiliado.ForeColor = SystemColors.ButtonFace;
+            btnNoAfiliado.Location = new Point(0, 93);
+            btnNoAfiliado.Margin = new Padding(0);
+            btnNoAfiliado.Name = "btnNoAfiliado";
+            btnNoAfiliado.Padding = new Padding(22, 0, 0, 0);
+            btnNoAfiliado.Size = new Size(200, 30);
+            btnNoAfiliado.TabIndex = 9;
+            btnNoAfiliado.Text = "No Afiliado";
+            btnNoAfiliado.TextAlign = ContentAlignment.MiddleLeft;
+            btnNoAfiliado.UseVisualStyleBackColor = false;
+            btnNoAfiliado.Click += btnNoAfiliado_Click;
+            // 
             // btnSubPanelAfiliados
             // 
             btnSubPanelAfiliados.BackColor = Color.FromArgb(11, 7, 17);
@@ -361,24 +395,15 @@
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
-            // btnNoAfiliado
+            // button2
             // 
-            btnNoAfiliado.BackColor = Color.FromArgb(64, 64, 64);
-            btnNoAfiliado.Dock = DockStyle.Bottom;
-            btnNoAfiliado.FlatAppearance.BorderSize = 0;
-            btnNoAfiliado.FlatStyle = FlatStyle.Popup;
-            btnNoAfiliado.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnNoAfiliado.ForeColor = SystemColors.ButtonFace;
-            btnNoAfiliado.Location = new Point(0, 93);
-            btnNoAfiliado.Margin = new Padding(0);
-            btnNoAfiliado.Name = "btnNoAfiliado";
-            btnNoAfiliado.Padding = new Padding(22, 0, 0, 0);
-            btnNoAfiliado.Size = new Size(200, 30);
-            btnNoAfiliado.TabIndex = 9;
-            btnNoAfiliado.Text = "No Afiliado";
-            btnNoAfiliado.TextAlign = ContentAlignment.MiddleLeft;
-            btnNoAfiliado.UseVisualStyleBackColor = false;
-            btnNoAfiliado.Click += btnNoAfiliado_Click;
+            button2.Location = new Point(9, 548);
+            button2.Name = "button2";
+            button2.Size = new Size(175, 23);
+            button2.TabIndex = 9;
+            button2.Text = "Verificacion Afiliado";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click_1;
             // 
             // VentanaPrincipal
             // 
@@ -427,5 +452,7 @@
         private PictureBox pictureBox1;
         private Button btnProfesores;
         private Button btnNoAfiliado;
+        private Button button1;
+        private Button button2;
     }
 }

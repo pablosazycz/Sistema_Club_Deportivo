@@ -1,6 +1,6 @@
 ﻿namespace Sistema_Club_Deportivo
 {
-    partial class EdicionAfiliado
+    partial class EdicionNoAfiliado
     {
         /// <summary>
         /// Required designer variable.
@@ -28,11 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            label19 = new Label();
+            txtIdPersona = new TextBox();
+            label18 = new Label();
+            txtIdNoAfiliado = new TextBox();
+            btnBuscarAfil = new Button();
+            txtBuscarAfil = new TextBox();
+            radioSocioBusca = new RadioButton();
+            radioDocBuscar = new RadioButton();
+            label17 = new Label();
             txtFechaAfi = new DateTimePicker();
             label16 = new Label();
             label12 = new Label();
             txtIdRol = new TextBox();
-            btnEditarAfiliado = new Button();
+            btnEditarNoAfiliado = new Button();
             label11 = new Label();
             txtTel2 = new TextBox();
             label10 = new Label();
@@ -55,331 +64,336 @@
             txtTipoDoc = new TextBox();
             txtApellido = new TextBox();
             txtNombre = new TextBox();
-            label17 = new Label();
-            radioDocBuscar = new RadioButton();
-            radioSocioBusca = new RadioButton();
-            txtBuscarAfil = new TextBox();
-            btnBuscarAfil = new Button();
-            label18 = new Label();
-            txtIdAfiliado = new TextBox();
-            label19 = new Label();
-            txtIdPersona = new TextBox();
+            btnNoafiliado = new Button();
             SuspendLayout();
             // 
-            // txtFechaAfi
+            // label19
             // 
-            txtFechaAfi.Format = DateTimePickerFormat.Short;
-            txtFechaAfi.Location = new Point(101, 356);
-            txtFechaAfi.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
-            txtFechaAfi.Name = "txtFechaAfi";
-            txtFechaAfi.Size = new Size(173, 23);
-            txtFechaAfi.TabIndex = 68;
-            txtFechaAfi.Value = new DateTime(2023, 10, 19, 21, 42, 20, 0);
+            label19.AutoSize = true;
+            label19.Location = new Point(267, 124);
+            label19.Name = "label19";
+            label19.Size = new Size(59, 15);
+            label19.TabIndex = 113;
+            label19.Text = "IdPersona";
             // 
-            // label16
+            // txtIdPersona
             // 
-            label16.AutoSize = true;
-            label16.Location = new Point(33, 356);
-            label16.Name = "label16";
-            label16.Size = new Size(91, 15);
-            label16.TabIndex = 66;
-            label16.Text = "Fecha Afiliacion";
+            txtIdPersona.Location = new Point(332, 121);
+            txtIdPersona.Name = "txtIdPersona";
+            txtIdPersona.ReadOnly = true;
+            txtIdPersona.Size = new Size(164, 23);
+            txtIdPersona.TabIndex = 112;
             // 
-            // label12
+            // label18
             // 
-            label12.AutoSize = true;
-            label12.Location = new Point(36, 117);
-            label12.Name = "label12";
-            label12.Size = new Size(29, 15);
-            label12.TabIndex = 61;
-            label12.Text = "ROL";
+            label18.AutoSize = true;
+            label18.Location = new Point(516, 129);
+            label18.Name = "label18";
+            label18.Size = new Size(74, 15);
+            label18.TabIndex = 111;
+            label18.Text = "IdNoAfiliado";
             // 
-            // txtIdRol
+            // txtIdNoAfiliado
             // 
-            txtIdRol.Location = new Point(93, 114);
-            txtIdRol.Name = "txtIdRol";
-            txtIdRol.Size = new Size(164, 23);
-            txtIdRol.TabIndex = 60;
+            txtIdNoAfiliado.Location = new Point(597, 121);
+            txtIdNoAfiliado.Name = "txtIdNoAfiliado";
+            txtIdNoAfiliado.ReadOnly = true;
+            txtIdNoAfiliado.Size = new Size(164, 23);
+            txtIdNoAfiliado.TabIndex = 110;
             // 
-            // btnEditarAfiliado
+            // btnBuscarAfil
             // 
-            btnEditarAfiliado.Location = new Point(610, 408);
-            btnEditarAfiliado.Name = "btnEditarAfiliado";
-            btnEditarAfiliado.Size = new Size(122, 23);
-            btnEditarAfiliado.TabIndex = 59;
-            btnEditarAfiliado.Text = "Editar Afiliado";
-            btnEditarAfiliado.UseVisualStyleBackColor = true;
-            btnEditarAfiliado.Click += btnEditarAfiliado_Click;
+            btnBuscarAfil.Location = new Point(440, 56);
+            btnBuscarAfil.Name = "btnBuscarAfil";
+            btnBuscarAfil.Size = new Size(75, 23);
+            btnBuscarAfil.TabIndex = 109;
+            btnBuscarAfil.Text = "Buscar";
+            btnBuscarAfil.UseVisualStyleBackColor = true;
+            btnBuscarAfil.Click += btnBuscarAfil_Click_1;
             // 
-            // label11
+            // txtBuscarAfil
             // 
-            label11.AutoSize = true;
-            label11.Location = new Point(42, 320);
-            label11.Name = "label11";
-            label11.Size = new Size(61, 15);
-            label11.TabIndex = 58;
-            label11.Text = "Telefono 2";
+            txtBuscarAfil.Location = new Point(162, 57);
+            txtBuscarAfil.Name = "txtBuscarAfil";
+            txtBuscarAfil.Size = new Size(239, 23);
+            txtBuscarAfil.TabIndex = 108;
+            txtBuscarAfil.TextChanged += txtBuscarAfil_TextChanged;
             // 
-            // txtTel2
+            // radioSocioBusca
             // 
-            txtTel2.Location = new Point(110, 315);
-            txtTel2.Name = "txtTel2";
-            txtTel2.Size = new Size(164, 23);
-            txtTel2.TabIndex = 57;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Location = new Point(312, 287);
-            label10.Name = "label10";
-            label10.Size = new Size(61, 15);
-            label10.TabIndex = 56;
-            label10.Text = "Telefono 1";
-            // 
-            // txtTel1
-            // 
-            txtTel1.Location = new Point(380, 282);
-            txtTel1.Name = "txtTel1";
-            txtTel1.Size = new Size(164, 23);
-            txtTel1.TabIndex = 55;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new Point(39, 287);
-            label9.Name = "label9";
-            label9.Size = new Size(36, 15);
-            label9.TabIndex = 54;
-            label9.Text = "Email";
-            // 
-            // txtEmail
-            // 
-            txtEmail.Location = new Point(107, 282);
-            txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(164, 23);
-            txtEmail.TabIndex = 53;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(323, 249);
-            label8.Name = "label8";
-            label8.Size = new Size(58, 15);
-            label8.TabIndex = 52;
-            label8.Text = "Localidad";
-            // 
-            // txtLocalidad
-            // 
-            txtLocalidad.Location = new Point(391, 244);
-            txtLocalidad.Name = "txtLocalidad";
-            txtLocalidad.Size = new Size(164, 23);
-            txtLocalidad.TabIndex = 51;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(39, 249);
-            label7.Name = "label7";
-            label7.Size = new Size(64, 15);
-            label7.TabIndex = 50;
-            label7.Text = "Cod Postal";
-            // 
-            // txtCP
-            // 
-            txtCP.Location = new Point(107, 244);
-            txtCP.Name = "txtCP";
-            txtCP.Size = new Size(164, 23);
-            txtCP.TabIndex = 49;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(345, 220);
-            label6.Name = "label6";
-            label6.Size = new Size(57, 15);
-            label6.TabIndex = 48;
-            label6.Text = "Direccion";
-            // 
-            // txtFechaNac
-            // 
-            txtFechaNac.Format = DateTimePickerFormat.Short;
-            txtFechaNac.Location = new Point(100, 212);
-            txtFechaNac.Name = "txtFechaNac";
-            txtFechaNac.Size = new Size(171, 23);
-            txtFechaNac.TabIndex = 46;
-            // 
-            // txtDireccion
-            // 
-            txtDireccion.Location = new Point(413, 215);
-            txtDireccion.Name = "txtDireccion";
-            txtDireccion.Size = new Size(164, 23);
-            txtDireccion.TabIndex = 47;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(32, 212);
-            label5.Name = "label5";
-            label5.Size = new Size(62, 15);
-            label5.TabIndex = 45;
-            label5.Text = "Fecha Nac";
-            // 
-            // txtNroDoc
-            // 
-            txtNroDoc.Location = new Point(340, 172);
-            txtNroDoc.Name = "txtNroDoc";
-            txtNroDoc.Size = new Size(164, 23);
-            txtNroDoc.TabIndex = 44;
-            txtNroDoc.TextChanged += txtNroDoc_TextChanged;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(280, 175);
-            label4.Name = "label4";
-            label4.Size = new Size(51, 15);
-            label4.TabIndex = 43;
-            label4.Text = "Nro Doc";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(33, 180);
-            label3.Name = "label3";
-            label3.Size = new Size(54, 15);
-            label3.TabIndex = 42;
-            label3.Text = "Tipo Doc";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(266, 146);
-            label2.Name = "label2";
-            label2.Size = new Size(51, 15);
-            label2.TabIndex = 41;
-            label2.Text = "Apellido";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(36, 146);
-            label1.Name = "label1";
-            label1.Size = new Size(51, 15);
-            label1.TabIndex = 40;
-            label1.Text = "Nombre";
-            // 
-            // txtTipoDoc
-            // 
-            txtTipoDoc.Location = new Point(87, 172);
-            txtTipoDoc.Name = "txtTipoDoc";
-            txtTipoDoc.Size = new Size(164, 23);
-            txtTipoDoc.TabIndex = 39;
-            // 
-            // txtApellido
-            // 
-            txtApellido.Location = new Point(323, 143);
-            txtApellido.Name = "txtApellido";
-            txtApellido.Size = new Size(164, 23);
-            txtApellido.TabIndex = 38;
-            // 
-            // txtNombre
-            // 
-            txtNombre.Location = new Point(93, 143);
-            txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(164, 23);
-            txtNombre.TabIndex = 37;
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Location = new Point(15, 6);
-            label17.Name = "label17";
-            label17.Size = new Size(141, 15);
-            label17.TabIndex = 70;
-            label17.Text = "Elija Criterio de Búsqueda";
+            radioSocioBusca.AutoSize = true;
+            radioSocioBusca.Location = new Point(26, 73);
+            radioSocioBusca.Name = "radioSocioBusca";
+            radioSocioBusca.Size = new Size(77, 19);
+            radioSocioBusca.TabIndex = 107;
+            radioSocioBusca.Text = "Nro Socio";
+            radioSocioBusca.UseVisualStyleBackColor = true;
             // 
             // radioDocBuscar
             // 
             radioDocBuscar.AutoSize = true;
             radioDocBuscar.Checked = true;
-            radioDocBuscar.Location = new Point(39, 41);
+            radioDocBuscar.Location = new Point(26, 48);
             radioDocBuscar.Name = "radioDocBuscar";
             radioDocBuscar.Size = new Size(69, 19);
-            radioDocBuscar.TabIndex = 71;
+            radioDocBuscar.TabIndex = 106;
             radioDocBuscar.TabStop = true;
             radioDocBuscar.Text = "Nro Doc";
             radioDocBuscar.UseVisualStyleBackColor = true;
             // 
-            // radioSocioBusca
+            // label17
             // 
-            radioSocioBusca.AutoSize = true;
-            radioSocioBusca.Location = new Point(39, 66);
-            radioSocioBusca.Name = "radioSocioBusca";
-            radioSocioBusca.Size = new Size(77, 19);
-            radioSocioBusca.TabIndex = 71;
-            radioSocioBusca.Text = "Nro Socio";
-            radioSocioBusca.UseVisualStyleBackColor = true;
+            label17.AutoSize = true;
+            label17.Location = new Point(2, 13);
+            label17.Name = "label17";
+            label17.Size = new Size(141, 15);
+            label17.TabIndex = 105;
+            label17.Text = "Elija Criterio de Búsqueda";
             // 
-            // txtBuscarAfil
+            // txtFechaAfi
             // 
-            txtBuscarAfil.Location = new Point(175, 50);
-            txtBuscarAfil.Name = "txtBuscarAfil";
-            txtBuscarAfil.Size = new Size(239, 23);
-            txtBuscarAfil.TabIndex = 72;
+            txtFechaAfi.Format = DateTimePickerFormat.Short;
+            txtFechaAfi.Location = new Point(88, 363);
+            txtFechaAfi.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
+            txtFechaAfi.Name = "txtFechaAfi";
+            txtFechaAfi.Size = new Size(173, 23);
+            txtFechaAfi.TabIndex = 104;
+            txtFechaAfi.Value = new DateTime(2023, 10, 19, 21, 42, 20, 0);
             // 
-            // btnBuscarAfil
+            // label16
             // 
-            btnBuscarAfil.Location = new Point(453, 49);
-            btnBuscarAfil.Name = "btnBuscarAfil";
-            btnBuscarAfil.Size = new Size(75, 23);
-            btnBuscarAfil.TabIndex = 73;
-            btnBuscarAfil.Text = "Buscar";
-            btnBuscarAfil.UseVisualStyleBackColor = true;
-            btnBuscarAfil.Click += btnBuscarAfil_Click;
+            label16.AutoSize = true;
+            label16.Location = new Point(20, 363);
+            label16.Name = "label16";
+            label16.Size = new Size(91, 15);
+            label16.TabIndex = 103;
+            label16.Text = "Fecha Afiliacion";
             // 
-            // label18
+            // label12
             // 
-            label18.AutoSize = true;
-            label18.Location = new Point(529, 122);
-            label18.Name = "label18";
-            label18.Size = new Size(58, 15);
-            label18.TabIndex = 75;
-            label18.Text = "IdAfiliado";
+            label12.AutoSize = true;
+            label12.Location = new Point(23, 124);
+            label12.Name = "label12";
+            label12.Size = new Size(29, 15);
+            label12.TabIndex = 102;
+            label12.Text = "ROL";
             // 
-            // txtIdAfiliado
+            // txtIdRol
             // 
-            txtIdAfiliado.Location = new Point(593, 117);
-            txtIdAfiliado.Name = "txtIdAfiliado";
-            txtIdAfiliado.ReadOnly = true;
-            txtIdAfiliado.Size = new Size(164, 23);
-            txtIdAfiliado.TabIndex = 74;
+            txtIdRol.Location = new Point(80, 121);
+            txtIdRol.Name = "txtIdRol";
+            txtIdRol.ReadOnly = true;
+            txtIdRol.Size = new Size(164, 23);
+            txtIdRol.TabIndex = 101;
             // 
-            // label19
+            // btnEditarNoAfiliado
             // 
-            label19.AutoSize = true;
-            label19.Location = new Point(280, 117);
-            label19.Name = "label19";
-            label19.Size = new Size(59, 15);
-            label19.TabIndex = 77;
-            label19.Text = "IdPersona";
+            btnEditarNoAfiliado.Location = new Point(400, 365);
+            btnEditarNoAfiliado.Name = "btnEditarNoAfiliado";
+            btnEditarNoAfiliado.Size = new Size(122, 23);
+            btnEditarNoAfiliado.TabIndex = 100;
+            btnEditarNoAfiliado.Text = "Editar No Afiliado";
+            btnEditarNoAfiliado.UseVisualStyleBackColor = true;
+            btnEditarNoAfiliado.Click += btnEditarNoAfiliado_Click_1;
             // 
-            // txtIdPersona
+            // label11
             // 
-            txtIdPersona.Location = new Point(345, 114);
-            txtIdPersona.Name = "txtIdPersona";
-            txtIdPersona.ReadOnly = true;
-            txtIdPersona.Size = new Size(164, 23);
-            txtIdPersona.TabIndex = 76;
+            label11.AutoSize = true;
+            label11.Location = new Point(29, 327);
+            label11.Name = "label11";
+            label11.Size = new Size(61, 15);
+            label11.TabIndex = 99;
+            label11.Text = "Telefono 2";
             // 
-            // EdicionAfiliado
+            // txtTel2
+            // 
+            txtTel2.Location = new Point(97, 322);
+            txtTel2.Name = "txtTel2";
+            txtTel2.Size = new Size(164, 23);
+            txtTel2.TabIndex = 98;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(299, 294);
+            label10.Name = "label10";
+            label10.Size = new Size(61, 15);
+            label10.TabIndex = 97;
+            label10.Text = "Telefono 1";
+            // 
+            // txtTel1
+            // 
+            txtTel1.Location = new Point(367, 289);
+            txtTel1.Name = "txtTel1";
+            txtTel1.Size = new Size(164, 23);
+            txtTel1.TabIndex = 96;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(26, 294);
+            label9.Name = "label9";
+            label9.Size = new Size(36, 15);
+            label9.TabIndex = 95;
+            label9.Text = "Email";
+            // 
+            // txtEmail
+            // 
+            txtEmail.Location = new Point(94, 289);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(164, 23);
+            txtEmail.TabIndex = 94;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(310, 256);
+            label8.Name = "label8";
+            label8.Size = new Size(58, 15);
+            label8.TabIndex = 93;
+            label8.Text = "Localidad";
+            // 
+            // txtLocalidad
+            // 
+            txtLocalidad.Location = new Point(378, 251);
+            txtLocalidad.Name = "txtLocalidad";
+            txtLocalidad.Size = new Size(164, 23);
+            txtLocalidad.TabIndex = 92;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(26, 256);
+            label7.Name = "label7";
+            label7.Size = new Size(64, 15);
+            label7.TabIndex = 91;
+            label7.Text = "Cod Postal";
+            // 
+            // txtCP
+            // 
+            txtCP.Location = new Point(94, 251);
+            txtCP.Name = "txtCP";
+            txtCP.Size = new Size(164, 23);
+            txtCP.TabIndex = 90;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(332, 227);
+            label6.Name = "label6";
+            label6.Size = new Size(57, 15);
+            label6.TabIndex = 89;
+            label6.Text = "Direccion";
+            // 
+            // txtFechaNac
+            // 
+            txtFechaNac.Format = DateTimePickerFormat.Short;
+            txtFechaNac.Location = new Point(87, 219);
+            txtFechaNac.Name = "txtFechaNac";
+            txtFechaNac.Size = new Size(171, 23);
+            txtFechaNac.TabIndex = 87;
+            // 
+            // txtDireccion
+            // 
+            txtDireccion.Location = new Point(400, 222);
+            txtDireccion.Name = "txtDireccion";
+            txtDireccion.Size = new Size(164, 23);
+            txtDireccion.TabIndex = 88;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(19, 219);
+            label5.Name = "label5";
+            label5.Size = new Size(62, 15);
+            label5.TabIndex = 86;
+            label5.Text = "Fecha Nac";
+            // 
+            // txtNroDoc
+            // 
+            txtNroDoc.Location = new Point(327, 179);
+            txtNroDoc.Name = "txtNroDoc";
+            txtNroDoc.Size = new Size(164, 23);
+            txtNroDoc.TabIndex = 85;
+            txtNroDoc.TextChanged += txtNroDoc_TextChanged_1;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(267, 182);
+            label4.Name = "label4";
+            label4.Size = new Size(51, 15);
+            label4.TabIndex = 84;
+            label4.Text = "Nro Doc";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(20, 187);
+            label3.Name = "label3";
+            label3.Size = new Size(54, 15);
+            label3.TabIndex = 83;
+            label3.Text = "Tipo Doc";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(253, 153);
+            label2.Name = "label2";
+            label2.Size = new Size(51, 15);
+            label2.TabIndex = 82;
+            label2.Text = "Apellido";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(23, 153);
+            label1.Name = "label1";
+            label1.Size = new Size(51, 15);
+            label1.TabIndex = 81;
+            label1.Text = "Nombre";
+            // 
+            // txtTipoDoc
+            // 
+            txtTipoDoc.Location = new Point(74, 179);
+            txtTipoDoc.Name = "txtTipoDoc";
+            txtTipoDoc.Size = new Size(164, 23);
+            txtTipoDoc.TabIndex = 80;
+            // 
+            // txtApellido
+            // 
+            txtApellido.Location = new Point(310, 150);
+            txtApellido.Name = "txtApellido";
+            txtApellido.Size = new Size(164, 23);
+            txtApellido.TabIndex = 79;
+            // 
+            // txtNombre
+            // 
+            txtNombre.Location = new Point(80, 150);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(164, 23);
+            txtNombre.TabIndex = 78;
+            // 
+            // btnNoafiliado
+            // 
+            btnNoafiliado.Location = new Point(597, 289);
+            btnNoafiliado.Name = "btnNoafiliado";
+            btnNoafiliado.Size = new Size(152, 23);
+            btnNoafiliado.TabIndex = 114;
+            btnNoafiliado.Text = "Convertir a socio";
+            btnNoafiliado.UseVisualStyleBackColor = true;
+            btnNoafiliado.Click += btnNoafiliado_Click;
+            // 
+            // EdicionNoAfiliado
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnNoafiliado);
             Controls.Add(label19);
             Controls.Add(txtIdPersona);
             Controls.Add(label18);
-            Controls.Add(txtIdAfiliado);
+            Controls.Add(txtIdNoAfiliado);
             Controls.Add(btnBuscarAfil);
             Controls.Add(txtBuscarAfil);
             Controls.Add(radioSocioBusca);
@@ -389,7 +403,7 @@
             Controls.Add(label16);
             Controls.Add(label12);
             Controls.Add(txtIdRol);
-            Controls.Add(btnEditarAfiliado);
+            Controls.Add(btnEditarNoAfiliado);
             Controls.Add(label11);
             Controls.Add(txtTel2);
             Controls.Add(label10);
@@ -412,18 +426,28 @@
             Controls.Add(txtTipoDoc);
             Controls.Add(txtApellido);
             Controls.Add(txtNombre);
-            Name = "EdicionAfiliado";
-            Text = "EdicionAfiliado";
+            Name = "EdicionNoAfiliado";
+            Text = "EdicionNoAfiliado";
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
+
+        private Label label19;
+        private TextBox txtIdPersona;
+        private Label label18;
+        private TextBox txtIdNoAfiliado;
+        private Button btnBuscarAfil;
+        private TextBox txtBuscarAfil;
+        private RadioButton radioSocioBusca;
+        private RadioButton radioDocBuscar;
+        private Label label17;
         private DateTimePicker txtFechaAfi;
         private Label label16;
         private Label label12;
         private TextBox txtIdRol;
-        private Button btnEditarAfiliado;
+        private Button btnEditarNoAfiliado;
         private Label label11;
         private TextBox txtTel2;
         private Label label10;
@@ -446,14 +470,6 @@
         private TextBox txtTipoDoc;
         private TextBox txtApellido;
         private TextBox txtNombre;
-        private Label label17;
-        private RadioButton radioDocBuscar;
-        private RadioButton radioSocioBusca;
-        private TextBox txtBuscarAfil;
-        private Button btnBuscarAfil;
-        private Label label18;
-        private TextBox txtIdAfiliado;
-        private Label label19;
-        private TextBox txtIdPersona;
+        private Button btnNoafiliado;
     }
 }

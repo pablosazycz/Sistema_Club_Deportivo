@@ -33,20 +33,12 @@
             btnBorrarAf = new Button();
             btnNuevoAf = new Button();
             pnlTabPagos = new Panel();
-            dataGridView1 = new DataGridView();
-            idTicket = new DataGridViewTextBoxColumn();
-            fecha = new DataGridViewTextBoxColumn();
-            monto = new DataGridViewTextBoxColumn();
-            formaPago = new DataGridViewTextBoxColumn();
-            cantCuotas = new DataGridViewComboBoxColumn();
-            titularTarjeta = new DataGridViewTextBoxColumn();
-            bcoTarjeta = new DataGridViewTextBoxColumn();
-            pagoRealizado = new DataGridViewTextBoxColumn();
             button1 = new Button();
+            dgdPago = new DataGridView();
             panel1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             pnlTabPagos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgdPago).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -113,75 +105,13 @@
             // pnlTabPagos
             // 
             pnlTabPagos.BackColor = Color.FromArgb(11, 7, 17);
-            pnlTabPagos.Controls.Add(dataGridView1);
+            pnlTabPagos.Controls.Add(dgdPago);
             pnlTabPagos.Controls.Add(button1);
             pnlTabPagos.Dock = DockStyle.Fill;
             pnlTabPagos.Location = new Point(0, 40);
             pnlTabPagos.Name = "pnlTabPagos";
             pnlTabPagos.Size = new Size(934, 547);
             pnlTabPagos.TabIndex = 1;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { idTicket, fecha, monto, formaPago, cantCuotas, titularTarjeta, bcoTarjeta, pagoRealizado });
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 0);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(934, 517);
-            dataGridView1.TabIndex = 10;
-            // 
-            // idTicket
-            // 
-            idTicket.HeaderText = "idTicket";
-            idTicket.Name = "idTicket";
-            idTicket.Resizable = DataGridViewTriState.True;
-            idTicket.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // fecha
-            // 
-            fecha.HeaderText = "Fecha";
-            fecha.Name = "fecha";
-            fecha.Resizable = DataGridViewTriState.True;
-            fecha.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // monto
-            // 
-            monto.HeaderText = "Monto";
-            monto.Name = "monto";
-            monto.Resizable = DataGridViewTriState.True;
-            monto.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // formaPago
-            // 
-            formaPago.HeaderText = "Forma de Pago";
-            formaPago.Name = "formaPago";
-            // 
-            // cantCuotas
-            // 
-            cantCuotas.HeaderText = "Cantidad de Cuotas";
-            cantCuotas.Name = "cantCuotas";
-            // 
-            // titularTarjeta
-            // 
-            titularTarjeta.HeaderText = "Titular Tarjeta";
-            titularTarjeta.Name = "titularTarjeta";
-            titularTarjeta.Resizable = DataGridViewTriState.True;
-            titularTarjeta.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // bcoTarjeta
-            // 
-            bcoTarjeta.HeaderText = "Banco Tarjeta";
-            bcoTarjeta.Name = "bcoTarjeta";
-            bcoTarjeta.Resizable = DataGridViewTriState.True;
-            bcoTarjeta.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // pagoRealizado
-            // 
-            pagoRealizado.HeaderText = "Pago realizado";
-            pagoRealizado.Name = "pagoRealizado";
             // 
             // button1
             // 
@@ -200,6 +130,20 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
+            // dgdPago
+            // 
+            dgdPago.AllowUserToAddRows = false;
+            dgdPago.AllowUserToDeleteRows = false;
+            dgdPago.AllowUserToOrderColumns = true;
+            dgdPago.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgdPago.Dock = DockStyle.Fill;
+            dgdPago.Location = new Point(0, 0);
+            dgdPago.Name = "dgdPago";
+            dgdPago.ReadOnly = true;
+            dgdPago.RowTemplate.Height = 25;
+            dgdPago.Size = new Size(934, 517);
+            dgdPago.TabIndex = 10;
+            // 
             // Pagos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -209,10 +153,11 @@
             Controls.Add(panel1);
             Name = "Pagos";
             Text = "Pagos";
+            Load += Pagos_Load;
             panel1.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             pnlTabPagos.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgdPago).EndInit();
             ResumeLayout(false);
         }
 
@@ -223,7 +168,6 @@
         private TableLayoutPanel tableLayoutPanel1;
         private Button btnBorrarAf;
         private Button btnNuevoAf;
-        private DataGridView dataGridView1;
         private Button button1;
         private DataGridViewTextBoxColumn idTicket;
         private DataGridViewTextBoxColumn fecha;
@@ -233,5 +177,6 @@
         private DataGridViewTextBoxColumn titularTarjeta;
         private DataGridViewTextBoxColumn bcoTarjeta;
         private DataGridViewTextBoxColumn pagoRealizado;
+        private DataGridView dgdPago;
     }
 }

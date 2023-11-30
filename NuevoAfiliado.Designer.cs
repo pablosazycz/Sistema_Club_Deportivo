@@ -30,7 +30,6 @@
         {
             txtNombre = new TextBox();
             txtApellido = new TextBox();
-            txtTipoDoc = new TextBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -53,14 +52,9 @@
             btnAgregarAfiliado = new Button();
             label12 = new Label();
             textBox1 = new TextBox();
-            label13 = new Label();
-            txtCuotas = new TextBox();
-            label14 = new Label();
-            txtNroCarnet = new TextBox();
-            label15 = new Label();
             txtFechaAfi = new DateTimePicker();
-            txtSocio = new TextBox();
             label16 = new Label();
+            txtTipoDoc = new ComboBox();
             SuspendLayout();
             // 
             // txtNombre
@@ -77,13 +71,6 @@
             txtApellido.Name = "txtApellido";
             txtApellido.Size = new Size(164, 23);
             txtApellido.TabIndex = 1;
-            // 
-            // txtTipoDoc
-            // 
-            txtTipoDoc.Location = new Point(60, 70);
-            txtTipoDoc.Name = "txtTipoDoc";
-            txtTipoDoc.Size = new Size(164, 23);
-            txtTipoDoc.TabIndex = 2;
             // 
             // label1
             // 
@@ -128,7 +115,7 @@
             txtNroDoc.Location = new Point(313, 70);
             txtNroDoc.Name = "txtNroDoc";
             txtNroDoc.Size = new Size(164, 23);
-            txtNroDoc.TabIndex = 7;
+            txtNroDoc.TabIndex = 3;
             // 
             // label5
             // 
@@ -144,15 +131,15 @@
             txtDireccion.Location = new Point(386, 113);
             txtDireccion.Name = "txtDireccion";
             txtDireccion.Size = new Size(164, 23);
-            txtDireccion.TabIndex = 10;
+            txtDireccion.TabIndex = 5;
             // 
             // txtFechaNac
             // 
             txtFechaNac.Format = DateTimePickerFormat.Short;
             txtFechaNac.Location = new Point(73, 110);
             txtFechaNac.Name = "txtFechaNac";
-            txtFechaNac.Size = new Size(231, 23);
-            txtFechaNac.TabIndex = 9;
+            txtFechaNac.Size = new Size(171, 23);
+            txtFechaNac.TabIndex = 4;
             txtFechaNac.ValueChanged += dateTimePicker1_ValueChanged;
             // 
             // label6
@@ -178,7 +165,7 @@
             txtCP.Location = new Point(80, 142);
             txtCP.Name = "txtCP";
             txtCP.Size = new Size(164, 23);
-            txtCP.TabIndex = 12;
+            txtCP.TabIndex = 6;
             // 
             // label8
             // 
@@ -194,7 +181,7 @@
             txtLocalidad.Location = new Point(364, 142);
             txtLocalidad.Name = "txtLocalidad";
             txtLocalidad.Size = new Size(164, 23);
-            txtLocalidad.TabIndex = 14;
+            txtLocalidad.TabIndex = 7;
             // 
             // label9
             // 
@@ -210,7 +197,8 @@
             txtEmail.Location = new Point(80, 180);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(164, 23);
-            txtEmail.TabIndex = 16;
+            txtEmail.TabIndex = 8;
+            txtEmail.TextChanged += txtEmail_TextChanged;
             // 
             // label10
             // 
@@ -226,7 +214,7 @@
             txtTel1.Location = new Point(353, 180);
             txtTel1.Name = "txtTel1";
             txtTel1.Size = new Size(164, 23);
-            txtTel1.TabIndex = 18;
+            txtTel1.TabIndex = 9;
             // 
             // label11
             // 
@@ -242,11 +230,11 @@
             txtTel2.Location = new Point(83, 213);
             txtTel2.Name = "txtTel2";
             txtTel2.Size = new Size(164, 23);
-            txtTel2.TabIndex = 20;
+            txtTel2.TabIndex = 10;
             // 
             // btnAgregarAfiliado
             // 
-            btnAgregarAfiliado.Location = new Point(593, 401);
+            btnAgregarAfiliado.Location = new Point(253, 291);
             btnAgregarAfiliado.Name = "btnAgregarAfiliado";
             btnAgregarAfiliado.Size = new Size(75, 23);
             btnAgregarAfiliado.TabIndex = 22;
@@ -274,85 +262,43 @@
             textBox1.Text = "Afiliado";
             textBox1.TextChanged += textBox1_TextChanged_1;
             // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Location = new Point(288, 330);
-            label13.Name = "label13";
-            label13.Size = new Size(81, 15);
-            label13.TabIndex = 32;
-            label13.Text = "Cuota a Pagar";
-            // 
-            // txtCuotas
-            // 
-            txtCuotas.Location = new Point(375, 327);
-            txtCuotas.Name = "txtCuotas";
-            txtCuotas.Size = new Size(164, 23);
-            txtCuotas.TabIndex = 31;
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Location = new Point(15, 330);
-            label14.Name = "label14";
-            label14.Size = new Size(42, 15);
-            label14.TabIndex = 30;
-            label14.Text = "Carnet";
-            // 
-            // txtNroCarnet
-            // 
-            txtNroCarnet.Location = new Point(83, 325);
-            txtNroCarnet.Name = "txtNroCarnet";
-            txtNroCarnet.Size = new Size(164, 23);
-            txtNroCarnet.TabIndex = 29;
-            // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Location = new Point(325, 301);
-            label15.Name = "label15";
-            label15.Size = new Size(36, 15);
-            label15.TabIndex = 36;
-            label15.Text = "Socio";
-            // 
             // txtFechaAfi
             // 
-            txtFechaAfi.Location = new Point(80, 293);
+            txtFechaAfi.Format = DateTimePickerFormat.Short;
+            txtFechaAfi.Location = new Point(375, 218);
             txtFechaAfi.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
             txtFechaAfi.Name = "txtFechaAfi";
-            txtFechaAfi.Size = new Size(230, 23);
-            txtFechaAfi.TabIndex = 35;
-            txtFechaAfi.Value = new DateTime(2023, 10, 19, 21, 42, 20, 0);
-            // 
-            // txtSocio
-            // 
-            txtSocio.Location = new Point(393, 296);
-            txtSocio.Name = "txtSocio";
-            txtSocio.Size = new Size(164, 23);
-            txtSocio.TabIndex = 34;
+            txtFechaAfi.Size = new Size(110, 23);
+            txtFechaAfi.TabIndex = 11;
+            txtFechaAfi.Value = new DateTime(2023, 11, 26, 0, 0, 0, 0);
             // 
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new Point(12, 293);
+            label16.Location = new Point(282, 218);
             label16.Name = "label16";
             label16.Size = new Size(91, 15);
             label16.TabIndex = 33;
             label16.Text = "Fecha Afiliacion";
+            // 
+            // txtTipoDoc
+            // 
+            txtTipoDoc.DropDownStyle = ComboBoxStyle.DropDownList;
+            txtTipoDoc.FormattingEnabled = true;
+            txtTipoDoc.Items.AddRange(new object[] { "DNI", "PASAPORTE" });
+            txtTipoDoc.Location = new Point(66, 75);
+            txtTipoDoc.Name = "txtTipoDoc";
+            txtTipoDoc.Size = new Size(121, 23);
+            txtTipoDoc.TabIndex = 2;
             // 
             // NuevoAfiliado
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(label15);
+            Controls.Add(txtTipoDoc);
             Controls.Add(txtFechaAfi);
-            Controls.Add(txtSocio);
             Controls.Add(label16);
-            Controls.Add(label13);
-            Controls.Add(txtCuotas);
-            Controls.Add(label14);
-            Controls.Add(txtNroCarnet);
             Controls.Add(label12);
             Controls.Add(textBox1);
             Controls.Add(btnAgregarAfiliado);
@@ -375,7 +321,6 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(txtTipoDoc);
             Controls.Add(txtApellido);
             Controls.Add(txtNombre);
             Name = "NuevoAfiliado";
@@ -389,7 +334,6 @@
 
         private TextBox txtNombre;
         private TextBox txtApellido;
-        private TextBox txtTipoDoc;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -412,13 +356,8 @@
         private Button btnAgregarAfiliado;
         private Label label12;
         private TextBox textBox1;
-        private Label label13;
-        private TextBox txtCuotas;
-        private Label label14;
-        private TextBox txtNroCarnet;
-        private Label label15;
         private DateTimePicker txtFechaAfi;
-        private TextBox txtSocio;
         private Label label16;
+        private ComboBox txtTipoDoc;
     }
 }

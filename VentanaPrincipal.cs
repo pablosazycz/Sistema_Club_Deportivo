@@ -190,8 +190,26 @@ namespace Sistema_Club_Deportivo
 
         private void btnNoAfiliado_Click(object sender, EventArgs e)
         {
-            NuevoNoAfiliado nuevoNoAfiliado = new NuevoNoAfiliado();   
+            NuevoNoAfiliado nuevoNoAfiliado = new NuevoNoAfiliado();
             nuevoNoAfiliado.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            EdicionNoAfiliado edicionNoAfiliado = new EdicionNoAfiliado();
+            edicionNoAfiliado.Show();
+        }
+
+        private void btnSubVTurAsig_Click_1(object sender, EventArgs e)
+        {
+            TurnosActividades turnosActividades = new TurnosActividades();
+            turnosActividades.Show();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+           VerificarAFiliado verificarAFiliado = new VerificarAFiliado();
+            verificarAFiliado.Show();   
         }
 
 

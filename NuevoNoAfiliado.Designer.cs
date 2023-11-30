@@ -64,14 +64,13 @@
             dataGridView2 = new DataGridView();
             btnSiguienteP2 = new Button();
             btnAtrasP2 = new Button();
-            button3 = new Button();
             label14 = new Label();
             cboTipoACtividad = new ComboBox();
             dataGridView1 = new DataGridView();
             label13 = new Label();
             panel3 = new Panel();
-            button8 = new Button();
             btnFinalizar = new Button();
+            button8 = new Button();
             btnAtrasP3 = new Button();
             groupBox2 = new GroupBox();
             montoAPagar = new TextBox();
@@ -146,12 +145,13 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(800, 450);
             panel1.TabIndex = 0;
+            panel1.Paint += panel1_Paint;
             // 
             // btnSiguienteP1
             // 
-            btnSiguienteP1.Location = new Point(503, 377);
+            btnSiguienteP1.Location = new Point(503, 388);
             btnSiguienteP1.Name = "btnSiguienteP1";
-            btnSiguienteP1.Size = new Size(75, 23);
+            btnSiguienteP1.Size = new Size(133, 23);
             btnSiguienteP1.TabIndex = 73;
             btnSiguienteP1.Text = "siguiente";
             btnSiguienteP1.UseVisualStyleBackColor = true;
@@ -159,7 +159,7 @@
             // 
             // btnSalirP1
             // 
-            btnSalirP1.Location = new Point(365, 377);
+            btnSalirP1.Location = new Point(110, 388);
             btnSalirP1.Name = "btnSalirP1";
             btnSalirP1.Size = new Size(75, 23);
             btnSalirP1.TabIndex = 72;
@@ -169,11 +169,12 @@
             // cboTipoDoc
             // 
             cboTipoDoc.FormattingEnabled = true;
-            cboTipoDoc.Items.AddRange(new object[] { "Seleccione Tipo", "DNI", "PASAPORTE" });
+            cboTipoDoc.Items.AddRange(new object[] { "DNI", "PASAPORTE" });
             cboTipoDoc.Location = new Point(78, 82);
             cboTipoDoc.Name = "cboTipoDoc";
             cboTipoDoc.Size = new Size(121, 23);
             cboTipoDoc.TabIndex = 71;
+            cboTipoDoc.Text = "Seleccione tipo";
             // 
             // txtFechaAfi
             // 
@@ -214,7 +215,7 @@
             // 
             // btnAgregarAfiliado
             // 
-            btnAgregarAfiliado.Location = new Point(95, 368);
+            btnAgregarAfiliado.Location = new Point(387, 388);
             btnAgregarAfiliado.Name = "btnAgregarAfiliado";
             btnAgregarAfiliado.Size = new Size(75, 23);
             btnAgregarAfiliado.TabIndex = 59;
@@ -242,7 +243,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(297, 192);
+            label10.Location = new Point(286, 192);
             label10.Name = "label10";
             label10.Size = new Size(61, 15);
             label10.TabIndex = 56;
@@ -250,7 +251,7 @@
             // 
             // txtTel1
             // 
-            txtTel1.Location = new Point(365, 187);
+            txtTel1.Location = new Point(354, 187);
             txtTel1.Name = "txtTel1";
             txtTel1.Size = new Size(164, 23);
             txtTel1.TabIndex = 55;
@@ -275,7 +276,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(308, 154);
+            label8.Location = new Point(285, 154);
             label8.Name = "label8";
             label8.Size = new Size(58, 15);
             label8.TabIndex = 52;
@@ -283,7 +284,7 @@
             // 
             // txtLocalidad
             // 
-            txtLocalidad.Location = new Point(376, 149);
+            txtLocalidad.Location = new Point(353, 149);
             txtLocalidad.Name = "txtLocalidad";
             txtLocalidad.Size = new Size(164, 23);
             txtLocalidad.TabIndex = 51;
@@ -308,7 +309,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(330, 125);
+            label6.Location = new Point(284, 121);
             label6.Name = "label6";
             label6.Size = new Size(57, 15);
             label6.TabIndex = 48;
@@ -324,7 +325,7 @@
             // 
             // txtDireccion
             // 
-            txtDireccion.Location = new Point(398, 120);
+            txtDireccion.Location = new Point(352, 116);
             txtDireccion.Name = "txtDireccion";
             txtDireccion.Size = new Size(164, 23);
             txtDireccion.TabIndex = 47;
@@ -403,9 +404,8 @@
             panel2.Controls.Add(dataGridView2);
             panel2.Controls.Add(btnSiguienteP2);
             panel2.Controls.Add(btnAtrasP2);
-            panel2.Controls.Add(button3);
-            panel2.Controls.Add(label14);
             panel2.Controls.Add(cboTipoACtividad);
+            panel2.Controls.Add(label14);
             panel2.Controls.Add(dataGridView1);
             panel2.Controls.Add(label13);
             panel2.Dock = DockStyle.Fill;
@@ -450,7 +450,7 @@
             // 
             // btnSiguienteP2
             // 
-            btnSiguienteP2.Location = new Point(398, 401);
+            btnSiguienteP2.Location = new Point(553, 415);
             btnSiguienteP2.Name = "btnSiguienteP2";
             btnSiguienteP2.Size = new Size(75, 23);
             btnSiguienteP2.TabIndex = 6;
@@ -460,23 +460,13 @@
             // 
             // btnAtrasP2
             // 
-            btnAtrasP2.Location = new Point(241, 401);
+            btnAtrasP2.Location = new Point(121, 415);
             btnAtrasP2.Name = "btnAtrasP2";
             btnAtrasP2.Size = new Size(75, 23);
             btnAtrasP2.TabIndex = 5;
             btnAtrasP2.Text = "atras";
             btnAtrasP2.UseVisualStyleBackColor = true;
             btnAtrasP2.Click += btnAtras_Click;
-            // 
-            // button3
-            // 
-            button3.Location = new Point(12, 401);
-            button3.Name = "button3";
-            button3.Size = new Size(189, 23);
-            button3.TabIndex = 4;
-            button3.Text = "Inscribir";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
             // 
             // label14
             // 
@@ -523,8 +513,8 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(button8);
             panel3.Controls.Add(btnFinalizar);
+            panel3.Controls.Add(button8);
             panel3.Controls.Add(btnAtrasP3);
             panel3.Controls.Add(groupBox2);
             panel3.Controls.Add(comboBox3);
@@ -550,6 +540,16 @@
             panel3.TabIndex = 7;
             panel3.VisibleChanged += panel3_VisibleChanged;
             // 
+            // btnFinalizar
+            // 
+            btnFinalizar.Location = new Point(503, 415);
+            btnFinalizar.Name = "btnFinalizar";
+            btnFinalizar.Size = new Size(75, 23);
+            btnFinalizar.TabIndex = 123;
+            btnFinalizar.Text = "Finalizar";
+            btnFinalizar.UseVisualStyleBackColor = true;
+            btnFinalizar.Click += btnFinalizar_Click_1;
+            // 
             // button8
             // 
             button8.Location = new Point(387, 300);
@@ -559,15 +559,6 @@
             button8.Text = "Impresion de Voucher";
             button8.UseVisualStyleBackColor = true;
             button8.Click += button8_Click;
-            // 
-            // btnFinalizar
-            // 
-            btnFinalizar.Location = new Point(503, 415);
-            btnFinalizar.Name = "btnFinalizar";
-            btnFinalizar.Size = new Size(75, 23);
-            btnFinalizar.TabIndex = 123;
-            btnFinalizar.Text = "Finalizar";
-            btnFinalizar.UseVisualStyleBackColor = true;
             // 
             // btnAtrasP3
             // 
@@ -650,7 +641,8 @@
             // 
             // dateFechaVto
             // 
-            dateFechaVto.Format = DateTimePickerFormat.Short;
+            dateFechaVto.CustomFormat = "MM/yyyy";
+            dateFechaVto.Format = DateTimePickerFormat.Custom;
             dateFechaVto.Location = new Point(121, 78);
             dateFechaVto.Name = "dateFechaVto";
             dateFechaVto.Size = new Size(96, 23);
@@ -790,6 +782,7 @@
             // 
             txtIdNoAfiliado.Location = new Point(85, 66);
             txtIdNoAfiliado.Name = "txtIdNoAfiliado";
+            txtIdNoAfiliado.ReadOnly = true;
             txtIdNoAfiliado.Size = new Size(100, 23);
             txtIdNoAfiliado.TabIndex = 110;
             // 
@@ -905,7 +898,6 @@
         private ComboBox cboTipoACtividad;
         private Button btnSiguienteP2;
         private Button btnAtrasP2;
-        private Button button3;
         private Panel panel3;
         private Label label15;
         private Button btnFinalizar;

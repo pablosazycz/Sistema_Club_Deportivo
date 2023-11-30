@@ -172,17 +172,9 @@ namespace Sistema_Club_Deportivo
 
                         try
                         {
-
                             ObtenerCuotasSeleccionadas();
-                            ActualizarMontoAPagar(Convert.ToInt32(txtMonto.Text), cuotas);
+                            ActualizarMontoAPagar(Convert.ToDecimal(txtMonto.Text), cuotas);
 
-                            InformacionFinanciera informacionFinanciera = new InformacionFinanciera
-                            {
-                                AfiliadoID = afiliadoId,
-                                NumeroTarjetaCredito = txtNroTarjeta.Text,
-                                FechaExpiracion = dateFechaVto.Value,
-                                CodigoSeguridad = Convert.ToInt32(txtCodSeg.Text)
-                            };
 
                             Pago pago = new Pago
                             {
@@ -197,7 +189,19 @@ namespace Sistema_Club_Deportivo
                             };
 
                             Administrador admin = new Administrador();
-                            admin.RegistrarPago(pago);
+                            int idPago = admin.RegistrarPago(pago);
+
+
+
+                            InformacionFinanciera informacionFinanciera = new InformacionFinanciera
+                            {
+                                PersonaId = personaId,
+                                NumeroTarjetaCredito = txtNroTarjeta.Text,
+                                FechaExpiracion = dateFechaVto.Value,
+                                CodigoSeguridad = Convert.ToInt32(txtCodSeg.Text),
+                                PagoId = idPago
+                            };
+
                             admin.RegistrarInfoFinanciera(informacionFinanciera);
                             MessageBox.Show("Pago realizado con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -213,14 +217,9 @@ namespace Sistema_Club_Deportivo
                         try
                         {
 
+                            ObtenerCuotasSeleccionadas();
+                            ActualizarMontoAPagar(Convert.ToDecimal(txtMonto.Text), cuotas);
 
-                            InformacionFinanciera informacionFinanciera = new InformacionFinanciera
-                            {
-                                AfiliadoID = afiliadoId,
-                                NumeroTarjetaCredito = txtNroTarjeta.Text,
-                                FechaExpiracion = dateFechaVto.Value,
-                                CodigoSeguridad = Convert.ToInt32(txtCodSeg.Text)
-                            };
 
                             Pago pago = new Pago
                             {
@@ -230,11 +229,24 @@ namespace Sistema_Club_Deportivo
                                 Monto = monto,
                                 Comentario = comentario,
                                 Cuota = cuotas,
-                                FechaVencimiento = fechaVencimiento
+                                FechaVencimiento = fechaVencimiento,
+
                             };
 
                             Administrador admin = new Administrador();
-                            admin.RegistrarPago(pago);
+                            int idPago = admin.RegistrarPago(pago);
+
+
+
+                            InformacionFinanciera informacionFinanciera = new InformacionFinanciera
+                            {
+                                PersonaId = personaId,
+                                NumeroTarjetaCredito = txtNroTarjeta.Text,
+                                FechaExpiracion = dateFechaVto.Value,
+                                CodigoSeguridad = Convert.ToInt32(txtCodSeg.Text),
+                                PagoId = idPago
+                            };
+
                             admin.RegistrarInfoFinanciera(informacionFinanciera);
                             MessageBox.Show("Pago realizado con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }

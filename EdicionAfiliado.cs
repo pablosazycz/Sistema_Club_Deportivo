@@ -20,7 +20,7 @@ namespace Sistema_Club_Deportivo
             InitializeComponent();
         }
 
-        int dniOriginal;  //variable para guardar el dni de la bd, asi se puede editar el dni
+        int dniOriginal; 
         private void btnBuscarAfil_Click(object sender, EventArgs e)
         {
             string criterioBusqueda = txtBuscarAfil.Text;
@@ -46,7 +46,7 @@ namespace Sistema_Club_Deportivo
                     txtNombre.Text = afiliado.Persona.Nombre;
                     txtTipoDoc.Text = afiliado.Persona.TipoDoc;
                     txtNroDoc.Text = afiliado.Persona.Dni.ToString();
-                    dniOriginal = afiliado.Persona.Dni; //guarda el dni original para poder editarlo
+                    dniOriginal = afiliado.Persona.Dni;
                     txtFechaNac.Value = afiliado.Persona.FechaNacimiento;
                     txtDireccion.Text = afiliado.Persona.Direccion;
                     txtCP.Text = afiliado.Persona.Cp.ToString();
@@ -55,9 +55,8 @@ namespace Sistema_Club_Deportivo
                     txtTel1.Text = afiliado.Persona.Telefono1.ToString();
                     txtTel2.Text = afiliado.Persona.Telefono2.ToString();
                     txtFechaAfi.Value = afiliado.FechaAfiliacion;
-                    txtNroCarnet.Text = afiliado.Carnet.NroCarnet.ToString();
-                    txtCuotas.Text = afiliado.CuotaAPagar.ToString();
-                    txtSocio.Text = afiliado.Socio.ToString();
+
+
 
                 }
                 else
@@ -80,51 +79,80 @@ namespace Sistema_Club_Deportivo
 
 
         }
+        Boolean error = false;
+        private Boolean Controlblanco()
+        {
+            if (string.IsNullOrEmpty(txtNombre.Text) ||
+                string.IsNullOrEmpty(txtApellido.Text) ||
+                string.IsNullOrEmpty(txtNroDoc.Text) ||
+                string.IsNullOrEmpty(txtFechaNac.Text) ||
+                string.IsNullOrEmpty(txtDireccion.Text) ||
+                string.IsNullOrEmpty(txtCP.Text) ||
+                string.IsNullOrEmpty(txtLocalidad.Text) ||
+                string.IsNullOrEmpty(txtEmail.Text) ||
+                string.IsNullOrEmpty(txtTel1.Text) ||
+                string.IsNullOrEmpty(txtTel2.Text))
+            {
+
+                error = true;
+            }
+            else
+            {
+                error = false;
+            }
+
+            return error;
+
+        }
+
+
 
         int dniChanged;
         private void txtNroDoc_TextChanged(object sender, EventArgs e)
         {
-            if (int.TryParse(txtNroDoc.Text, out int nuevoDni)) // Intenta analizar el nuevo DNI
+            if (int.TryParse(txtNroDoc.Text, out int nuevoDni))
             {
-                dniChanged = nuevoDni; // Almacena el nuevo DNI como valor original
+                dniChanged = nuevoDni;
             }
         }
         private void btnEditarAfiliado_Click(object sender, EventArgs e)
         {
-            // Obtén los valores editados del formulario
-            Afiliado afiliado = new Afiliado();
-            afiliado.Id = int.Parse(txtIdAfiliado.Text);
-            afiliado.FechaAfiliacion = txtFechaAfi.Value;
-            afiliado.Socio = int.Parse(txtSocio.Text);
-            afiliado.CuotaAPagar = int.Parse(txtCuotas.Text);
+            if (Controlblanco() == false)
+            {
 
-            Carnet carnet = new Carnet();
-            carnet.NroCarnet = long.Parse(txtNroCarnet.Text);
+                Afiliado afiliado = new Afiliado();
+                afiliado.Id = int.Parse(txtIdAfiliado.Text);
+                afiliado.FechaAfiliacion = txtFechaAfi.Value;
 
-            // Obtén los valores editados de la persona asociada al afiliado
-            Persona persona = new Persona();
-            persona.Id = int.Parse(txtIdPersona.Text);
-            persona.IdRol = int.Parse(txtIdRol.Text); // Puedes mantener el mismo rol
-            persona.Nombre = txtNombre.Text;
-            persona.Apellido = txtApellido.Text;
-            persona.TipoDoc = txtTipoDoc.Text;
-            persona.Dni = int.Parse(txtNroDoc.Text);
-            persona.FechaNacimiento = txtFechaNac.Value;
-            persona.Direccion = txtDireccion.Text;
-            persona.Cp = int.Parse(txtCP.Text);
-            persona.Localidad = txtLocalidad.Text;
-            persona.CorreoElect = txtEmail.Text;
-            persona.Telefono1 = int.Parse(txtTel1.Text);
-            persona.Telefono2 = int.Parse(txtTel2.Text);
 
-            // Guarda los cambios en la base de datos
-            Administrador admin = new Administrador();
-            admin.EditarAfiliado(afiliado); // Actualiza los datos del afiliado
-            admin.EditarPersona(persona); // Actualiza los datos de la persona
+                Carnet carnet = new Carnet();
 
-            // Informa al usuario que los cambios se han guardado con éxito
-            MessageBox.Show("Cambios guardados con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Persona persona = new Persona();
+                persona.Id = int.Parse(txtIdPersona.Text);
+                persona.IdRol = int.Parse(txtIdRol.Text);
+                persona.Nombre = txtNombre.Text;
+                persona.Apellido = txtApellido.Text;
+                persona.TipoDoc = txtTipoDoc.Text;
+                persona.Dni = int.Parse(txtNroDoc.Text);
+                persona.FechaNacimiento = txtFechaNac.Value;
+                persona.Direccion = txtDireccion.Text;
+                persona.Cp = int.Parse(txtCP.Text);
+                persona.Localidad = txtLocalidad.Text;
+                persona.CorreoElect = txtEmail.Text;
+                persona.Telefono1 = int.Parse(txtTel1.Text);
+                persona.Telefono2 = int.Parse(txtTel2.Text);
 
+                // Guarda los cambios en la base de datos
+                Administrador admin = new Administrador();
+                admin.EditarAfiliado(afiliado);
+                admin.EditarPersona(persona);
+
+                MessageBox.Show("Cambios guardados con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Debe completar todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 

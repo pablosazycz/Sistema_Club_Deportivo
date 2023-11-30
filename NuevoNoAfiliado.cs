@@ -29,7 +29,7 @@ namespace Sistema_Club_Deportivo
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
-
+            ActualizarEstadoBoton();
         }
 
         private void txtBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -47,136 +47,146 @@ namespace Sistema_Club_Deportivo
         int Dni = -1;
         private void btnAgregarAfiliado_Click(object sender, EventArgs e)
         {
-            try
+            if (Controlblanco() == false)
+
             {
-                // Recopilar datos desde controles de formulario
-                Persona persona = new Persona
-                {
-                    IdRol = 2,
-                    Nombre = txtNombre.Text,
-                    Apellido = txtApellido.Text,
-                    TipoDoc = cboTipoDoc.Text,
-                    Dni = int.Parse(txtNroDoc.Text),
-                    FechaNacimiento = txtFechaNac.Value,
-                    Direccion = txtDireccion.Text,
-                    Cp = int.TryParse(txtCP.Text, out int cp) ? cp : 0,
-                    Localidad = txtLocalidad.Text,
-                    CorreoElect = txtEmail.Text,
-                    Telefono1 = int.TryParse(txtTel1.Text, out int telefono1) ? telefono1 : 0,
-                    Telefono2 = int.TryParse(txtTel1.Text, out int telefono2) ? telefono2 : 0
-                };
+                btnSiguienteP1.Enabled = true;
 
-                Administrador administrador = new Administrador();
-                (bool personaExistente, bool personaEliminada) = administrador.VerificarExistenciaPersona(persona.Dni);
-
-                if (personaExistente)
+                try
                 {
-                    LimpiarCampos();
-                    if (personaEliminada)
+
+                    Persona persona = new Persona
                     {
-                        DialogResult resultado = MessageBox.Show("La persona ya existe pero está dada de baja. ¿Desea reactivarla?", "Persona Existente", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        IdRol = 2,
+                        Nombre = txtNombre.Text,
+                        Apellido = txtApellido.Text,
+                        TipoDoc = cboTipoDoc.Text,
+                        Dni = int.Parse(txtNroDoc.Text),
+                        FechaNacimiento = txtFechaNac.Value,
+                        Direccion = txtDireccion.Text,
+                        Cp = int.TryParse(txtCP.Text, out int cp) ? cp : 0,
+                        Localidad = txtLocalidad.Text,
+                        CorreoElect = txtEmail.Text,
+                        Telefono1 = int.TryParse(txtTel1.Text, out int telefono1) ? telefono1 : 0,
+                        Telefono2 = int.TryParse(txtTel1.Text, out int telefono2) ? telefono2 : 0
+                    };
 
-                        if (resultado == DialogResult.Yes)
+                    Administrador administrador = new Administrador();
+                    (bool personaExistente, bool personaEliminada) = administrador.VerificarExistenciaPersona(persona.Dni);
+
+                    if (personaExistente)
+                    {
+                        if (personaEliminada)
                         {
-                            (bool personaReactivada, int idPersona, DateTime fechaVencimiento, long nroCarnet) = administrador.ReactivarPersona(persona.Dni);
+                            DialogResult resultado = MessageBox.Show("La persona ya existe pero está dada de baja. ¿Desea reactivarla?", "Persona Existente", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                            if (personaReactivada)
+                            if (resultado == DialogResult.Yes)
                             {
+                                (bool personaReactivada, int idPersona, DateTime fechaVencimiento, long nroCarnet) = administrador.ReactivarPersona(persona.Dni);
 
-                                MessageBox.Show("La persona ha sido reactivada.");
+                                if (personaReactivada)
+                                {
 
-                                // Crea el formulario FormCarnet y pasa la información
-                                NoAfiliado noAfiliado = administrador.BuscarNoAfiliadoPorDni(persona.Dni);
+                                    MessageBox.Show("La persona ha sido reactivada.");
 
-                                //mostrar noafiliado y persona en textbox
+                                    // Crea el formulario FormCarnet y pasa la información
+                                    NoAfiliado noAfiliado = administrador.BuscarNoAfiliadoPorDni(persona.Dni);
 
-                                txtNombre.Text = noAfiliado.Persona.Nombre;
-                                txtApellido.Text = noAfiliado.Persona.Apellido;
-                                cboTipoDoc.Text = noAfiliado.Persona.TipoDoc;
-                                txtNroDoc.Text = noAfiliado.Persona.Dni.ToString();
-                                txtFechaNac.Text = noAfiliado.Persona.FechaNacimiento.ToString();
-                                txtDireccion.Text = noAfiliado.Persona.Direccion;
-                                txtCP.Text = noAfiliado.Persona.Cp.ToString();
-                                txtLocalidad.Text = noAfiliado.Persona.Localidad;
-                                txtEmail.Text = noAfiliado.Persona.CorreoElect;
-                                txtTel1.Text = noAfiliado.Persona.Telefono1.ToString();
-                                txtTel2.Text = noAfiliado.Persona.Telefono2.ToString();
+                                    //mostrar noafiliado y persona en textbox
 
-                                //guardar en variables los datos de noafiliado
-                                idNoAfiliado = noAfiliado.Id;
-                                DateTime fechaAfiliacion = noAfiliado.FechaAfiliacion;
-                                personaId = noAfiliado.IdPersona;
-                                Dni = noAfiliado.Persona.Dni;
+                                    txtNombre.Text = noAfiliado.Persona.Nombre;
+                                    txtApellido.Text = noAfiliado.Persona.Apellido;
+                                    cboTipoDoc.Text = noAfiliado.Persona.TipoDoc;
+                                    txtNroDoc.Text = noAfiliado.Persona.Dni.ToString();
+                                    txtFechaNac.Text = noAfiliado.Persona.FechaNacimiento.ToString();
+                                    txtDireccion.Text = noAfiliado.Persona.Direccion;
+                                    txtCP.Text = noAfiliado.Persona.Cp.ToString();
+                                    txtLocalidad.Text = noAfiliado.Persona.Localidad;
+                                    txtEmail.Text = noAfiliado.Persona.CorreoElect;
+                                    txtTel1.Text = noAfiliado.Persona.Telefono1.ToString();
+                                    txtTel2.Text = noAfiliado.Persona.Telefono2.ToString();
+
+                                    //guardar en variables los datos de noafiliado
+                                    idNoAfiliado = noAfiliado.Id;
+                                    DateTime fechaAfiliacion = noAfiliado.FechaAfiliacion;
+                                    personaId = noAfiliado.IdPersona;
+                                    Dni = noAfiliado.Persona.Dni;
 
 
 
 
+
+                                }
+                                btnSiguienteP1.Enabled = true;
 
                             }
+                            else
+                            {
 
+
+                                MessageBox.Show("La persona ya existe pero está dada de baja y no fue reactivada.");
+                            }
                         }
                         else
                         {
+                            MessageBox.Show("La persona ya existe y no está dada de baja.");
+                            // Crea el formulario FormCarnet y pasa la información
+                            NoAfiliado noAfiliado = administrador.BuscarNoAfiliadoPorDni(persona.Dni);
 
+                            //mostrar noafiliado y persona en textbox
 
-                            MessageBox.Show("La persona ya existe pero está dada de baja y no fue reactivada.");
+                            txtNombre.Text = noAfiliado.Persona.Nombre;
+                            txtApellido.Text = noAfiliado.Persona.Apellido;
+                            cboTipoDoc.Text = noAfiliado.Persona.TipoDoc;
+                            txtNroDoc.Text = noAfiliado.Persona.Dni.ToString();
+                            txtFechaNac.Text = noAfiliado.Persona.FechaNacimiento.ToString();
+                            txtDireccion.Text = noAfiliado.Persona.Direccion;
+                            txtCP.Text = noAfiliado.Persona.Cp.ToString();
+                            txtLocalidad.Text = noAfiliado.Persona.Localidad;
+                            txtEmail.Text = noAfiliado.Persona.CorreoElect;
+                            txtTel1.Text = noAfiliado.Persona.Telefono1.ToString();
+                            txtTel2.Text = noAfiliado.Persona.Telefono2.ToString();
+
+                            //guardar en variables los datos de noafiliado
+                            idNoAfiliado = noAfiliado.Id;
+                            DateTime fechaAfiliacion = noAfiliado.FechaAfiliacion;
+                            personaId = noAfiliado.IdPersona;
+                            Dni = noAfiliado.Persona.Dni;
+                            btnSiguienteP1.Enabled = true;
                         }
                     }
                     else
                     {
-                        MessageBox.Show("La persona ya existe y no está dada de baja.");
-                        // Crea el formulario FormCarnet y pasa la información
-                        NoAfiliado noAfiliado = administrador.BuscarNoAfiliadoPorDni(persona.Dni);
+                        int idPersona = administrador.CrearPersonaObj(persona);
 
-                        //mostrar noafiliado y persona en textbox
+                        NoAfiliado noAfiliado = new NoAfiliado
+                        {
+                            FechaAfiliacion = DateTime.Now,
 
-                        txtNombre.Text = noAfiliado.Persona.Nombre;
-                        txtApellido.Text = noAfiliado.Persona.Apellido;
-                        cboTipoDoc.Text = noAfiliado.Persona.TipoDoc;
-                        txtNroDoc.Text = noAfiliado.Persona.Dni.ToString();
-                        txtFechaNac.Text = noAfiliado.Persona.FechaNacimiento.ToString();
-                        txtDireccion.Text = noAfiliado.Persona.Direccion;
-                        txtCP.Text = noAfiliado.Persona.Cp.ToString();
-                        txtLocalidad.Text = noAfiliado.Persona.Localidad;
-                        txtEmail.Text = noAfiliado.Persona.CorreoElect;
-                        txtTel1.Text = noAfiliado.Persona.Telefono1.ToString();
-                        txtTel2.Text = noAfiliado.Persona.Telefono2.ToString();
+                            IdPersona = idPersona,
+                            Persona = persona
+                        };
 
-                        //guardar en variables los datos de noafiliado
+                        administrador.CrearNoAfiliadoObj(noAfiliado);
+
+                        DialogResult result = MessageBox.Show("Afiliado agregado exitosamente. Oprima Siguiente", "Éxito", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        noAfiliado = administrador.BuscarNoAfiliadoPorDni(persona.Dni);
                         idNoAfiliado = noAfiliado.Id;
-                        DateTime fechaAfiliacion = noAfiliado.FechaAfiliacion;
                         personaId = noAfiliado.IdPersona;
                         Dni = noAfiliado.Persona.Dni;
 
+
+
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    int idPersona = administrador.CrearPersonaObj(persona);
-
-                    NoAfiliado noAfiliado = new NoAfiliado
-                    {
-                        FechaAfiliacion = DateTime.Now,
-
-                        IdPersona = idPersona,
-                        Persona = persona
-                    };
-
-                    administrador.CrearNoAfiliadoObj(noAfiliado);
-
-                    DialogResult result = MessageBox.Show("Afiliado agregado exitosamente. Oprima Siguiente", "Éxito", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                    noAfiliado = administrador.BuscarNoAfiliadoPorDni(persona.Dni);
-                    idNoAfiliado = noAfiliado.Id;
-                    personaId = noAfiliado.IdPersona;
-                    Dni = noAfiliado.Persona.Dni;
-
-                    LimpiarCampos();
-
+                    MessageBox.Show("Error al crear afiliado" + ex.ToString(), "Error");
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Error al crear afiliado" + ex.ToString(), "Error");
+                MessageBox.Show("Debe completar todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -221,17 +231,17 @@ namespace Sistema_Club_Deportivo
         }
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
-            // Incrementa el estado actual
+
             estadoActual++;
 
-            // Si llega al último estado, muestra el panel final y cambia el texto del botón
+
             if (estadoActual > CantidadTotalEstados)
             {
                 estadoActual = CantidadTotalEstados;
-                //btnSiguienteP1.Text = "Finalizar";
+
             }
 
-            // Actualiza el contenido del formulario
+
             MostrarContenido();
         }
         private void btnAtras_Click(object sender, EventArgs e)
@@ -249,7 +259,7 @@ namespace Sistema_Club_Deportivo
             // Actualiza el contenido del formulario
             MostrarContenido();
         }
-        private void btnFinalizar_Click(object sender, EventArgs e)
+        private void btnFinalizar_Click_1(object sender, EventArgs e)
         {
             // Si está en el último estado, cierra la ventana
             if (estadoActual == CantidadTotalEstados)
@@ -262,9 +272,17 @@ namespace Sistema_Club_Deportivo
         {
 
         }
+        //        ABS
+        //Crossfit
+        //Funcional Training
+        //Musculacion
+        //Spinnig
+        //Yoga
+        //Zumba
 
         private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
+
             switch (cboTipoACtividad.Text)
             {
                 case "Todas las Actividades":
@@ -273,15 +291,112 @@ namespace Sistema_Club_Deportivo
                         Administrador admin = new Administrador();
                         List<Actividad> actividades = admin.ObtenerActividades();
 
-                        // Lógica para mostrar la lista de actividades en tu formulario
+
                         MostrarActividadesEnFormulario(actividades);
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show($"Error al obtener las actividades: {ex.Message}");
                     }
-
                     break;
+                case "ABS":
+                    try
+                    {
+                        Administrador admin = new Administrador();
+                        List<Actividad> actividades = admin.ObtenerActividadesPorNombre("ABS");
+
+
+                        MostrarActividadesEnFormulario(actividades);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al obtener las actividades: {ex.Message}");
+                    }
+                    break;
+                case "Crossfit":
+                    try
+                    {
+                        Administrador admin = new Administrador();
+                        List<Actividad> actividades = admin.ObtenerActividadesPorNombre("Crossfit");
+
+
+                        MostrarActividadesEnFormulario(actividades);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al obtener las actividades: {ex.Message}");
+                    }
+                    break;
+                case "Funcional Training":
+                    try
+                    {
+                        Administrador admin = new Administrador();
+                        List<Actividad> actividades = admin.ObtenerActividadesPorNombre("Funcional Training");
+
+                        MostrarActividadesEnFormulario(actividades);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al obtener las actividades: {ex.Message}");
+                    }
+                    break;
+                case "Musculacion":
+                    try
+                    {
+                        Administrador admin = new Administrador();
+                        List<Actividad> actividades = admin.ObtenerActividadesPorNombre("Musculacion");
+
+
+                        MostrarActividadesEnFormulario(actividades);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al obtener las actividades: {ex.Message}");
+                    }
+                    break;
+                case "Spinnig":
+                    try
+                    {
+                        Administrador admin = new Administrador();
+                        List<Actividad> actividades = admin.ObtenerActividadesPorNombre("Spinnig");
+
+
+                        MostrarActividadesEnFormulario(actividades);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al obtener las actividades: {ex.Message}");
+                    }
+                    break;
+                case "Yoga":
+                    try
+                    {
+                        Administrador admin = new Administrador();
+                        List<Actividad> actividades = admin.ObtenerActividadesPorNombre("Yoga");
+
+                        MostrarActividadesEnFormulario(actividades);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al obtener las actividades: {ex.Message}");
+                    }
+                    break;
+                case "Zumba":
+                    try
+                    {
+                        Administrador admin = new Administrador();
+                        List<Actividad> actividades = admin.ObtenerActividadesPorNombre("Zumba");
+
+
+                        MostrarActividadesEnFormulario(actividades);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al obtener las actividades: {ex.Message}");
+                    }
+                    break;
+
+
 
             }
         }
@@ -392,7 +507,20 @@ namespace Sistema_Club_Deportivo
 
             // Actualiza el texto del Label con el monto total
             labelTotalCosto.Text = $"Total: {totalCosto:C}";
+            ActualizarEstadoBoton();
+
         }
+
+        private void ActualizarEstadoBoton()
+        {
+
+            bool hayDatos = dataGridView2.Rows.Count > 0;
+
+
+            btnSiguienteP2.Enabled = hayDatos;
+        }
+
+
         private void button3_Click(object sender, EventArgs e)
         {
             totalCosto = 0;
@@ -471,15 +599,8 @@ namespace Sistema_Club_Deportivo
                         {
 
                             ObtenerCuotasSeleccionadas();
-                            ActualizarMontoAPagar(Convert.ToInt32(txtMonto.Text), cuotas);
+                            ActualizarMontoAPagar(Convert.ToDecimal(txtMonto.Text), cuotas);
 
-                            InformacionFinanciera informacionFinanciera = new InformacionFinanciera
-                            {
-                                AfiliadoID = NoafiliadoId,
-                                NumeroTarjetaCredito = txtNroTarjeta.Text,
-                                FechaExpiracion = dateFechaVto.Value,
-                                CodigoSeguridad = Convert.ToInt32(txtCodSeg.Text)
-                            };
 
                             Pago pago = new Pago
                             {
@@ -494,7 +615,19 @@ namespace Sistema_Club_Deportivo
                             };
 
                             Administrador admin = new Administrador();
-                            admin.RegistrarPago(pago);
+                            int idPago = admin.RegistrarPago(pago);
+
+
+
+                            InformacionFinanciera informacionFinanciera = new InformacionFinanciera
+                            {
+                                PersonaId = personaId,
+                                NumeroTarjetaCredito = txtNroTarjeta.Text,
+                                FechaExpiracion = dateFechaVto.Value,
+                                CodigoSeguridad = Convert.ToInt32(txtCodSeg.Text),
+                                PagoId = idPago
+                            };
+
                             admin.RegistrarInfoFinanciera(informacionFinanciera);
                             MessageBox.Show("Pago realizado con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -509,15 +642,9 @@ namespace Sistema_Club_Deportivo
                     case "Debito":
                         try
                         {
+                            ObtenerCuotasSeleccionadas();
+                            ActualizarMontoAPagar(Convert.ToDecimal(txtMonto.Text), cuotas);
 
-
-                            InformacionFinanciera informacionFinanciera = new InformacionFinanciera
-                            {
-                                AfiliadoID = NoafiliadoId,
-                                NumeroTarjetaCredito = txtNroTarjeta.Text,
-                                FechaExpiracion = dateFechaVto.Value,
-                                CodigoSeguridad = Convert.ToInt32(txtCodSeg.Text)
-                            };
 
                             Pago pago = new Pago
                             {
@@ -527,11 +654,24 @@ namespace Sistema_Club_Deportivo
                                 Monto = monto,
                                 Comentario = comentario,
                                 Cuota = cuotas,
-                                FechaVencimiento = fechaVencimiento
+                                FechaVencimiento = fechaVencimiento,
+
                             };
 
                             Administrador admin = new Administrador();
-                            admin.RegistrarPago(pago);
+                            int idPago = admin.RegistrarPago(pago);
+
+
+
+                            InformacionFinanciera informacionFinanciera = new InformacionFinanciera
+                            {
+                                PersonaId = personaId,
+                                NumeroTarjetaCredito = txtNroTarjeta.Text,
+                                FechaExpiracion = dateFechaVto.Value,
+                                CodigoSeguridad = Convert.ToInt32(txtCodSeg.Text),
+                                PagoId = idPago
+                            };
+
                             admin.RegistrarInfoFinanciera(informacionFinanciera);
                             MessageBox.Show("Pago realizado con éxito", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -599,7 +739,7 @@ namespace Sistema_Club_Deportivo
                     radioCuotas3.Enabled = false;
                     int cuotas = ObtenerCuotasSeleccionadas();
 
-                    ActualizarMontoAPagar(Convert.ToInt32(txtMonto.Text), cuotas);
+                    ActualizarMontoAPagar(Convert.ToDecimal(txtMonto.Text), cuotas);
 
                     break;
 
@@ -658,7 +798,7 @@ namespace Sistema_Club_Deportivo
 
         private void ImprimirTicket()
         {
-          
+
             PrintDocument printDocument = new PrintDocument();
 
             printDocument.PrintPage += new PrintPageEventHandler(ImprimirTicketContenido);
@@ -673,19 +813,19 @@ namespace Sistema_Club_Deportivo
 
         private void ImprimirTicketContenido(object sender, PrintPageEventArgs e)
         {
-           
+
             string ticket = GenerarTicket(totalCosto, comboBox3.Text, ObtenerNombresActividades());
 
-            
+
             Font font = new Font("Arial", 10);
             SolidBrush brush = new SolidBrush(Color.Black);
 
-           
+
             float yPos = 0;
             float leftMargin = e.MarginBounds.Left;
             float topMargin = e.MarginBounds.Top;
 
-          
+
             foreach (var line in ticket.Split('\n'))
             {
                 e.Graphics.DrawString(line, font, brush, leftMargin, topMargin + yPos);
@@ -696,7 +836,7 @@ namespace Sistema_Club_Deportivo
         {
             StringBuilder ticketBuilder = new StringBuilder();
 
-           
+
             ticketBuilder.AppendLine("----- GYM NO PAIN NO GAIN -----");
             ticketBuilder.AppendLine("----- Ticket de Pago -----");
             ticketBuilder.AppendLine($"Fecha: {DateTime.Now}");
@@ -704,7 +844,7 @@ namespace Sistema_Club_Deportivo
             ticketBuilder.AppendLine($"Método de Pago: {metodoPago}");
             ticketBuilder.AppendLine();
 
-            
+
             ticketBuilder.AppendLine("Actividades Pagadas:");
             foreach (var actividad in actividadesPagadas)
             {
@@ -743,6 +883,52 @@ namespace Sistema_Club_Deportivo
         {
             ImprimirTicket();
         }
+
+
+
+
+        Boolean error = false;
+        private Boolean Controlblanco()
+        {
+            if (string.IsNullOrEmpty(txtNombre.Text) ||
+                string.IsNullOrEmpty(txtApellido.Text) ||
+                string.IsNullOrEmpty(txtNroDoc.Text) ||
+                string.IsNullOrEmpty(txtFechaNac.Text) ||
+                string.IsNullOrEmpty(txtDireccion.Text) ||
+                string.IsNullOrEmpty(txtCP.Text) ||
+                string.IsNullOrEmpty(txtLocalidad.Text) ||
+                string.IsNullOrEmpty(txtEmail.Text) ||
+                string.IsNullOrEmpty(txtTel1.Text) ||
+                string.IsNullOrEmpty(txtTel2.Text))
+            {
+
+                error = true;
+            }
+            else
+            {
+                error = false;
+            }
+
+            return error;
+
+        }
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            if (Controlblanco() == true)
+            {
+
+                btnSiguienteP1.Enabled = false;
+                btnSiguienteP1.Text = "Complete todos los campos";
+            }
+            else
+            {
+
+
+                btnSiguienteP1.Text = "Siguiente";
+            }
+        }
+
+
     }
 
 }

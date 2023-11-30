@@ -277,9 +277,7 @@ namespace Login.Datos
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new MySqlParameter("p_idPersona", afiliado.IdPersona)); // Asocia el afiliado con la persona
                 cmd.Parameters.Add(new MySqlParameter("p_fechaAfiliacion", afiliado.FechaAfiliacion));
-                cmd.Parameters.Add(new MySqlParameter("p_socio", afiliado.Socio));
-                //cmd.Parameters.Add(new MySqlParameter("p_nroCarnet", nroCarnet));
-                cmd.Parameters.Add(new MySqlParameter("p_cuotaAPagar", afiliado.CuotaAPagar));
+
                 cmd.Parameters.Add(new MySqlParameter("p_idAfiliado", MySqlDbType.Int32));
                 cmd.Parameters["p_idAfiliado"].Direction = ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
@@ -418,36 +416,36 @@ namespace Login.Datos
                     // Llena los datos del afiliado
                     afiliado.Id = reader.GetInt32(0);
                     afiliado.FechaAfiliacion = reader.GetDateTime(1);
-                    afiliado.Socio = reader.GetInt32(2);
+                    //afiliado.Socio = reader.GetInt32(2);
                     //afiliado.NroCarnet = reader.GetInt32(3);
-                    afiliado.CuotaAPagar = reader.GetInt32(3);
-                    afiliado.IdPersona = reader.GetInt32(4);
-                    afiliado.Eliminado = reader.GetBoolean(5);
+                    //afiliado.CuotaAPagar = reader.GetInt32(3);
+                    afiliado.IdPersona = reader.GetInt32(2);
+                    afiliado.Eliminado = reader.GetBoolean(3);
 
 
                     // Llena los datos de la persona
-                    persona.Id = reader.GetInt32(6);
-                    persona.IdRol = reader.GetInt32(7);
-                    persona.Nombre = reader.GetString(8);
-                    persona.Apellido = reader.GetString(9);
-                    persona.TipoDoc = reader.GetString(10);
-                    persona.Dni = reader.GetInt32(11);
-                    persona.FechaNacimiento = reader.GetDateTime(12);
-                    persona.Direccion = reader.GetString(13);
-                    persona.Cp = reader.GetInt32(14);
-                    persona.Localidad = reader.GetString(15);
-                    persona.CorreoElect = reader.GetString(16);
-                    persona.Telefono1 = reader.GetInt32(17);
-                    persona.Telefono2 = reader.GetInt32(18);
-                    persona.Eliminado = reader.GetBoolean(19);
+                    persona.Id = reader.GetInt32(4);
+                    persona.IdRol = reader.GetInt32(5);
+                    persona.Nombre = reader.GetString(6);
+                    persona.Apellido = reader.GetString(7);
+                    persona.TipoDoc = reader.GetString(8);
+                    persona.Dni = reader.GetInt32(9);
+                    persona.FechaNacimiento = reader.GetDateTime(10);
+                    persona.Direccion = reader.GetString(11);
+                    persona.Cp = reader.GetInt32(12);
+                    persona.Localidad = reader.GetString(13);
+                    persona.CorreoElect = reader.GetString(14);
+                    persona.Telefono1 = reader.GetInt32(15);
+                    persona.Telefono2 = reader.GetInt32(16);
+                    persona.Eliminado = reader.GetBoolean(17);
 
 
 
-                    // Establece el objeto Persona en el objeto Afiliado
+                    // Establece el objeto Persona en el objeto Afiliado 
                     afiliado.Persona = persona;
 
-                    carnet.NroCarnet = reader.GetInt64(20);
-                    carnet.FechaVencimiento = reader.GetDateTime(22);
+                    carnet.NroCarnet = reader.GetInt64(18);
+                    carnet.FechaVencimiento = reader.GetDateTime(20);
                     afiliado.Carnet = carnet;
                 }
 
@@ -544,18 +542,48 @@ namespace Login.Datos
                 MySqlCommand cmd = new MySqlCommand("EditarAfiliado", sqlCon);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                // Agrega parámetros para actualizar los campos específicos del afiliado
+
                 cmd.Parameters.Add(new MySqlParameter("p_idAfiliado", afiliado.Id));
                 cmd.Parameters.Add(new MySqlParameter("p_fechaAfiliacion", afiliado.FechaAfiliacion));
-                cmd.Parameters.Add(new MySqlParameter("p_socio", afiliado.Socio));
-                //cmd.Parameters.Add(new MySqlParameter("p_nroCarnet", afiliado.NroCarnet));
-                cmd.Parameters.Add(new MySqlParameter("p_cuotaAPagar", afiliado.CuotaAPagar));
+
 
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
                 // Maneja excepciones si es necesario.
+                throw;
+            }
+            finally
+            {
+                if (sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
+            }
+        }
+
+        public void EditarNoAfiliado(NoAfiliado noAfiliado)
+        {
+            MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion();
+
+            try
+            {
+                sqlCon.Open();
+
+                MySqlCommand cmd = new MySqlCommand("EditarNoAfiliado", sqlCon);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+
+                cmd.Parameters.Add(new MySqlParameter("p_idNoAfiliado", noAfiliado.Id));
+                cmd.Parameters.Add(new MySqlParameter("p_fechaAfiliacion", noAfiliado.FechaAfiliacion));
+
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
                 throw;
             }
             finally
@@ -716,7 +744,7 @@ namespace Login.Datos
             {
                 sqlCon.Open();
                 Carnet carnet = null; // Inicializa a null
-                
+
                 MySqlCommand cmd = new MySqlCommand("BuscarCarnetPorDni", sqlCon);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new MySqlParameter("p_dniPersona", dniPersona));
@@ -736,81 +764,150 @@ namespace Login.Datos
                 return carnet;
             }
         }
-        
-            public void EliminarAfiliado(int idAfiliado)
+
+        public void EliminarAfiliado(int idAfiliado)
         {
-                MySqlConnection sqlCon = new MySqlConnection();
-                try
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
             {
-                    sqlCon = Conexion.getInstancia().CrearConexion();
-                    sqlCon.Open();
-    
-                    using (MySqlCommand cmd = new MySqlCommand("EliminarAfiliado", sqlCon))
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
+
+                using (MySqlCommand cmd = new MySqlCommand("EliminarAfiliado", sqlCon))
                 {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("p_idAfiliado", idAfiliado);
-    
-                        cmd.ExecuteNonQuery();
-                    }
-    
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("p_idAfiliado", idAfiliado);
+
+                    cmd.ExecuteNonQuery();
                 }
-                catch (Exception ex)
-            {
-                    // Manejo de errores
-                    Console.WriteLine("Error al eliminar al afiliado: " + ex.Message);
-                }
+
             }
-    
-            public void EliminarPersona(int idPersona)  
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                Console.WriteLine("Error al eliminar al afiliado: " + ex.Message);
+            }
+        }
+
+        public void EliminarPersona(int idPersona)
         {
-                MySqlConnection sqlCon = new MySqlConnection();
-                try
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
             {
-                    sqlCon = Conexion.getInstancia().CrearConexion();
-                    sqlCon.Open();
-    
-                    using (MySqlCommand cmd = new MySqlCommand("EliminarPersona", sqlCon))
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
+
+                using (MySqlCommand cmd = new MySqlCommand("EliminarPersona", sqlCon))
                 {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("p_idPersona", idPersona);
-    
-                        cmd.ExecuteNonQuery();
-                    }
-    
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("p_idPersona", idPersona);
+
+                    cmd.ExecuteNonQuery();
                 }
-                catch (Exception ex)
-            {
-                    // Manejo de errores
-                    Console.WriteLine("Error al eliminar a la persona: " + ex.Message);
-                }
+
             }
-    
-            public void EliminarCarnet(int idCarnet)
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                Console.WriteLine("Error al eliminar a la persona: " + ex.Message);
+            }
+        }
+
+        public void EliminarCarnet(int idCarnet)
         {
-                MySqlConnection sqlCon = new MySqlConnection();
-                try
+            MySqlConnection sqlCon = new MySqlConnection();
+            try
             {
-                    sqlCon = Conexion.getInstancia().CrearConexion();
-                    sqlCon.Open();
-    
-                    using (MySqlCommand cmd = new MySqlCommand("EliminarCarnet", sqlCon))
+                sqlCon = Conexion.getInstancia().CrearConexion();
+                sqlCon.Open();
+
+                using (MySqlCommand cmd = new MySqlCommand("EliminarCarnet", sqlCon))
                 {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("p_idCarnet", idCarnet);
-    
-                        cmd.ExecuteNonQuery();
-                    }
-    
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("p_idCarnet", idCarnet);
+
+                    cmd.ExecuteNonQuery();
                 }
-                catch (Exception ex)
-            {
-                    // Manejo de errores
-                    Console.WriteLine("Error al eliminar el carnet: " + ex.Message);
-                }
+
             }
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                Console.WriteLine("Error al eliminar el carnet: " + ex.Message);
+            }
+        }
+
+        public void InsertarAfiliado(int idPersona)
+        {//convierte a noAfiliado en afiliado
+            MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion();
+            try
+            {
+                sqlCon.Open();
 
 
-        public void RegistrarPago(Pago pago)
+                DateTime fechaAfiliacion = DateTime.Now;
+
+                string query = "INSERT INTO afiliado (fechaAfiliacion, idPersona, eliminado) " +
+                               "VALUES (@FechaAfiliacion, @IdPersona, 0)";
+
+                MySqlCommand cmd = new MySqlCommand(query, sqlCon);
+                cmd.Parameters.AddWithValue("@FechaAfiliacion", fechaAfiliacion);
+                cmd.Parameters.AddWithValue("@IdPersona", idPersona);
+
+                cmd.ExecuteNonQuery();
+
+
+
+            }
+            finally
+            {
+                sqlCon.Close();
+            }
+        }
+
+        public void EliminarNoAfiliado(int idPersona)
+        {
+            MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion();
+
+            try
+            {
+                sqlCon.Open();
+
+
+                string query = "UPDATE noafiliado SET eliminado = 1 WHERE idPersona = @IdPersona";
+
+                MySqlCommand cmd = new MySqlCommand(query, sqlCon);
+                cmd.Parameters.AddWithValue("@IdPersona", idPersona);
+
+                cmd.ExecuteNonQuery();
+            }
+            finally
+            {
+                sqlCon.Close();
+            }
+        }
+
+        public void CambioIdRol(int idPersona)
+        {
+            MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion();
+            try
+            {
+                sqlCon.Open();
+
+                string query = "UPDATE persona SET idRol = 1 WHERE id = @IdPersona";
+                MySqlCommand cmd = new MySqlCommand(query, sqlCon);
+                cmd.Parameters.AddWithValue("@IdPersona", idPersona);
+
+                cmd.ExecuteNonQuery();
+            }
+            finally
+            {
+                sqlCon.Close();
+            }
+        }
+
+
+        public int RegistrarPago(Pago pago)
         {
             using (MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion())
             {
@@ -827,7 +924,14 @@ namespace Login.Datos
                     command.Parameters.AddWithValue("@p_Cuota", pago.Cuota);
                     command.Parameters.AddWithValue("@p_FechaVencimiento", pago.FechaVencimiento);
 
+                    var idParam = new MySqlParameter("@p_PagoID", MySqlDbType.Int32);
+                    idParam.Direction = ParameterDirection.Output;
+                    command.Parameters.Add(idParam);
+
                     command.ExecuteNonQuery();
+
+                    // Devolver el ID del pago
+                    return Convert.ToInt32(idParam.Value);
                 }
             }
         }
@@ -841,10 +945,11 @@ namespace Login.Datos
                 using (MySqlCommand command = new MySqlCommand("RegistrarInfoFinanciera", sqlCon))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@p_AfiliadoID", informacionFinanciera.AfiliadoID);
+                    command.Parameters.AddWithValue("@p_personaId", informacionFinanciera.PersonaId);
                     command.Parameters.AddWithValue("@p_FechaExpiracion", informacionFinanciera.FechaExpiracion);
                     command.Parameters.AddWithValue("@p_NumeroTarjetaCredito", informacionFinanciera.NumeroTarjetaCredito);
-                    command.Parameters.AddWithValue("@p_CodigoSeguridad", informacionFinanciera.CodigoSeguridad); ;
+                    command.Parameters.AddWithValue("@p_CodigoSeguridad", informacionFinanciera.CodigoSeguridad);
+                    command.Parameters.AddWithValue("@p_PagoID", informacionFinanciera.PagoId);
 
 
                     command.ExecuteNonQuery();
@@ -874,7 +979,7 @@ namespace Login.Datos
                         command.Parameters.AddWithValue("@p_ProfesorID", actividad.ProfesorID);
                         command.Parameters.AddWithValue("@p_Equipamiento", actividad.Equipamiento);
                         command.Parameters.AddWithValue("@p_DiasSemana", actividad.DiasSemana);
-                        
+
                         command.ExecuteNonQuery();
                     }
                 }
@@ -882,7 +987,7 @@ namespace Login.Datos
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al crear la actividad: {ex.Message}");
-                
+
             }
         }
 
@@ -949,7 +1054,7 @@ namespace Login.Datos
                         command.Parameters.AddWithValue("@p_ActividadID", actividad.ActividadID);
                         command.Parameters.AddWithValue("@p_Nombre", actividad.Nombre);
                         command.Parameters.AddWithValue("@p_Descripcion", actividad.Descripcion);
-                        command.Parameters.AddWithValue("@p_CupoMaximo", actividad.CupoMaximo); 
+                        command.Parameters.AddWithValue("@p_CupoMaximo", actividad.CupoMaximo);
                         command.Parameters.AddWithValue("@p_FechaInicio", actividad.FechaInicio);
                         command.Parameters.AddWithValue("@p_FechaFin", actividad.FechaFin);
                         command.Parameters.AddWithValue("@p_HoraInicio", actividad.HoraInicio);
@@ -958,7 +1063,7 @@ namespace Login.Datos
                         command.Parameters.AddWithValue("@p_ProfesorID", actividad.ProfesorID);
                         command.Parameters.AddWithValue("@p_Equipamiento", actividad.Equipamiento);
                         command.Parameters.AddWithValue("@p_DiasSemana", actividad.DiasSemana);
-                        
+
 
                         command.ExecuteNonQuery();
                     }
@@ -1013,7 +1118,7 @@ namespace Login.Datos
             }
         }
 
-        
+
         public List<InscripcionActividad> ObtenerInscripcionesPorNoAfiliado(int noAfiliadoID)
         {
             List<InscripcionActividad> inscripciones = new List<InscripcionActividad>();
@@ -1036,7 +1141,7 @@ namespace Login.Datos
                                 NoAfiliadoID = Convert.ToInt32(reader["NoAfiliadoID"]),
                                 ActividadID = Convert.ToInt32(reader["ActividadID"]),
                                 FechaRegistro = Convert.ToDateTime(reader["FechaRegistro"]),
-                                // Otras propiedades según tus necesidades
+
                             };
 
                             inscripciones.Add(inscripcion);
@@ -1048,6 +1153,54 @@ namespace Login.Datos
             return inscripciones;
         }
 
+        public List<Actividad>? ObtenerActividadesPorNombre(string nombreActividad)
+        {
+            List<Actividad> actividades = new List<Actividad>();
+
+            try
+            {
+                MySqlConnection sqlCon = Conexion.getInstancia().CrearConexion();
+                string query = "SELECT * FROM Actividades WHERE Nombre LIKE @Nombre";
+                sqlCon.Open();
+
+                using (MySqlCommand command = new MySqlCommand(query, sqlCon))
+                {
+                    command.Parameters.AddWithValue("@Nombre", "%" + nombreActividad + "%");
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Actividad actividad = new Actividad
+                            {
+                                ActividadID = Convert.ToInt32(reader["ActividadID"]),
+                                Nombre = reader["Nombre"].ToString(),
+                                Descripcion = reader["Descripcion"].ToString(),
+                                CupoMaximo = Convert.ToInt32(reader["CupoMaximo"]),
+                                FechaInicio = Convert.ToDateTime(reader["FechaInicio"]),
+                                FechaFin = Convert.ToDateTime(reader["FechaFin"]),
+                                HoraInicio = TimeSpan.Parse(reader["HoraInicio"].ToString()),
+                                HoraFin = TimeSpan.Parse(reader["HoraFin"].ToString()),
+                                Costo = Convert.ToDecimal(reader["Costo"]),
+                                ProfesorID = Convert.ToInt32(reader["ProfesorID"]),
+                                Equipamiento = reader["Equipamiento"].ToString(),
+                                DiasSemana = reader["DiasSemana"].ToString(),
+                            };
+
+                            actividades.Add(actividad);
+                        }
+                    }
+                }
+
+                return actividades;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al obtener las actividades: {ex.Message}");
+                return null;
+            }
+        }
     }
 }
-        
+

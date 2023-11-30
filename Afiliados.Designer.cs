@@ -62,6 +62,7 @@
             btnAfilNoSocio.TabIndex = 6;
             btnAfilNoSocio.Text = "No-SOCIOS";
             btnAfilNoSocio.UseVisualStyleBackColor = false;
+            btnAfilNoSocio.Click += btnAfilNoSocio_Click;
             // 
             // btnAfilSocio
             // 

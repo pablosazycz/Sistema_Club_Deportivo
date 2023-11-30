@@ -33,10 +33,6 @@
             btnBorrarAf = new Button();
             pnlTabCarn = new Panel();
             dataGridView1 = new DataGridView();
-            nombreYApellido = new DataGridViewTextBoxColumn();
-            nroCarnet = new DataGridViewTextBoxColumn();
-            idAfiliado = new DataGridViewTextBoxColumn();
-            fechaVenc = new DataGridViewTextBoxColumn();
             button1 = new Button();
             tblLytPnlTopMenuButCar.SuspendLayout();
             pnlTabCarn.SuspendLayout();
@@ -108,35 +104,18 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToOrderColumns = true;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { nombreYApellido, nroCarnet, idAfiliado, fechaVenc });
             dataGridView1.Dock = DockStyle.Fill;
             dataGridView1.Location = new Point(0, 0);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(934, 517);
             dataGridView1.TabIndex = 9;
-            // 
-            // nombreYApellido
-            // 
-            nombreYApellido.HeaderText = "Nombre y Apellido";
-            nombreYApellido.Name = "nombreYApellido";
-            // 
-            // nroCarnet
-            // 
-            nroCarnet.HeaderText = "Número de Carnet";
-            nroCarnet.Name = "nroCarnet";
-            // 
-            // idAfiliado
-            // 
-            idAfiliado.HeaderText = "Número Afiliado";
-            idAfiliado.Name = "idAfiliado";
-            // 
-            // fechaVenc
-            // 
-            fechaVenc.HeaderText = "Fecha de Vencimiento";
-            fechaVenc.Name = "fechaVenc";
             // 
             // button1
             // 
@@ -164,6 +143,7 @@
             Controls.Add(tblLytPnlTopMenuButCar);
             Name = "Carnets";
             Text = "Carnets";
+            Load += Carnets_Load;
             tblLytPnlTopMenuButCar.ResumeLayout(false);
             pnlTabCarn.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
@@ -178,9 +158,5 @@
         private Button btnNuevoAf;
         private Button button1;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn nombreYApellido;
-        private DataGridViewTextBoxColumn nroCarnet;
-        private DataGridViewTextBoxColumn idAfiliado;
-        private DataGridViewTextBoxColumn fechaVenc;
     }
 }

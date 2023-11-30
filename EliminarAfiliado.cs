@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -53,9 +54,7 @@ namespace Sistema_Club_Deportivo
                     txtTel1.Text = afiliado.Persona.Telefono1.ToString();
                     txtTel2.Text = afiliado.Persona.Telefono2.ToString();
                     txtFechaAfi.Value = afiliado.FechaAfiliacion;
-                    txtNroCarnet.Text = afiliado.Carnet.NroCarnet.ToString();
-                    txtCuotas.Text = afiliado.CuotaAPagar.ToString();
-                    txtSocio.Text = afiliado.Socio.ToString();
+
 
                 }
                 else
@@ -81,21 +80,55 @@ namespace Sistema_Club_Deportivo
 
         private void btnEditarAfiliado_Click(object sender, EventArgs e)
         {
-            MsgBoxResult resultado = Interaction.MsgBox("¿Está seguro que desea eliminar el afiliado?", MsgBoxStyle.YesNo, "Eliminar Afiliado");
-            if (resultado== MsgBoxResult.Yes)
+            if (Controlblanco() == false)
             {
-                Administrador admin = new Administrador();
-                int idAfiliado = int.Parse(txtIdAfiliado.Text);
-                int idPersona = int.Parse(txtIdPersona.Text);
-                admin.DarDeBajaAfiliado(idAfiliado);
-                admin.DarDeBajaPersona(idPersona);
-                MessageBox.Show("El afiliado ha sido eliminado correctamente", "Eliminar Afiliado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                MsgBoxResult resultado = Interaction.MsgBox("¿Está seguro que desea eliminar el afiliado?", MsgBoxStyle.YesNo, "Eliminar Afiliado");
+                if (resultado == MsgBoxResult.Yes)
+                {
+                    Administrador admin = new Administrador();
+                    int idAfiliado = int.Parse(txtIdAfiliado.Text);
+                    int idPersona = int.Parse(txtIdPersona.Text);
+                    admin.DarDeBajaAfiliado(idAfiliado);
+                    admin.DarDeBajaPersona(idPersona);
+                    MessageBox.Show("El afiliado ha sido eliminado correctamente", "Eliminar Afiliado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
+                else
+                {
+                    return;
+                }
             }
             else
             {
-                return;
+                MsgBoxResult resultado = Interaction.MsgBox("Debe completar todos los campos", MsgBoxStyle.OkOnly, "Error");
             }
         }
+
+        Boolean error = false;
+        private Boolean Controlblanco()
+        {
+            if (string.IsNullOrEmpty(txtNombre.Text) ||
+                string.IsNullOrEmpty(txtApellido.Text) ||
+                string.IsNullOrEmpty(txtNroDoc.Text) ||
+                string.IsNullOrEmpty(txtFechaNac.Text) ||
+                string.IsNullOrEmpty(txtDireccion.Text) ||
+                string.IsNullOrEmpty(txtCP.Text) ||
+                string.IsNullOrEmpty(txtLocalidad.Text) ||
+                string.IsNullOrEmpty(txtEmail.Text) ||
+                string.IsNullOrEmpty(txtTel1.Text) ||
+                string.IsNullOrEmpty(txtTel2.Text))
+            {
+
+                error = true;
+            }
+            else
+            {
+                error = false;
+            }
+
+            return error;
+
+        }
+
     }
 }

@@ -37,14 +37,8 @@
             radioSocioBusca = new RadioButton();
             radioDocBuscar = new RadioButton();
             label17 = new Label();
-            label15 = new Label();
             txtFechaAfi = new DateTimePicker();
-            txtSocio = new TextBox();
             label16 = new Label();
-            label13 = new Label();
-            txtCuotas = new TextBox();
-            label14 = new Label();
-            txtNroCarnet = new TextBox();
             label12 = new Label();
             txtIdRol = new TextBox();
             btnEditarAfiliado = new Button();
@@ -92,7 +86,7 @@
             // label18
             // 
             label18.AutoSize = true;
-            label18.Location = new Point(62, 422);
+            label18.Location = new Point(550, 119);
             label18.Name = "label18";
             label18.Size = new Size(58, 15);
             label18.TabIndex = 117;
@@ -100,7 +94,7 @@
             // 
             // txtIdAfiliado
             // 
-            txtIdAfiliado.Location = new Point(127, 419);
+            txtIdAfiliado.Location = new Point(615, 116);
             txtIdAfiliado.Name = "txtIdAfiliado";
             txtIdAfiliado.ReadOnly = true;
             txtIdAfiliado.Size = new Size(164, 23);
@@ -154,15 +148,6 @@
             label17.TabIndex = 111;
             label17.Text = "Elija Criterio de Búsqueda";
             // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Location = new Point(373, 366);
-            label15.Name = "label15";
-            label15.Size = new Size(36, 15);
-            label15.TabIndex = 110;
-            label15.Text = "Socio";
-            // 
             // txtFechaAfi
             // 
             txtFechaAfi.Format = DateTimePickerFormat.Short;
@@ -173,13 +158,6 @@
             txtFechaAfi.TabIndex = 109;
             txtFechaAfi.Value = new DateTime(2023, 10, 19, 21, 42, 20, 0);
             // 
-            // txtSocio
-            // 
-            txtSocio.Location = new Point(441, 361);
-            txtSocio.Name = "txtSocio";
-            txtSocio.Size = new Size(164, 23);
-            txtSocio.TabIndex = 108;
-            // 
             // label16
             // 
             label16.AutoSize = true;
@@ -188,38 +166,6 @@
             label16.Size = new Size(91, 15);
             label16.TabIndex = 107;
             label16.Text = "Fecha Afiliacion";
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Location = new Point(336, 395);
-            label13.Name = "label13";
-            label13.Size = new Size(81, 15);
-            label13.TabIndex = 106;
-            label13.Text = "Cuota a Pagar";
-            // 
-            // txtCuotas
-            // 
-            txtCuotas.Location = new Point(423, 392);
-            txtCuotas.Name = "txtCuotas";
-            txtCuotas.Size = new Size(164, 23);
-            txtCuotas.TabIndex = 105;
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Location = new Point(63, 395);
-            label14.Name = "label14";
-            label14.Size = new Size(42, 15);
-            label14.TabIndex = 104;
-            label14.Text = "Carnet";
-            // 
-            // txtNroCarnet
-            // 
-            txtNroCarnet.Location = new Point(131, 390);
-            txtNroCarnet.Name = "txtNroCarnet";
-            txtNroCarnet.Size = new Size(164, 23);
-            txtNroCarnet.TabIndex = 103;
             // 
             // label12
             // 
@@ -438,14 +384,8 @@
             Controls.Add(radioSocioBusca);
             Controls.Add(radioDocBuscar);
             Controls.Add(label17);
-            Controls.Add(label15);
             Controls.Add(txtFechaAfi);
-            Controls.Add(txtSocio);
             Controls.Add(label16);
-            Controls.Add(label13);
-            Controls.Add(txtCuotas);
-            Controls.Add(label14);
-            Controls.Add(txtNroCarnet);
             Controls.Add(label12);
             Controls.Add(txtIdRol);
             Controls.Add(btnEditarAfiliado);

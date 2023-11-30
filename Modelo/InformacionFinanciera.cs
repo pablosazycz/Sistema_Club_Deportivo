@@ -9,10 +9,11 @@ namespace Sistema_Club_Deportivo.Modelo
 {
     public class InformacionFinanciera
     {
-        public int AfiliadoID { get; set; }
+        public int PersonaId { get; set; }
         public string NumeroTarjetaCredito { get; set; }
         public DateTime FechaExpiracion { get; set; }
         public int CodigoSeguridad { get; set; }
+        public int PagoId { get; set; }
 
         public Afiliado Afiliado { get; set; }
 
